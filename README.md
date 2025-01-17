@@ -129,13 +129,22 @@ The wireframes included in this project represent the initial design and layout 
 
 By visualizing the flow of the website, the wireframes help to establish a clear, user-friendly experience from the start. They include placeholders for the navigation bar, booking sections, footer, and other essential features that will be developed in later stages. The wireframes will evolve as the project progresses, ensuring the design stays aligned with both user needs and project goals.
 
-<!-- ADD:[Home Page Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[Sign Up Form Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[Account Page Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[Booking Page Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[Admin Dashboard Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[Menu Page Wireframe](docs/wireframes/indexwireframe.png) -->
-<!-- ADD:[About Page Wireframe](docs/wireframes/indexwireframe.png) -->
+
+#### Images of the individual wireframes:
+
+<details><summary>Home Page Wireframe</summary> <p align="left"><img src="./documentation/wireframes/Homepage.png" alt="wireframes for the home page" width="900"/></p> </details>
+
+<details><summary>Sign Up Form Wireframe</summary> <p align="left"><img src="./documentation/wireframes/About%20page.png" alt="wireframes for the sign up form" width="630"/></p> </details>
+
+<details><summary>Account Page Wireframe</summary> <p align="left"><img src="./documentation/wireframes/Account%20page.png" alt="wireframes for the account page" width="830"/></p> </details>
+
+<details><summary>Booking Page Wireframe</summary> <p align="left"><img src="./documentation/wireframes/Booking%20page.png" alt="wireframes for the booking page" width="850"/></p> </details>
+
+<details><summary>Admin Dashboard Wireframe</summary> <p align="left"><img src="./documentation/wireframes/Admin%20dashboard.png" alt="wireframes for the admin dashboard" width="830"/></p> </details>
+
+<details><summary>Menu Page</summary> <p align="left"><img src="./documentation/wireframes/Menu%20page.png" alt="wireframes for the menu page" width="620"/></p> </details>
+
+<details><summary>About Us</summary> <p align="left"><img src="./documentation/wireframes/About%20page.png" alt="wireframes for the about us section" width="620"/></p> </details>
 
 <!-- TO-DO: ## Features
 
