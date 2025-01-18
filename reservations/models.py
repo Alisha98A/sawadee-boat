@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime, date
+from django.utils.timezone import make_aware
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -60,3 +61,19 @@ class Reservation(models.Model):
         latest_start_time = datetime.strptime("20:00", "%H:%M").time()
         if self.time_slot > latest_start_time:
             raise ValidationError("Last booking must start at 20:00 or earlier.")
+
+        # Prevent overlapping reservations
+        start_time = make_aware(datetime.combine(self.booking_date, self.time_slot))
+        end_time = start_time + timedelta(hours=2)
+        overlapping_reservations = Reservation.objects.filter(
+            boat=self.boat,
+            booking_date=self.booking_date,
+        ).exclude(id=self.id)
+
+        for reservation in overlapping_reservations:
+            existing_start = make_aware(datetime.combine(reservation.booking_date, reservation.time_slot))
+            existing_end = existing_start + timedelta(hours=2)
+            if start_time < existing_end and end_time > existing_start:
+                raise ValidationError(
+                    f"This boat is already booked from {existing_start.time()} to {existing_end.time()}."
+                )
