@@ -55,3 +55,8 @@ class Reservation(models.Model):
         closing_time = datetime.strptime("22:00", "%H:%M").time()
         if not opening_time <= self.time_slot <= closing_time:
             raise ValidationError("Bookings must be between 10:00 and 22:00.")
+
+        # Ensure last booking starts by 20:00
+        latest_start_time = datetime.strptime("20:00", "%H:%M").time()
+        if self.time_slot > latest_start_time:
+            raise ValidationError("Last booking must start at 20:00 or earlier.")
