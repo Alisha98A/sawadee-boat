@@ -77,3 +77,8 @@ class Reservation(models.Model):
                 raise ValidationError(
                     f"This boat is already booked from {existing_start.time()} to {existing_end.time()}."
                 )
+            
+    def save(self, *args, **kwargs):
+        """Overrides the save method to validate before saving."""
+        self.clean()
+        super().save(*args, **kwargs)
