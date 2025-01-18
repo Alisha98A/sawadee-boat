@@ -1,7 +1,8 @@
+from datetime import timedelta, datetime, date
+from django.utils.timezone import make_aware
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
 
 # Create your models here.
 
@@ -36,7 +37,48 @@ class Reservation(models.Model):
     def __str__(self):
         return f"Reservation for {self.user.username} on {self.booking_date}"
 
-    # Ensures that number of guests is within the specified range (4-20)
     def clean(self):
+        """Validates the reservation details, including time slots, guest limits, and overlaps."""
+        today = date.today()
+
+        # Prevent past bookings and enforce 2-day advance notice
+        if self.booking_date < today:
+            raise ValidationError("Booking date cannot be in the past.")
+        if self.booking_date < today + timedelta(days=2):
+            raise ValidationError("Bookings must be made at least 2 days in advance.")
+
+        # Validate guest count
         if not 4 <= self.number_of_guests <= 20:
-            raise ValidationError('Number of guests must be between 4 and 20.')
+            raise ValidationError("Number of guests must be between 4 and 20.")
+
+        # Validate time slot within operational hours
+        opening_time = datetime.strptime("10:00", "%H:%M").time()
+        closing_time = datetime.strptime("22:00", "%H:%M").time()
+        if not opening_time <= self.time_slot <= closing_time:
+            raise ValidationError("Bookings must be between 10:00 and 22:00.")
+
+        # Ensure last booking starts by 20:00
+        latest_start_time = datetime.strptime("20:00", "%H:%M").time()
+        if self.time_slot > latest_start_time:
+            raise ValidationError("Last booking must start at 20:00 or earlier.")
+
+        # Prevent overlapping reservations
+        start_time = make_aware(datetime.combine(self.booking_date, self.time_slot))
+        end_time = start_time + timedelta(hours=2)
+        overlapping_reservations = Reservation.objects.filter(
+            boat=self.boat,
+            booking_date=self.booking_date,
+        ).exclude(id=self.id)
+
+        for reservation in overlapping_reservations:
+            existing_start = make_aware(datetime.combine(reservation.booking_date, reservation.time_slot))
+            existing_end = existing_start + timedelta(hours=2)
+            if start_time < existing_end and end_time > existing_start:
+                raise ValidationError(
+                    f"This boat is already booked from {existing_start.time()} to {existing_end.time()}."
+                )
+            
+    def save(self, *args, **kwargs):
+        """Overrides the save method to validate before saving."""
+        self.clean()
+        super().save(*args, **kwargs)
