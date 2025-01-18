@@ -46,6 +46,6 @@ class Reservation(models.Model):
         if self.booking_date < today + timedelta(days=2):
             raise ValidationError("Bookings must be made at least 2 days in advance.")
 
-
-# save for later
-#        if not 4 <= self.number_of_guests <= 20:
+        # Validate guest count
+        if not 4 <= self.number_of_guests <= 20:
+            raise ValidationError("Number of guests must be between 4 and 20.")
