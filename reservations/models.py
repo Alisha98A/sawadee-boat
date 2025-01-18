@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime, date
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -49,3 +49,9 @@ class Reservation(models.Model):
         # Validate guest count
         if not 4 <= self.number_of_guests <= 20:
             raise ValidationError("Number of guests must be between 4 and 20.")
+
+        # Validate time slot within operational hours
+        opening_time = datetime.strptime("10:00", "%H:%M").time()
+        closing_time = datetime.strptime("22:00", "%H:%M").time()
+        if not opening_time <= self.time_slot <= closing_time:
+            raise ValidationError("Bookings must be between 10:00 and 22:00.")
