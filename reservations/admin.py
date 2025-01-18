@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import Boat, Reservation
 
-# Register your models here.
-admin.site.register(Boat)
+@admin.register(Boat)
+class BoatAdmin(admin.ModelAdmin):
+    """
+    Customize the admin interface for the Boat model.
+    """
+    list_display = ('name', 'capacity')
+    search_fields = ('name',)
+
 admin.site.register(Reservation)
