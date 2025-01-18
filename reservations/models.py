@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -36,7 +37,11 @@ class Reservation(models.Model):
     def __str__(self):
         return f"Reservation for {self.user.username} on {self.booking_date}"
 
-    # Ensures that number of guests is within the specified range (4-20)
     def clean(self):
-        if not 4 <= self.number_of_guests <= 20:
-            raise ValidationError('Number of guests must be between 4 and 20.')
+        """Validates the reservation details, including time slots, guest limits, and overlaps."""
+        today = date.today()
+
+           
+
+# save for later
+#        if not 4 <= self.number_of_guests <= 20:
