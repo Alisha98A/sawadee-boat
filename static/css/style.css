@@ -44,8 +44,11 @@ body, main {
     background-color: #724E2F;
 }
 
-/* Custom styles for footer */
-#footer {
+/* ===================================================================
+   Footer Styles
+   =================================================================== */
+
+   #footer {
     background-color: #724E2F;
     color: #E9D69E;
     padding: 1rem 0;
