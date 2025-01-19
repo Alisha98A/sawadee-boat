@@ -26,4 +26,27 @@
         <a href="/reservation/" class="btn btn-primary btn-lg">Make a Reservation</a>
     </div>
 </section>
+
+<!-- Three columns -->
+<section id="info-columns" class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h3>About Us</h3>
+                <p>Learn about our mission and the experience we offer.</p>
+                <a href="{% url 'about' %}" class="btn btn-outline-primary">Read More</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Menu</h3>
+                <p>Explore our delicious Thai dishes served on board.</p>
+                <a href="/menu/" class="btn btn-outline-primary">View Menu</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Reservations</h3>
+                <p>Book a spot on our beautiful boat for an unforgettable experience.</p>
+                <a href="/reservation/" class="btn btn-outline-primary">Make a Reservation</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
