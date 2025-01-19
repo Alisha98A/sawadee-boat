@@ -9,3 +9,21 @@ body {
 main {
     margin-top: 4rem; 
 }
+
+/* Custom styles for navbar */
+#navbar {
+    background-color: #E9D69E;
+}
+
+#navbar-brand, #nav-link {
+    color: #1E1E1E;
+}
+
+/* Navbar toggle for smaller screens */
+.navbar-toggler {
+    border-color: #724E2F;
+}
+
+.navbar-toggler-icon {
+    background-color: #724E2F;
+}
