@@ -50,8 +50,13 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
+    <footer class="text-center py-3 mt-auto" id="footer">
+        {% block footer %}
         <p>&copy; 2025 Sawadee Dining Boat</p>
+        {% block copyright %}
+        <p>All rights reserved.</p>
+        {% endblock %}
+        {% endblock %}
     </footer>
 </body>
 </html>
