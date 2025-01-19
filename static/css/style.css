@@ -74,3 +74,19 @@ body, main {
     object-fit: cover;
     height: 100%;
 }
+
+/* ===================================================================
+   Intro Section Styles
+   =================================================================== */
+
+#intro {
+    background-color: #f8f9fa;
+}
+
+#intro h2 {
+    font-size: 2.5rem;
+}
+
+#intro p {
+    font-size: 1.2rem;
+}
