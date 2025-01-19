@@ -1,0 +1,11 @@
+/* General body settings */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content spacing */
+main {
+    margin-top: 4rem; 
+}
