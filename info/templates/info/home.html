@@ -12,6 +12,9 @@
             <source src="{% static 'videos/watervideo.mp4' %}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        
+        <!-- Fallback image for smaller screens or when video fails to load -->
+        <img src="{% static 'images/herodesktop.jpg' %}" class="img-fluid w-100 d-block d-md-none" alt="Fallback Image">
     </div>
 </section>
 {% endblock %}
