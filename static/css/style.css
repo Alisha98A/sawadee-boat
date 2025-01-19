@@ -1,13 +1,23 @@
-/* General body settings */
+/* ===================================================================
+   Global Styles
+   =================================================================== */
+
+/* Make the body fill the screen */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Main content spacing */
-main {
-    margin-top: 4rem; 
+/* Remove margin or padding from the body or main section */
+body, main {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Centered text */
+.text-center {
+    text-align: center;
 }
 
 /* Custom styles for navbar */
