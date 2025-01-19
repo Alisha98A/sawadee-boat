@@ -48,7 +48,7 @@ body, main {
    Footer Styles
    =================================================================== */
 
-   #footer {
+#footer {
     background-color: #724E2F;
     color: #E9D69E;
     padding: 1rem 0;
@@ -56,4 +56,21 @@ body, main {
 
 #footer p {
     margin: 0;
+}
+
+/* ===================================================================
+   Hero Section Styles
+   =================================================================== */
+
+
+#hero {
+    height: 400px; 
+    overflow: hidden;
+    margin-top: 0; 
+    padding-top: 0; 
+}
+
+#hero img {
+    object-fit: cover;
+    height: 100%;
 }
