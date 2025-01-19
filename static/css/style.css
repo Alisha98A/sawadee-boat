@@ -90,3 +90,25 @@ body, main {
 #intro p {
     font-size: 1.2rem;
 }
+
+/* ===================================================================
+   Info Columns Section Styles
+   =================================================================== */
+
+   #info-columns .col-md-4 {
+    margin-bottom: 30px;
+}
+
+#info-columns h3 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+#info-columns p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+#info-columns .btn {
+    margin-top: 1rem;
+}
