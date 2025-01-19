@@ -112,3 +112,22 @@ body, main {
 #info-columns .btn {
     margin-top: 1rem;
 }
+
+/* ===================================================================
+   Button Styles
+   =================================================================== */
+
+   .btn-primary {
+    background-color: #ff6347; 
+    border-color: #ff4500;
+}
+
+.btn-outline-primary {
+    color: #ff6347;
+    border-color: #ff6347;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ff6347;
+    color: white;
+}
