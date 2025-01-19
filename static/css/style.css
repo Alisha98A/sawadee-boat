@@ -131,3 +131,14 @@ body, main {
     background-color: #ff6347;
     color: white;
 }
+
+/* ===================================================================
+   Media Queries (Optional for responsiveness)
+   =================================================================== */
+
+/* Media queries for tablets/small desktop/large mobile devices . */
+@media (max-width: 768px) {
+    #hero {
+        height: 250px;
+    }
+}
