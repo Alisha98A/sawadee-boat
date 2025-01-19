@@ -20,9 +20,15 @@ body, main {
     text-align: center;
 }
 
-/* Custom styles for navbar */
+/* ===================================================================
+   Navbar Styles
+   =================================================================== */
+
+/* Ensure the navbar has no margin/padding affecting the hero */
 #navbar {
     background-color: #E9D69E;
+    margin-bottom: 0; 
+    padding-bottom: 0;
 }
 
 #navbar-brand, #nav-link {
