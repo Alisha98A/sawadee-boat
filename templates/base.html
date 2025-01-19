@@ -18,11 +18,32 @@
 </head>
 <body class="d-flex flex-column">
     <header>
-        <h1>Welcome to Sawadee Dining Boat</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
+        {% block header %}
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/" id="navbar-brand">Sawadee Dining Boat</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" id="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}" id="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/menu/" id="nav-link">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reservation/" id="nav-link">Reservation</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
+        {% endblock %}
     </header>
 
     <main>
