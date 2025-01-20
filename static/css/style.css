@@ -163,14 +163,48 @@ section#hero video {
 
 /* Media queries for tablets/small desktop/large mobile devices . */
 @media (max-width: 768px) {
-    #hero {
-        height: 250px;
-    }
+#hero {
+    height: 250px;
+}
 
-    .text-overlay {
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        padding: 5vw;
-        max-width: 90%;
+.text-overlay {
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    padding: 5vw;
+    max-width: 90%;
      }
 }
+
+.text-overlay h1 {
+    font-size: 6vw;
+}
+
+.text-overlay p {
+    font-size: 4vw;
+}
+
+.text-overlay .btn {
+    font-size: 3vw;
+    padding: 10px 20px;
+}
+
+/* Larger text on wider screens */
+@media (min-width: 768px) {
+.text-overlay {
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 80%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.text-overlay h1 {
+    font-size: 3.5rem;
+}
+.text-overlay p {
+    font-size: 1.5rem;
+}
+.text-overlay .btn {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+}
+}
+
