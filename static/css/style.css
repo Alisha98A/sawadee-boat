@@ -61,13 +61,12 @@ body, main {
 /* ===================================================================
    Hero Section Styles
    =================================================================== */
-
-
 #hero {
-    height: 400px; 
+    height: 100vh;
     overflow: hidden;
-    margin-top: 0; 
-    padding-top: 0; 
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
 }
 
 #hero img {
@@ -95,7 +94,7 @@ body, main {
    Info Columns Section Styles
    =================================================================== */
 
-   #info-columns .col-md-4 {
+#info-columns .col-md-4 {
     margin-bottom: 30px;
 }
 
@@ -117,7 +116,7 @@ body, main {
    Button Styles
    =================================================================== */
 
-   .btn-primary {
+.btn-primary {
     background-color: #ff6347; 
     border-color: #ff4500;
 }
@@ -133,7 +132,7 @@ body, main {
 }
 
 /* ===================================================================
-   Media Queries (Optional for responsiveness)
+   Media Queries
    =================================================================== */
 
 /* Media queries for tablets/small desktop/large mobile devices . */
