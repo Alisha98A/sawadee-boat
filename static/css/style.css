@@ -82,6 +82,13 @@ section#hero {
     overflow: hidden; 
 }
 
+/* Make the video fill the section */
+section#hero video {
+    height: 100%; 
+    width: 100%; 
+    z-index: 1; 
+}
+
 /* ===================================================================
    Intro Section Styles
    =================================================================== */
