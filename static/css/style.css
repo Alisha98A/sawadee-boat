@@ -95,6 +95,11 @@ section#hero video {
     z-index: 2; 
 }
 
+/*Add background color to text on hero image/video for visibility*/
+.text-overlay {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
 /* ===================================================================
    Intro Section Styles
    =================================================================== */
