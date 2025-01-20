@@ -10,6 +10,19 @@
     <meta
       name="keywords"
       content="Sawadee Dining Boat, Thai restaurant, Thai food, boat dining, Thai boat restaurant, boat experience, Thai cuisine, private boat dining" />
+    <!-- Favicon -->
+<!-- Standard favicon -->
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon_ico/favicon.ico' %}">
+<!-- PNG favicons for different sizes -->
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon_ico/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon_ico/favicon-16x16.png' %}">
+<!-- Apple touch icon for iOS -->
+<link rel="apple-touch-icon" href="{% static 'images/favicon_ico/apple-touch-icon.png' %}">
+<!-- Android Chrome icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon_ico/android-chrome-192x192.png' %}">
+<link rel="icon" type="image/png" sizes="512x512" href="{% static 'images/favicon_ico/android-chrome-512x512.png' %}">
+<!-- Web App Manifest -->
+<link rel="manifest" href="{% static 'images/favicon_ico/site.webmanifest' %}">
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -21,7 +34,10 @@
         {% block header %}
         <nav class="navbar navbar-expand-lg" id="navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/" id="navbar-brand">Sawadee Dining Boat</a>
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'images/favicon_ico/android-chrome-192x192.png' %}" alt="Logo" width="64" height="64">
+                    
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
