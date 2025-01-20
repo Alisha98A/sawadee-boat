@@ -6,7 +6,7 @@
 {% block content %}
 <!-- Hero video -->
 <section id="hero" class="mb-4">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 position-relative">
         <!-- Video for larger screens -->
         <video autoplay loop muted class="w-100 h-100 object-fit-cover d-none d-md-block" poster="{% static 'images/herodesktop.jpg' %}">
             <source src="{% static 'videos/watervideo.mp4' %}" type="video/mp4">
@@ -15,6 +15,13 @@
         
         <!-- Fallback image for smaller screens or when video fails to load -->
         <img src="{% static 'images/herodesktop.jpg' %}" class="img-fluid w-100 d-block d-md-none" alt="Fallback Image">
+
+        <!-- Text overlay on both video and image -->
+        <div class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1>Welcome to Sawadee Dining Boat</h1>
+            <p>Enjoy a unique dining experience on the water.</p>
+            <a href="/reservation/" class="btn btn-primary btn-lg">Make a Reservation</a>
+        </div>
     </div>
 </section>
 
@@ -22,8 +29,7 @@
 <section id="intro" class="text-center py-5">
     <div class="container">
         <h2>Welcome Aboard</h2>
-        <p class="lead">Enjoy a unique dining experience on the water.</p>
-        <a href="/reservation/" class="btn btn-primary btn-lg">Make a Reservation</a>
+        <p class="lead">Experience an unforgettable journey on the water as we combine the flavors of authentic Thai cuisine with the charm of dining aboard a luxurious boat. Whether you’re celebrating a special occasion or simply looking for a unique dining experience, our boat is the perfect destination for you and your group.</p>
     </div>
 </section>
 
