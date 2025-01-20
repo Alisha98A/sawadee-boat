@@ -89,6 +89,12 @@ section#hero video {
     z-index: 1; 
 }
 
+/* Overlay text styling */
+.video-overlay-text {
+    text-shadow: 10px 20px 50px rgba(0, 0, 0, 0.7);
+    z-index: 2; 
+}
+
 /* ===================================================================
    Intro Section Styles
    =================================================================== */
