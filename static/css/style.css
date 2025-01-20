@@ -161,4 +161,11 @@ section#hero video {
     #hero {
         height: 250px;
     }
+
+    .text-overlay {
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 5vw;
+        max-width: 90%;
+     }
 }
