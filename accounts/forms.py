@@ -19,9 +19,9 @@ def validate_phone_number(value):
 
 class ProfileForm(forms.ModelForm):
     phone_number = forms.CharField(
-        max_length=15,  # Limit input to 15 characters
+        max_length=15,  
         required=True,
-        validators=[validate_phone_number]  # Custom validator
+        validators=[validate_phone_number] 
     )
     birth_date = forms.DateField(
         required=True,
@@ -54,3 +54,15 @@ class ProfileForm(forms.ModelForm):
             raise ValidationError("You must be at least 18 years old.")
         
         return birth_date
+
+    def clean_address(self):
+        """
+        Validates the address:
+        - Ensures it does not contain invalid characters.
+        """
+        address = self.cleaned_data.get('address')
+        invalid_chars = ['$', '%', '&', '@']
+        if any(char in address for char in invalid_chars):
+            raise ValidationError("Address contains invalid characters.")
+        
+        return address
