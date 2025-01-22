@@ -23,5 +23,24 @@
             </ul>
         </div>
     {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <!-- Back to Profile Page Link -->
+    <a href="{% url 'profile' %}" class="btn btn-secondary mt-2">Back to Profile</a>
+
+    <!-- Link to Make a Reservation -->
+    <div class="mt-3">
+        <a href="x" class="btn btn-success">Make a Reservation</a>
+    </div>
+
 </div>
 {% endblock %}
