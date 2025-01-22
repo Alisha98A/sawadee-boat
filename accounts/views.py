@@ -23,3 +23,11 @@ class ProfileUpdateView(UpdateView):
 
     def get_object(self):
         return self.request.user.profile
+
+# Sign-up view
+def signup(request):
+    form = CustomSignupForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save(request)
+        return redirect('success')
+    return render(request, 'accounts/signup.html', {'form': form})
