@@ -19,9 +19,9 @@ def validate_phone_number(value):
 
 class ProfileForm(forms.ModelForm):
     phone_number = forms.CharField(
-        max_length=15,  
+        max_length=15,  # Limit input to 15 characters
         required=True,
-        validators=[validate_phone_number] 
+        validators=[validate_phone_number]  # Custom validator
     )
     birth_date = forms.DateField(
         required=True,
@@ -36,3 +36,21 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['birth_date', 'phone_number', 'address']
+
+    def clean_birth_date(self):
+        """
+        Validates birth date:
+        - Ensures the date is not in the future.
+        - Ensures the user is at least 18 years old.
+        """
+        birth_date = self.cleaned_data.get('birth_date')
+        if birth_date >= date.today():
+            raise ValidationError("Birth date cannot be in the future.")
+        
+        age = date.today().year - birth_date.year
+        age -= (date.today().month, date.today().day) < (birth_date.month, birth_date.day)
+
+        if age < 18:
+            raise ValidationError("You must be at least 18 years old.")
+        
+        return birth_date
