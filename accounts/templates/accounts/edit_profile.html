@@ -3,5 +3,25 @@
 {% block content %}
 <div class="container">
     <h1>Edit Your Profile</h1>
+    
+    <!-- Display success message after profile update -->
+    {% if form.is_valid %}
+        <div class="alert alert-success">
+            Profile updated successfully!
+        </div>
+    {% endif %}
+    
+    <!-- Display any form validation errors -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
