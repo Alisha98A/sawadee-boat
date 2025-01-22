@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','.herokuapp.com', '8000-alisha98a-sawadeeboat-gskure5nomt.ws-eu117.gitpod.io']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.herokuapp.com', '8000-alisha98a-sawadeeboat-05tfwdet2yb.ws-eu117.gitpod.io']
 
 
 # Application definition
@@ -53,14 +53,12 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 # Allauth settings for email authentication
-LOGIN_REDIRECT_URL = '/'  
+LOGIN_REDIRECT_URL = '/accounts/profile/' 
 LOGOUT_REDIRECT_URL = '/' 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  
+ACCOUNT_EMAIL_VERIFICATION = 'none'  
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'  
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True 
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 EMAIL_HOST = 'smtp.mail.me.com'
@@ -68,6 +66,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('ICLOUD_EMAIL_USER')  
 EMAIL_HOST_PASSWORD = os.getenv('ICLOUD_EMAIL_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,6 +78,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 ROOT_URLCONF = 'sawadee_dining_boat.urls'
 
@@ -118,7 +119,7 @@ DATABASES = {
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
     "https://*.herokuapp.com",
-    "https://8000-alisha98a-sawadeeboat-oh6pq86rijv.ws-eu117.gitpod.io"
+    "https://8000-alisha98a-sawadeeboat-05tfwdet2yb.ws-eu117.gitpod.io"
 ]
 
 
@@ -140,7 +141,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
