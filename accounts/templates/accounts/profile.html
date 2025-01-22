@@ -25,5 +25,16 @@
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
+
+<!-- Display recent activity -->
+{% if profile.user.bookings.all %}
+    <h3>Recent Bookings:</h3>
+    <ul>
+    {% for booking in profile.user.bookings.all %}
+        <li>{{ booking.booking_date }} - {{ booking.number_of_guests }} guests</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No recent bookings.</p>
 {% endif %}
 {% endblock %}
