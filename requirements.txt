@@ -21,3 +21,10 @@ setuptools==75.8.0
 sqlparse==0.5.3
 urllib3==2.3.0
 whitenoise==6.5.0
+annotated-types==0.7.0
+django-flatpickr==2.0.3
+pydantic==2.10.5
+pydantic-settings==2.7.1
+pydantic_core==2.27.2
+PyJWT==2.10.1
+python-dotenv==1.0.1
