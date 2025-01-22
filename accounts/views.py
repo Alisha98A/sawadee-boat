@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.views.generic import UpdateView
 from .models import Profile
+from .forms import ProfileForm
+
 
 # Create your views here.
 
@@ -9,3 +13,13 @@ from .models import Profile
 def profile_view(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, 'accounts/profile.html', {'profile': profile})
+
+# Profile update view
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'accounts/edit_profile.html'
+    success_url = reverse_lazy('profile')
+
+    def get_object(self):
+        return self.request.user.profile
