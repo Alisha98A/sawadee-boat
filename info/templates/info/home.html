@@ -20,7 +20,7 @@
         <div class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
             <h1>Welcome to Sawadee Dining Boat</h1>
             <p>Enjoy a unique dining experience on the water.</p>
-            <a href="/reservation/" class="btn btn-primary btn-lg">Make a Reservation</a>
+            <a href="{% url 'reservation_selection' %}"  class="btn btn-primary btn-lg">Make a Reservation</a>
         </div>
     </div>
 </section>
@@ -50,7 +50,7 @@
             <div class="col-md-4">
                 <h3>Reservations</h3>
                 <p>Book a spot on our beautiful boat for an unforgettable experience.</p>
-                <a href="/reservation/" class="btn btn-outline-primary">Make a Reservation</a>
+                <a href="{% url 'reservation_selection' %}"  class="btn btn-outline-primary">Make a Reservation</a>
             </div>
         </div>
     </div>
