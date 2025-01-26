@@ -33,6 +33,8 @@ class Reservation(models.Model):
     time_slot = models.TimeField()  
     number_of_guests = models.IntegerField() 
     has_discount = models.BooleanField(default=False, null=True, blank=True) 
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"Reservation for {self.user.username} on {self.booking_date}"
