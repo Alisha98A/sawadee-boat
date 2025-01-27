@@ -11,5 +11,10 @@
         {% else %}
             <h4>You are logged in as a guest. You can make reservations for yourself.</h4>
         {% endif %}
+        
+        <form method="POST" action="{% url 'reservations:reservation_create' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
     </div>
 {% endblock %}
