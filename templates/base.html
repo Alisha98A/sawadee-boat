@@ -60,6 +60,18 @@
 </a>
 {% endif %}
                         </li>
+                    
+                        {% if user.is_authenticated %}
+                            <!-- Display Log Out if the user is authenticated -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_logout' %}" id="nav-link">Log Out</a>
+                            </li>
+                        {% else %}
+                            <!-- Display Log In/Create Account if the user is not authenticated -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}" id="nav-link">Log In/Create Account</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
