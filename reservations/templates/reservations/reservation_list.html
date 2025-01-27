@@ -16,6 +16,10 @@
         <td>{{ reservation.booking_date }}</td>
         <td>{{ reservation.time_slot }}</td>
         <td>{{ reservation.number_of_guests }}</td>
+        <td>
+            <a href="{% url 'reservations:reservation_edit' reservation.pk %}">Edit</a>
+            <a href="{% url 'reservations:reservation_delete' reservation.pk %}">Delete</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
