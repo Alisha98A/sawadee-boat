@@ -3,6 +3,8 @@ from django.utils.timezone import make_aware
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator, EmailValidator
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,7 +20,7 @@ class Boat(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Reservation(models.Model):
     """
@@ -32,7 +34,23 @@ class Reservation(models.Model):
     booking_date = models.DateField()  
     time_slot = models.TimeField()  
     number_of_guests = models.IntegerField() 
-    has_discount = models.BooleanField(default=False, null=True, blank=True) 
+    has_discount = models.BooleanField(default=False, null=True, blank=True)
+    first_name = models.CharField(max_length=50, default="DefaultFirstName")
+    last_name = models.CharField(max_length=50, default="DefaultLastName")   
+    phone_number = models.CharField(
+        max_length=15,
+        validators=[
+            RegexValidator(
+                regex=r'^\+?1?\d{9,15}$',
+                message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+            )
+        ],
+        default="+0000000000"
+    )
+    email_address = models.EmailField(
+    validators=[EmailValidator()],
+    default="default@example.com"
+)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -79,6 +97,10 @@ class Reservation(models.Model):
                 raise ValidationError(
                     f"This boat is already booked from {existing_start.time()} to {existing_end.time()}."
                 )
+            
+    def get_absolute_url(self):
+        # Redirect to the reservation list page after updating a reservation
+        return reverse('reservations_list')
             
     def save(self, *args, **kwargs):
         """Overrides the save method to validate before saving."""
