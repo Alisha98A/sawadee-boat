@@ -15,6 +15,11 @@
         <form method="POST" action="{% url 'reservations:reservation_create' %}">
             {% csrf_token %}
             {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Confirm Reservation</button>
         </form>
+
+        <div class="mt-3">
+            <a href="{% url 'reservations:reservations_list' %}" class="btn btn-secondary">Or go to the reservation dashboard</a>
+        </div>
     </div>
 {% endblock %}
