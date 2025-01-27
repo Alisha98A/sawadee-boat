@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form.instance.pk|default:"Create Reservation" }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>{% if form.instance.pk %}Edit Reservation{% else %}Create a New Reservation{% endif %}</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">
+                {% if form.instance.pk %}Update Reservation{% else %}Confirm Reservation{% endif %}
+            </button>
+        </form>
+
+        <div class="mt-3">
+            <a href="{% url 'reservations:reservations_list' %}" class="btn btn-secondary">Back to Reservations List</a>
+        </div>
+    </div>
+{% endblock %}
