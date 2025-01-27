@@ -10,5 +10,11 @@
         <p><strong>Date:</strong> {{ reservation.booking_date }}</p>
         <p><strong>Time Slot:</strong> {{ reservation.time_slot }}</p>
         <p><strong>Guests:</strong> {{ reservation.number_of_guests }}</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Reservation</button>
+            <a href="{% url 'reservations:reservations_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
     </div>
 {% endblock %}
