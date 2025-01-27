@@ -52,7 +52,13 @@
                             <a class="nav-link" href="/menu/" id="nav-link">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'reservation_selection' %}" id="nav-link">Reservation</a>
+                            {% if user.is_authenticated %}
+    <a href="{% url 'reservations:reservation_create' %}" class="btn btn-primary">Reservation</a>
+{% else %}
+<a href="{% url 'account_login' %}?next=/reservations/new/" class="btn btn-primary">
+    Log in to make a reservation
+</a>
+{% endif %}
                         </li>
                     </ul>
                 </div>
