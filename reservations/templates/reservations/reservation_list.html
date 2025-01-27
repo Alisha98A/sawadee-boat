@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is the reservations list template</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Your Reservations</h1>
+<a href="{% url 'reservations:reservation_create' %}">Create New Reservation</a>
+<table>
+    <tr>
+        <th>Boat</th>
+        <th>Date</th>
+        <th>Time Slot</th>
+        <th>Guests</th>
+        <th>Actions</th>
+    </tr>
+    {% for reservation in reservations %}
+    <tr>
+        <td>{{ reservation.boat.name }}</td>
+        <td>{{ reservation.booking_date }}</td>
+        <td>{{ reservation.time_slot }}</td>
+        <td>{{ reservation.number_of_guests }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
