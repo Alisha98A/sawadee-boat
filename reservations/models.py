@@ -13,7 +13,9 @@ class Reservation(models.Model):
     It stores details like booking date, time slot, number of guests, and contact information.
     The model ensures guest limits, time slot validation, and prevents overlapping bookings.
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    staff_member = models.ForeignKey(User, related_name='staff_reservations', null=True, blank=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="reservations_created")
     booking_date = models.DateField()  
     time_slot = models.TimeField()  
     number_of_guests = models.IntegerField() 
