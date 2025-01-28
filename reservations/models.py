@@ -6,37 +6,19 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator, EmailValidator
 from django.urls import reverse
 
-# Create your models here.
-
-class Boat(models.Model):
-    """
-    The Boat model represents a dining boat used for reservations.
-    It stores information about the boat's name, description, and capacity.
-    This model is used to keep track of available boats for customer bookings.
-    """
-    name = models.CharField(max_length=255)
-    description = models.TextField()  
-    capacity = models.IntegerField()  
-
-    def __str__(self):
-        return self.name
-
 
 class Reservation(models.Model):
     """
-    The Reservation model represents a booking made by a user for a specific boat.
-    It stores the user who made the reservation, the boat being reserved, the booking date, 
-    the time slot, and the number of guests. It also includes an optional discount field.
-    The model ensures that the number of guests is between 4 and 20 through the clean method.
+    The Reservation model represents a booking made by a user.
+    It stores details like booking date, time slot, number of guests, and contact information.
+    The model ensures guest limits, time slot validation, and prevents overlapping bookings.
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
-    boat = models.ForeignKey(Boat, on_delete=models.CASCADE)  
     booking_date = models.DateField()  
     time_slot = models.TimeField()  
     number_of_guests = models.IntegerField() 
-    has_discount = models.BooleanField(default=False, null=True, blank=True)
-    first_name = models.CharField(max_length=50, default="DefaultFirstName")
-    last_name = models.CharField(max_length=50, default="DefaultLastName")   
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)   
     phone_number = models.CharField(
         max_length=15,
         validators=[
@@ -44,13 +26,11 @@ class Reservation(models.Model):
                 regex=r'^\+?1?\d{9,15}$',
                 message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
             )
-        ],
-        default="+0000000000"
+        ]
     )
     email_address = models.EmailField(
-    validators=[EmailValidator()],
-    default="default@example.com"
-)
+        validators=[EmailValidator()],
+    )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -86,7 +66,6 @@ class Reservation(models.Model):
         start_time = make_aware(datetime.combine(self.booking_date, self.time_slot))
         end_time = start_time + timedelta(hours=2)
         overlapping_reservations = Reservation.objects.filter(
-            boat=self.boat,
             booking_date=self.booking_date,
         ).exclude(id=self.id)
 
@@ -95,7 +74,7 @@ class Reservation(models.Model):
             existing_end = existing_start + timedelta(hours=2)
             if start_time < existing_end and end_time > existing_start:
                 raise ValidationError(
-                    f"This boat is already booked from {existing_start.time()} to {existing_end.time()}."
+                    f"The boat is already booked from {existing_start.time()} to {existing_end.time()}."
                 )
             
     def get_absolute_url(self):
