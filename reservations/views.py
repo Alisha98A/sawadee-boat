@@ -1,7 +1,11 @@
-from django.shortcuts import render
-from django.views import generic
-from django.views.generic.list import ListView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
+from django.urls import reverse_lazy
 from .models import Reservation
+from .forms import ReservationFormForUser, ReservationFormForStaff
 from datetime import date
 
 # Create your views here.
