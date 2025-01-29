@@ -145,3 +145,18 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
+
+    def form_valid(self, form):
+        # Ensure the user field is always set correctly
+        if not self.request.user.is_staff:
+            form.instance.user = self.request.user
+
+        if self.request.user.is_staff and not form.cleaned_data.get("user"):
+            messages.error(self.request, "Staff must select a user for the reservation.")
+            return self.form_invalid(form)
+
+        messages.success(self.request, "Your reservation has been successfully updated!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("reservations:reservations_list")
