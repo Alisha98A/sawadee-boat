@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% block title %}My Reservations{% endblock %}
+
 {% block content %}
 <h1>Your Reservations</h1>
 <a href="{% url 'reservations:reservation_create' %}">Create New Reservation</a>
