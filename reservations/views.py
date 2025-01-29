@@ -160,3 +160,16 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("reservations:reservations_list")
+
+
+# ---------------------------------
+# Delete Reservation
+# ---------------------------------
+
+class ReservationDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Handles deleting a reservation.
+    """
+    model = Reservation
+    template_name = "reservations/reservation_confirm_delete.html"
+    success_url = reverse_lazy("reservations:reservations_list")
