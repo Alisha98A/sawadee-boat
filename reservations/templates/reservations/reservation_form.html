@@ -4,14 +4,15 @@
 
 {% block content %}
     <div class="container mt-5">
-        <h2>Create a Reservation</h2>
-        
-        {% if user_type == 'staff' %}
-            <h4>You are logged in as a staff member. You can make reservations for any boat.</h4>
+        {% if user.is_staff %}
+            <div class="alert alert-info">
+                <strong>Staff Mode:</strong> You are logged in as a staff member. Please select a user for this reservation.
+            </div>
+            <h2>Create a Reservation for a Guest</h2>
         {% else %}
-            <h4>You are logged in as a guest. You can make reservations for yourself.</h4>
+            <h2>Create a Reservation</h2>
         {% endif %}
-        
+
         <form method="POST" action="{% url 'reservations:reservation_create' %}">
             {% csrf_token %}
             {{ form.as_p }}
