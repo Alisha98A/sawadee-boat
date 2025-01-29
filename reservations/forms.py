@@ -26,3 +26,9 @@ class BaseReservationForm(forms.ModelForm):
         widget=forms.DateInput(attrs={'type': 'date', 'required': True}),
         error_messages={"required": "Please select a booking date."}
     )
+
+    time_slot = forms.ChoiceField(
+        choices=TIME_SLOTS,
+        required=True,
+        error_messages={"required": "Please select a time slot."}
+    )
