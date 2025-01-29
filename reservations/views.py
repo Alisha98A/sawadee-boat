@@ -142,3 +142,6 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Reservation
     template_name = "reservations/reservation_edit_form.html"
+
+    def get_form_class(self):
+        return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
