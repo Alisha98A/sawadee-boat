@@ -41,9 +41,13 @@ class Reservation(models.Model):
         """Validates the reservation details, including time slots, guest limits, and overlaps."""
         today = date.today()
 
-        # Prevent past bookings and enforce 2-day advance notice
+        # **Booking Date Validation**
+        if not self.booking_date:
+            raise ValidationError("Booking date is required.")
+
         if self.booking_date < today:
             raise ValidationError("Booking date cannot be in the past.")
+        
         if self.booking_date < today + timedelta(days=2):
             raise ValidationError("Bookings must be made at least 2 days in advance.")
 
