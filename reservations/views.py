@@ -102,3 +102,22 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
 
     def get_form_class(self):
         return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
+
+    def form_valid(self, form):
+        reservation = form.save(commit=False)
+
+        if self.request.user.is_staff:
+            # Ensure staff selects a user
+            if not form.cleaned_data.get("user"):
+                messages.error(self.request, "Staff must select a user for the reservation.")
+                return self.form_invalid(form)
+            reservation.user = form.cleaned_data["user"]
+        else:
+            reservation.user = self.request.user
+
+        # Track the creator of the reservation
+        reservation.created_by = self.request.user
+        reservation.save()
+
+        messages.success(self.request, "Reservation successfully created!")
+        return super().form_valid(form)
