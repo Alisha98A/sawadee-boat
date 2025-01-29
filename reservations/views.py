@@ -128,3 +128,17 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy("reservations:reservations_list")
+
+
+# ---------------------------------
+# Update Reservation
+# ---------------------------------
+
+class ReservationUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Handles updating a reservation.
+    - Users can only update their own reservations.
+    - Staff can update any reservation but must ensure a user is assigned.
+    """
+    model = Reservation
+    template_name = "reservations/reservation_edit_form.html"
