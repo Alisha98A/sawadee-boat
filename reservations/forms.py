@@ -58,4 +58,10 @@ class ReservationFormForStaff(BaseReservationForm):
     """
     Form for staff, allowing them to create reservations for other users.
     """
-    pass
+
+    user = forms.ModelChoiceField(
+        queryset=User.objects.filter(is_staff=False),
+        required=True,
+        label="Guest User",
+        error_messages={"required": "Please select a user for the reservation."}
+    )
