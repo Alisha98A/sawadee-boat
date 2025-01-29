@@ -41,8 +41,16 @@ def reservation_success(request):
     """Displays a success page after creating a reservation."""
     return render(request, "reservation_success.html")
 
+# ---------------------------------
+# List of Reservations
+# ---------------------------------
 
-class ReservationListView(ListView):
-    queryset = Reservation.objects.filter(booking_date__gte=date.today()).order_by('booking_date', 'time_slot')
-    template_name = 'reservations/reservation_list.html'  
-    context_object_name = 'reservations'
+class ReservationListView(LoginRequiredMixin, ListView):
+    """
+    Displays a list of reservations.
+    - Staff: See all reservations.
+    - Users: See only their own reservations.
+    """
+    model = Reservation
+    template_name = "reservation_list.html"
+    context_object_name = "reservations"
