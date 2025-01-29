@@ -74,3 +74,6 @@ class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Reservation
     template_name = "staff_dashboard.html"
     context_object_name = "reservations"
+
+    def test_func(self):
+        return self.request.user.is_staff
