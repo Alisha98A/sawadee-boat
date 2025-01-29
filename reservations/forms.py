@@ -38,3 +38,10 @@ class BaseReservationForm(forms.ModelForm):
         required=True,
         error_messages={"required": "Please select the number of guests."}
     )
+
+    class Meta:
+        model = Reservation
+        fields = [
+            'booking_date', 'time_slot', 'number_of_guests',
+            'first_name', 'last_name', 'phone_number', 'email_address'
+        ]
