@@ -41,6 +41,7 @@ def reservation_success(request):
     """Displays a success page after creating a reservation."""
     return render(request, "reservation_success.html")
 
+
 # ---------------------------------
 # List of Reservations
 # ---------------------------------
@@ -59,3 +60,17 @@ class ReservationListView(LoginRequiredMixin, ListView):
         if self.request.user.is_staff:
             return Reservation.objects.all().order_by("booking_date", "time_slot")
         return Reservation.objects.filter(user=self.request.user).order_by("booking_date")
+
+
+# ---------------------------------
+# Staff Dashboard
+# ---------------------------------
+
+class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    """
+    Dashboard view for staff to manage all reservations.
+    Only staff members can access this page.
+    """
+    model = Reservation
+    template_name = "staff_dashboard.html"
+    context_object_name = "reservations"
