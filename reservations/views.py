@@ -125,3 +125,6 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "There were errors in your submission. Please check your inputs.")
         return self.render_to_response(self.get_context_data(form=form))
+
+    def get_success_url(self):
+        return reverse_lazy("reservations:reservations_list")
