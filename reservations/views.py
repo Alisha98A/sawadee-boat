@@ -77,3 +77,7 @@ class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        messages.error(self.request, "You do not have permission to access this page.")
+        return redirect("reservation_list")
