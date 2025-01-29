@@ -32,3 +32,9 @@ class BaseReservationForm(forms.ModelForm):
         required=True,
         error_messages={"required": "Please select a time slot."}
     )
+
+    number_of_guests = forms.ChoiceField(
+        choices=GUEST_CHOICES,
+        required=True,
+        error_messages={"required": "Please select the number of guests."}
+    )
