@@ -52,3 +52,10 @@ class ReservationFormForUser(BaseReservationForm):
     Form for regular users booking their own reservations.
     """
     pass
+
+
+class ReservationFormForStaff(BaseReservationForm):
+    """
+    Form for staff, allowing them to create reservations for other users.
+    """
+    pass
