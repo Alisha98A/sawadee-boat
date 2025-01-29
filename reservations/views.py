@@ -54,3 +54,8 @@ class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = "reservation_list.html"
     context_object_name = "reservations"
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Reservation.objects.all().order_by("booking_date", "time_slot")
+        return Reservation.objects.filter(user=self.request.user).order_by("booking_date")
