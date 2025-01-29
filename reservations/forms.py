@@ -7,4 +7,13 @@ class BaseReservationForm(forms.ModelForm):
     """
     Base reservation form containing common fields for both users and staff.
     """
-    pass
+
+    # Time slots for reservations
+    TIME_SLOTS = [
+        ('10-12', '10:00 - 12:00'),
+        ('12-14', '12:00 - 14:00'),
+        ('14-16', '14:00 - 16:00'),
+        ('16-18', '16:00 - 18:00'),
+        ('18-20', '18:00 - 20:00'),
+        ('20-22', '20:00 - 22:00'),
+    ]
