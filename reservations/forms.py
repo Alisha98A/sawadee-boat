@@ -20,3 +20,9 @@ class BaseReservationForm(forms.ModelForm):
 
     # Guest count choices (4-20 guests)
     GUEST_CHOICES = [(str(i), str(i)) for i in range(4, 21)]
+
+    booking_date = forms.DateField(
+        required=True,
+        widget=forms.DateInput(attrs={'type': 'date', 'required': True}),
+        error_messages={"required": "Please select a booking date."}
+    )
