@@ -84,3 +84,18 @@ class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def get_queryset(self):
         return Reservation.objects.all().order_by("booking_date")
+
+
+# ---------------------------------
+# Create Reservation
+# ---------------------------------
+
+class ReservationCreateView(LoginRequiredMixin, CreateView):
+    """
+    Handles creating a reservation.
+    - Users can only create their own reservations.
+    - Staff must select a user when creating a reservation.
+    """
+    model = Reservation
+    template_name = "reservations/reservation_form.html"
+    success_url = reverse_lazy("reservation_list")
