@@ -18,6 +18,8 @@ def validate_phone_number(value):
     return cleaned_value
 
 class ProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=True, label="First Name")
+    last_name = forms.CharField(max_length=30, required=True, label="Last Name")
     phone_number = forms.CharField(
         max_length=15,  
         required=True,
@@ -35,7 +37,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['birth_date', 'phone_number', 'address']
+        fields = ['first_name', 'last_name','birth_date', 'phone_number', 'address']
 
     def clean_birth_date(self):
         """
