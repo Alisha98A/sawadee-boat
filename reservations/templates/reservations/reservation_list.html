@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}My Reservations{% endblock %}
 
 {% block content %}
@@ -24,36 +24,45 @@
     {% else %}
         <h2 class="text-center">Your Upcoming Reservations</h2>
     {% endif %}
-    
+
     <table class="table table-bordered table-hover mt-4">
-    <tr>
-        {% if user.is_staff %}
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone Number</th>
-    {% else %}
-        <th style="display:none;">First Name</th>
-        <th style="display:none;">Last Name</th>
-        <th style="display:none;">Phone Number</th>
-    {% endif %}
+        <thead class="thead-dark">
+            <tr>
+                {% if user.is_staff %}
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                {% else %}
+                    <th style="display:none;">First Name</th>
+                    <th style="display:none;">Last Name</th>
+                    <th style="display:none;">Phone Number</th>
+                {% endif %}
         <th>Boat</th>
-        <th>Date</th>
-        <th>Time Slot</th>
-        <th>Guests</th>
-        <th>Actions</th>
-    </tr>
-    {% for reservation in reservations %}
-    <tr>
+                <th>Date</th>
+                <th>Time Slot</th> 
+                <th>Guests</th>
+                
+                {% if user.is_staff %}
+                    <th>Created By</th>
+                    <th>Last Updated On</th>
+                {% endif %}
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
         <td>{{ reservation.boat.name }}</td>
-        <td>{{ reservation.booking_date }}</td>
-        <td>{{ reservation.time_slot }}</td>
-        <td>{{ reservation.number_of_guests }}</td>
-        <td>
+                <td>{{ reservation.booking_date }}</td>
+                <td>{{ reservation.time_slot }}</td>
+                <td>{{ reservation.number_of_guests }}</td>
+                <td>
             <a href="{% url 'reservations:reservation_edit' reservation.pk %}">Edit</a>
             <a href="{% url 'reservations:reservation_delete' reservation.pk %}">Delete</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
 </div>
 {% endblock %}
