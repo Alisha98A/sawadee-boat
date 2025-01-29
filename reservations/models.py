@@ -80,12 +80,11 @@ class Reservation(models.Model):
                 raise ValidationError(
                     f"The boat is already booked from {existing_start.time()} to {existing_end.time()}."
                 )
-            
-    def get_absolute_url(self):
-        # Redirect to the reservation list page after updating a reservation
-        return reverse('reservations_list')
-            
+
+
     def save(self, *args, **kwargs):
-        """Overrides the save method to validate before saving."""
+    # Ensure validation runs and assigns created_by before saving.
+        if not self.id and not self.created_by: 
+           self.created_by = self.created_by or self.user  
         self.clean()
         super().save(*args, **kwargs)
