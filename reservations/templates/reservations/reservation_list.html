@@ -3,6 +3,17 @@
 
 {% block content %}
 <div class="container">
+    <!-- Welcome Message -->
+    <div class="text-center my-5">
+        <h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
+        <p>
+            Enjoy a unique boat dining experience! Each reservation is for the entire boat, with a capacity of 4 to 20 guests. 
+            The 2-hour trip includes dining while traveling between the start and end destinations. Operating hours: 
+            <strong>10:00 AM to 10:00 PM, Monday through Friday.</strong>
+        </p>
+        <p>
+            Reservations must be made at least <strong>2 days in advance</strong>. We look forward to welcoming you aboard!
+        </p>
 <h1>Your Reservations</h1>
 <a href="{% url 'reservations:reservation_create' %}">Create New Reservation</a>
 <table>
