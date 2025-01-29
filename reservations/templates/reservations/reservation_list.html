@@ -14,6 +14,7 @@
         <p>
             Reservations must be made at least <strong>2 days in advance</strong>. We look forward to welcoming you aboard!
         </p>
+
         <!-- Call-to-Action -->
         <a href="{% url 'reservations:reservation_create' %}" class="btn btn-primary btn-lg my-4">Create a Reservation</a>
     </div>
@@ -53,7 +54,15 @@
         <tbody>
             {% for reservation in reservations %}
             <tr>
-        <td>{{ reservation.boat.name }}</td>
+                {% if user.is_staff %}
+                    <td>{{ reservation.first_name }}</td>
+                    <td>{{ reservation.last_name }}</td>
+                    <td>{{ reservation.phone_number }}</td>
+                {% else %}
+                    <td style="display:none;">{{ reservation.first_name }}</td>
+                    <td style="display:none;">{{ reservation.last_name }}</td>
+                    <td style="display:none;">{{ reservation.phone_number }}</td>
+                {% endif %}
                 <td>{{ reservation.booking_date }}</td>
                 <td>{{ reservation.time_slot }}</td>
                 <td>{{ reservation.number_of_guests }}</td>
