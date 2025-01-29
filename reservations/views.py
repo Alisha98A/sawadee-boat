@@ -36,6 +36,11 @@ def reservation_view(request):
         {"form": form, "user_type": "staff" if request.user.is_staff else "guest"}
     )
 
+@login_required
+def reservation_success(request):
+    """Displays a success page after creating a reservation."""
+    return render(request, "reservation_success.html")
+
 
 class ReservationListView(ListView):
     queryset = Reservation.objects.filter(booking_date__gte=date.today()).order_by('booking_date', 'time_slot')
