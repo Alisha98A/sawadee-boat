@@ -2,6 +2,7 @@
 {% block title %}My Reservations{% endblock %}
 
 {% block content %}
+<div class="container">
 <h1>Your Reservations</h1>
 <a href="{% url 'reservations:reservation_create' %}">Create New Reservation</a>
 <table>
@@ -25,4 +26,5 @@
     </tr>
     {% endfor %}
 </table>
+</div>
 {% endblock %}
