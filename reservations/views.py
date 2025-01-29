@@ -121,3 +121,7 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
 
         messages.success(self.request, "Reservation successfully created!")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "There were errors in your submission. Please check your inputs.")
+        return self.render_to_response(self.get_context_data(form=form))
