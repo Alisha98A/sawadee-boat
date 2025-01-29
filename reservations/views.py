@@ -99,3 +99,6 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     model = Reservation
     template_name = "reservations/reservation_form.html"
     success_url = reverse_lazy("reservation_list")
+
+    def get_form_class(self):
+        return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
