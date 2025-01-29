@@ -45,3 +45,10 @@ class BaseReservationForm(forms.ModelForm):
             'booking_date', 'time_slot', 'number_of_guests',
             'first_name', 'last_name', 'phone_number', 'email_address'
         ]
+
+
+class ReservationFormForUser(BaseReservationForm):
+    """
+    Form for regular users booking their own reservations.
+    """
+    pass
