@@ -80,5 +80,16 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% if not reservations %}
+        <p class="text-center mt-4">You have no reservations yet. <a href="{% url 'reservations:reservation_create' %}">Make a reservation now!</a></p>
+    {% endif %}
 </div>
+
+<!-- Additional Navigation -->
+<div class="text-center mt-5">
+    <a href="x" class="btn btn-secondary">View Menu</a>
+    <a href="{% url 'profile' %}" class="btn btn-secondary">My Account</a>
+</div>
+
 {% endblock %}
