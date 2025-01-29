@@ -27,6 +27,15 @@
     
     <table class="table table-bordered table-hover mt-4">
     <tr>
+        {% if user.is_staff %}
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+    {% else %}
+        <th style="display:none;">First Name</th>
+        <th style="display:none;">Last Name</th>
+        <th style="display:none;">Phone Number</th>
+    {% endif %}
         <th>Boat</th>
         <th>Date</th>
         <th>Time Slot</th>
