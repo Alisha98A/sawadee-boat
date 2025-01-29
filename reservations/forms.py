@@ -17,3 +17,6 @@ class BaseReservationForm(forms.ModelForm):
         ('18-20', '18:00 - 20:00'),
         ('20-22', '20:00 - 22:00'),
     ]
+
+    # Guest count choices (4-20 guests)
+    GUEST_CHOICES = [(str(i), str(i)) for i in range(4, 21)]
