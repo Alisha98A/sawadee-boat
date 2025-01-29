@@ -65,3 +65,6 @@ class ReservationFormForStaff(BaseReservationForm):
         label="Guest User",
         error_messages={"required": "Please select a user for the reservation."}
     )
+
+    class Meta(BaseReservationForm.Meta):
+        fields = ['user'] + BaseReservationForm.Meta.fields
