@@ -73,11 +73,12 @@
                 {% endif %}
                 
                 <td>
-            <a href="{% url 'reservations:reservation_edit' reservation.pk %}">Edit</a>
-            <a href="{% url 'reservations:reservation_delete' reservation.pk %}">Delete</a>
+                    <a href="{% url 'reservations:reservation_edit' reservation.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'reservations:reservation_delete' reservation.pk %}" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}
+        </tbody>
     </table>
 </div>
 {% endblock %}
