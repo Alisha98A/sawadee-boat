@@ -28,8 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1','localhost','.herokuapp.com', '8000-alisha98a-sawadeeboat-05tfwdet2yb.ws-eu117.gitpod.io']
 
 
@@ -43,6 +42,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'cloudinary',
+    'cloudinary_storage',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reservations',
@@ -101,6 +102,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sawadee_dining_boat.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
