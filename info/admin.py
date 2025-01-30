@@ -14,7 +14,8 @@ class ItemInline(admin.TabularInline):
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     """Admin panel settings for the Menu model."""
-    list_display = ("name",)
+    list_display = ("name", "is_active")
+    list_filter = ("is_active",)
     inlines = [MenuItemInline]
 
 @admin.register(MenuItem)
