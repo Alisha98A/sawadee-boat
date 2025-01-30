@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Menu, MenuItem, Item
 
+# -------------------------------------
+# Inlines (For Nested Editing)
+# -------------------------------------
 class MenuItemInline(admin.TabularInline):
     """Allows MenuItems to be edited directly inside the Menu admin page."""
     model = MenuItem
@@ -11,12 +14,15 @@ class ItemInline(admin.TabularInline):
     model = Item
     extra = 1
 
+# -------------------------------------
+# Menu Admin
+# -------------------------------------
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     """Admin panel settings for the Menu model."""
     list_display = ("name", "is_active")
     list_filter = ("is_active",)
-    inlines = [MenuItemInline]
+    inlines = [MenuItemInline]  
     actions = ["set_active_menu"]
 
     def set_active_menu(self, request, queryset):
@@ -30,13 +36,19 @@ class MenuAdmin(admin.ModelAdmin):
 
     set_active_menu.short_description = "Set as Active Menu"
 
+# -------------------------------------
+# MenuItem Admin
+# -------------------------------------
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
     """Admin panel settings for the MenuItem model."""
     list_display = ("menu", "category")
     inlines = [ItemInline]
-
+# -------------------------------------
+# Item Admin
+# -------------------------------------
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    """Admin panel settings for the Item model."""
     list_display = ("name", "menu_item", "price")
     search_fields = ("name",)
