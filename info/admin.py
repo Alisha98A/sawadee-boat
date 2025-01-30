@@ -17,5 +17,10 @@ class MenuAdmin(admin.ModelAdmin):
     list_display = ("name",)
     inlines = [MenuItemInline]
 
-admin.site.register(MenuItem)
-admin.site.register(Item)
+@admin.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    """Admin panel settings for the MenuItem model."""
+    list_display = ("menu", "category")
+    inlines = [ItemInline]
+
+@admin.register(Item)
