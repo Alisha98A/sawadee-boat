@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # -------------------------------------
 # Menu Model
@@ -33,5 +34,8 @@ class Item(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     
+    # CloudinaryField with a default placeholder
+    image = CloudinaryField("image", default="placeholder")
+
     def __str__(self):
         return self.name
