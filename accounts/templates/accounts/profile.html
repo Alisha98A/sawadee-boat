@@ -44,6 +44,11 @@
         <a href="{% url 'account_change_password' %}" class="btn btn-outline-warning">Change Password</a>
     </div>
 
+    <!-- Delete Account Section -->
+   <div class="text-center mt-4">
+    <a href="{% url 'delete_account' %}" class="btn btn-outline-danger">Delete My Account</a>
+  </div>
+
     <!-- Logout Section -->
     <div class="text-center mt-4">
         <form action="{% url 'account_logout' %}" method="POST">
