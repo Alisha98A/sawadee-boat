@@ -17,7 +17,15 @@
             <div class="row">
                 {% if section.menu_items.all %}
                     {% for item in section.menu_items.all %}
-                    <div class="col-md-3 col-sm-6 mb-4"></div>
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">{{ item.description }}</p>
+                                <p class="fw-bold">${{ item.price }}</p>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <p>No items available in this category.</p>
