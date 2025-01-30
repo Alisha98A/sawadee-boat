@@ -44,23 +44,12 @@
         <a href="{% url 'account_change_password' %}" class="btn btn-outline-warning">Change Password</a>
     </div>
 
-<!-- Logout button -->
+    <!-- Logout Section -->
+    <div class="text-center mt-4">
         <form action="{% url 'account_logout' %}" method="POST">
             {% csrf_token %}
-    <button type="submit">Logout</button>
+            <button type="submit" class="btn btn-danger">Logout</button>
         </form>
-
-<!-- Display recent activity -->
-{% if profile.user.bookings.all %}
-    <h3>Recent Bookings:</h3>
-    <ul>
-    {% for booking in profile.user.bookings.all %}
-        <li>{{ booking.booking_date }} - {{ booking.number_of_guests }} guests</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No recent bookings.</p>
-{% endif %}
     </div>
 </div>
     </div>
