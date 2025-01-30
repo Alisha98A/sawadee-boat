@@ -30,18 +30,19 @@
             <div class="col-md-5 text-center">
                 <p><strong>Name:</strong> {{ profile.first_name }} {{ profile.last_name }}</p>
                 <p><strong>Email:</strong> {{ profile.user.email }}</p>
-<p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
-<p><strong>Address:</strong> {{ profile.address }}</p>
-<p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+                <p><strong>Phone Number:</strong> {{ profile.phone_number|default:"Not provided" }}</p>
+                <p><strong>Birth Date:</strong> {{ profile.birth_date|default:"Not provided" }}</p>
+                <p><strong>Address:</strong> {{ profile.address|default:"Not provided" }}</p>
+                <p><strong>Member since:</strong> {{ profile.user.date_joined|date:"F j, Y" }}</p>
+            </div>
+        </div>
+    </div>
 
-<!-- Display date joined -->
-<p><strong>Date Joined:</strong> {{ profile.user.date_joined|date:"F j, Y" }}</p>
-
-<!-- Link to edit profile -->
-<a href="{% url 'edit_profile' %}">Edit Profile</a>
-
-<!-- Link to change password -->
-<a href="{% url 'account_change_password' %}">Change Password</a>
+    <!-- Profile Actions -->
+    <div class="text-center mt-4">
+        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Edit Profile</a>
+        <a href="{% url 'account_change_password' %}" class="btn btn-outline-warning">Change Password</a>
+    </div>
 
 <!-- Logout button -->
         <form action="{% url 'account_logout' %}" method="POST">
