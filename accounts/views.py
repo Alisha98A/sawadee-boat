@@ -49,3 +49,19 @@ class CustomPasswordChangeView(PasswordChangeView):
     def form_invalid(self, form):
         messages.error(self.request, "There was an error changing your password. Please try again.")
         return super().form_invalid(form)
+    
+
+# -------------------------
+# Account Deletion View
+# -------------------------
+@login_required
+def delete_account(request):
+    """Allow users to delete their account with confirmation."""
+    if request.method == "POST":
+        messages.success(request, "Your account has been deleted successfully.")
+        user = request.user
+        logout(request)
+        user.delete()
+        return redirect("account_login")
+
+    return render(request, "accounts/delete_account.html")
