@@ -23,3 +23,15 @@ class MenuItem(models.Model):
     
     def __str__(self):
         return f"{self.menu.name} - {self.category}"
+
+# -------------------------------------
+# Item Model
+# -------------------------------------
+class Item(models.Model):
+    menu_item = models.ForeignKey("MenuItem", on_delete=models.CASCADE, related_name="menu_items")
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    
+    def __str__(self):
+        return self.name
