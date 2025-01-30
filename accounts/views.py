@@ -1,21 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from allauth.account.views import PasswordChangeView
 from .models import Profile
 from .forms import ProfileForm
 
-# Create your views here.
 
-# Profile view
+# -------------------------
+# Profile Views & Update
+# -------------------------
 @login_required
 def profile_view(request):
+    """Display the user's profile."""
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, 'accounts/profile.html', {'profile': profile})
 
-# Profile update view
 class ProfileUpdateView(UpdateView):
     model = Profile
     form_class = ProfileForm
@@ -25,16 +28,20 @@ class ProfileUpdateView(UpdateView):
     def get_object(self):
         return self.request.user.profile
 
-# Sign-up view
+# -------------------------
+# Authentication Views
+# -------------------------
 def signup(request):
+    """Handle user registration."""
     form = CustomSignupForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         form.save(request)
         return redirect('success')
     return render(request, 'accounts/signup.html', {'form': form})
 
-# Custom password change view
+
 class CustomPasswordChangeView(PasswordChangeView):
+    """Allow users to change their password with success/error messages."""
     def form_valid(self, form):
         messages.success(self.request, "Your password has been changed successfully.")
         return redirect('account_profile')
