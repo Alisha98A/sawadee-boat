@@ -17,6 +17,18 @@ class MenuAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active")
     list_filter = ("is_active",)
     inlines = [MenuItemInline]
+    actions = ["set_active_menu"]
+
+    def set_active_menu(self, request, queryset):
+        """Ensure only one menu is active at a time."""
+        if queryset.count() > 1:
+            self.message_user(request, "You can only activate one menu at a time.", level="error")
+        else:
+            Menu.objects.update(is_active=False)  
+            queryset.update(is_active=True)  
+            self.message_user(request, "Selected menu is now active.")
+
+    set_active_menu.short_description = "Set as Active Menu"
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
