@@ -6,6 +6,11 @@ class MenuItemInline(admin.TabularInline):
     model = MenuItem
     extra = 1
 
+class ItemInline(admin.TabularInline):
+    """Allows Items to be edited directly inside the MenuItem admin page."""
+    model = Item
+    extra = 1
+
 admin.site.register(Menu)
 admin.site.register(MenuItem)
 admin.site.register(Item)
