@@ -15,10 +15,21 @@
                 <p>Feel free to contact us if you have any questions!</p>
                 <hr>
 
-<!-- Display profile details -->
-<p><strong>First Name:</strong> {{ profile.first_name }}</p>
-<p><strong>Last Name:</strong> {{ profile.last_name }}</p>
-<p><strong>Email:</strong> {{ profile.user.email }}</p>  
+                <!-- Reservations Section -->
+                <h3>Reservations</h3>
+                {% if profile.user.bookings.all %}
+                    <p>You have upcoming reservations.</p>
+                    <a href="{% url 'reservations:reservations_list' %}" class="btn btn-primary">View Reservations</a>
+                {% else %}
+                    <p>You currently don't have any upcoming reservations.</p>
+                    <a href="{% url 'reservations:reservation_create' %}" class="btn btn-primary">Make a reservation now</a>
+                {% endif %}
+            </div>
+
+            <!-- Right Side: Profile Details -->
+            <div class="col-md-5 text-center">
+                <p><strong>Name:</strong> {{ profile.first_name }} {{ profile.last_name }}</p>
+                <p><strong>Email:</strong> {{ profile.user.email }}</p>
 <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
 <p><strong>Address:</strong> {{ profile.address }}</p>
 <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
@@ -33,10 +44,10 @@
 <a href="{% url 'account_change_password' %}">Change Password</a>
 
 <!-- Logout button -->
-<form action="{% url 'account_logout' %}" method="POST">
-    {% csrf_token %}
+        <form action="{% url 'account_logout' %}" method="POST">
+            {% csrf_token %}
     <button type="submit">Logout</button>
-</form>
+        </form>
 
 <!-- Display recent activity -->
 {% if profile.user.bookings.all %}
@@ -49,8 +60,8 @@
 {% else %}
     <p>No recent bookings.</p>
 {% endif %}
+    </div>
 </div>
+    </div>
 </div>
-</div>
-</div>
-{% endblock %}
+{% endblock %}  
