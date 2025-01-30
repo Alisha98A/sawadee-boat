@@ -10,6 +10,7 @@
             No Menu Available
         {% endif %}
     </h1>
+    <p class="text-center">{{ menu.description }}</p>
 
     {% if menu and menu.items.all %}
         {% for section in menu.items.all %}
