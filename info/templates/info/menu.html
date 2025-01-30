@@ -19,6 +19,11 @@
                     {% for item in section.menu_items.all %}
                     <div class="col-md-3 col-sm-6 mb-4">
                         <div class="card h-100">
+                            {% if "placeholder" in item.image.url %}
+                                <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+                            {% else %}
+                                <img class="card-img-top" src="{{ item.image.url }}" alt="{{ item.name }}">
+                            {% endif %}
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ item.name }}</h5>
                                 <p class="card-text">{{ item.description }}</p>
