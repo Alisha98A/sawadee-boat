@@ -11,12 +11,17 @@ class CustomUserAdmin(UserAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        is_new_user = obj._state.adding  
+        is_new_user = obj._state.adding
         super().save_model(request, obj, form, change)
+
         if is_new_user:
-            obj.is_active = False  
+            obj.is_active = False
             obj.save()
-            send_email_confirmation(request, obj)  
+            send_email_confirmation(request, obj)
+
+# Unregister the default User admin and register the new one
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
