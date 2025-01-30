@@ -10,5 +10,13 @@
             No Menu Available
         {% endif %}
     </h1>
+
+    {% if menu and menu.items.all %}
+        {% for section in menu.items.all %}
+            <h3 class="mt-3">{{ section.category }}</h3>
+        {% endfor %}
+    {% else %}
+        <p class="text-center">No menu items found.</p>
+    {% endif %}
 </div>
 {% endblock %}
