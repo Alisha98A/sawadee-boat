@@ -13,3 +13,13 @@ class Menu(models.Model):
 
     class Meta:
         verbose_name_plural = "Menus"
+
+# -------------------------------------
+# MenuItem Model
+# -------------------------------------
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name="items")
+    category = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return f"{self.menu.name} - {self.category}"
