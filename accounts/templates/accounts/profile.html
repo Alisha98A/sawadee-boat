@@ -2,8 +2,18 @@
 
 {% block content %}
 <div class="container mt-5">
+    <!-- Welcome Section -->
     <div class="card p-4 shadow-sm">
-<h1>Welcome, {{ profile.user.username }}!</h1>
+        <div class="row">
+            <!-- Left Side: Welcome Message -->
+            <div class="col-md-7">
+                <h2>Welcome, {{ profile.user.username }}!</h2>
+                <p>
+                    This is your personal account page. Here you can add and edit 
+                    your personal information and manage your reservations.
+                </p>
+                <p>Feel free to contact us if you have any questions!</p>
+                <hr>
 
 <!-- Display profile details -->
 <p><strong>First Name:</strong> {{ profile.first_name }}</p>
@@ -39,6 +49,8 @@
 {% else %}
     <p>No recent bookings.</p>
 {% endif %}
+</div>
+</div>
 </div>
 </div>
 {% endblock %}
