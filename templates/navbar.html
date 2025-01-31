@@ -73,23 +73,22 @@
               Create a Reservation
             </a>
           </li>
-
-        {% if user.is_authenticated %}
-        <!-- Display Log Out if the user is authenticated -->
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_logout' %}" id="nav-link"
-            >Log Out</a
-          >
+            <a class="nav-link text-danger" href="{% url 'account_logout' %}">
+              Log Out
+            </a>
           </li>
           {% else %}
-        <!-- Display Log In/Create Account if the user is not authenticated -->
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'account_login' %}" id="nav-link"
-            >Log In/Create Account</a
-          >
+            <a class="nav-link btn btn-primary text-white" 
+               href="{% url 'account_login' %}?next={% url 'reservations:reservations_list' %}">
+              Reserve Now
+            </a>
           </li>
           {% endif %}
         </ul>
+      </div>
+
     </div>
   </div>
 </nav>
