@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <nav class="navbar navbar-expand-lg py-3" id="navbar">
   <div class="container-fluid d-flex flex-column">
 
@@ -31,15 +30,31 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-          <a class="nav-link" href="/" id="nav-link">Home</a>
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'about' %}" id="nav-link">About</a>
+          <a class="nav-link" href="{% url 'about' %}">About</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="/menu/" id="nav-link">Menu</a>
+            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'set_sail' %}">Set Sail With Us</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Center: Logo -->
+      <div class="navbar-center">
+        <a class="navbar-brand mx-auto" href="{% url 'home' %}">
+          <img src="{% static 'images/favicon_ico/android-chrome-192x192.png' %}"
+               alt="Logo" width="64" height="64">
+        </a>
+      </div>
+
+      <!-- Right Side: User Actions -->
+      <div class="navbar-right ms-auto">
+        <ul class="navbar-nav">
           {% if user.is_authenticated %}
           <a
             href="{% url 'reservations:reservation_create' %}"
