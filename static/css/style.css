@@ -1,9 +1,13 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lora:wght@400;600&display=swap');
+
 /* ===================================================================
    Global Styles
    =================================================================== */
 
 /* Make the body fill the screen */
 body {
+    font-family: 'Lora', serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
