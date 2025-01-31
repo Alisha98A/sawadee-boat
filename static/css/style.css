@@ -8,6 +8,8 @@
 /* Make the body fill the screen */
 body {
     font-family: 'Lora', serif;
+    background-color: #fdf7f0;
+    color: #3e2723;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -30,9 +32,18 @@ body, main {
 
 /* Ensure the navbar has no margin/padding affecting the hero */
 #navbar {
-    background-color: #E9D69E;
     margin-bottom: 0; 
     padding-bottom: 0;
+    background: linear-gradient(to right, #a87c5d, #7a4b31);
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.navbar-brand img {
+    height: auto;
 }
 
 #navbar-brand, #nav-link {
