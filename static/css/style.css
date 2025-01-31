@@ -59,6 +59,16 @@ body, main {
     background-color: #724E2F;
 }
 
+/* Navbar Structure */
+.navbar-left, .navbar-center, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left { justify-content: flex-start; flex: 1; }
+.navbar-center { justify-content: center; flex: 1; }
+.navbar-right { justify-content: flex-end; flex: 1; }
+
 /* ===================================================================
    Footer Styles
    =================================================================== */
