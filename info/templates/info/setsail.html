@@ -35,5 +35,12 @@
         <h2 class="text-success">Pricing</h2>
         <p>We offer a <strong>fixed rate</strong> based on group size. Visit our <a href="{% url 'menu' %}" class="text-decoration-none fw-bold">Menu</a> for more details.</p>
     </section>
+
+    <!-- CTA Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'reservations:reservation_create' %}" class="btn btn-lg btn-primary shadow-sm">
+            <i class="bi bi-calendar-plus-fill"></i> Create a Reservation
+        </a>
+    </div>
 </div>
 {% endblock %}
