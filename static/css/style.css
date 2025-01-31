@@ -18,7 +18,7 @@ body {
 /* Remove margin or padding from the body or main section */
 body, main {
     margin-top: 0;
-    padding-top: 0;
+    padding-top: 80px; 
 }
 
 /* Centered text */
@@ -30,36 +30,88 @@ body, main {
    Navbar Styles
    =================================================================== */
 
-/* Ensure the navbar has no margin/padding affecting the hero */
 #navbar {
-    margin-bottom: 0; 
+    margin-bottom: 0;
     padding-bottom: 0;
-    background: linear-gradient(to right, #a87c5d, #7a4b31);
+    background: linear-gradient(to right, rgba(168, 124, 93, 0.9), rgba(122, 75, 49, 0.9));
     padding: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
+
+/* Navbar Brand */
 .navbar-brand img {
     height: auto;
 }
 
-#navbar-brand, #nav-link {
-    color: #1E1E1E;
+/* White text for links */
+#navbar-brand, .nav-link {
+    color: white !important;
+    font-weight: 500;
+    position: relative;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Navbar toggle for smaller screens */
+/* Underline effect on hover */
+.nav-link::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Contact Info (Smaller & No Hover) */
+.navbar-contact {
+    color: white !important;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+/* Navbar toggle button */
 .navbar-toggler {
-    border-color: #724E2F;
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .navbar-toggler-icon {
-    background-color: #724E2F;
+    background-color: white;
 }
 
-/* Navbar Structure */
+/* Bigger buttons with smooth hover effect */
+.navbar-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 18px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Button hover effect with slight glow and scale */
+.navbar-btn:hover {
+    background: white;
+    color: #7a4b31;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+/* Navbar structure */
 .navbar-left, .navbar-center, .navbar-right {
     display: flex;
     align-items: center;
@@ -91,7 +143,7 @@ body, main {
     overflow: hidden;
     margin-top: 0;
     margin-bottom: 0;
-    padding-top: 0;
+    margin-top: -40px;
 }
 
 #hero img {
