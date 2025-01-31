@@ -29,3 +29,10 @@ def menu_view(request, menu_id=None):
         menu = Menu.objects.first()
 
     return render(request, "info/menu.html", {"menu": menu, "menu_list": Menu.objects.all()})
+
+# -------------------------------------
+# Display Set Sail View template
+# -------------------------------------
+
+def set_sail_view(request):
+    return render(request, "info/setsail.html")
