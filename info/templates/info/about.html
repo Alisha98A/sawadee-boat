@@ -5,9 +5,19 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">About Sawadee Dining Boat</h2>
-    <p class="text-center">
-        Where Thai Cuisine Meets the Beauty of the Sea.
-    </p>
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{% static 'images/info/boat_about_page.jpg' %}" class="img-fluid rounded shadow-lg" alt="Sawadee Dining Boat">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="mb-4">About Sawadee Dining Boat</h2>
+            <p><strong>Where Thai Cuisine Meets the Beauty of the Sea</strong></p>
+            <p>
+                Sawadee Dining Boat was founded in 2018 by a group of passionate food lovers and sailors 
+                who wanted to offer an unforgettable dining experience. Inspired by the vibrant flavors of 
+                Thailand and the serenity of the sea, our restaurant is more than just a meal—it’s a journey.
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}
