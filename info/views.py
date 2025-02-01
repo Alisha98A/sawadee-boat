@@ -168,3 +168,15 @@ def edit_item(request, item_id):
         return redirect("staff_menu")
 
     return render(request, "info/item_form.html", {"form": form, "title": "Edit Item"})
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def delete_item(request, item_id):
+    """Allow staff to delete a menu item."""
+    item = get_object_or_404(Item, id=item_id)
+    if request.method == "POST":
+        item.delete()
+        messages.success(request, "Menu item deleted successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/item_confirm_delete.html", {"item": item})
