@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Page Not Found - Sawadee Dining Boat{% endblock %}
+
+{% block content %}
+<section class="text-center py-5">
+    <div class="container">
+        <h1 class="display-3 text-danger">404</h1>
+        <h2 class="fw-bold">Oops! Page Not Found</h2>
+        <p class="lead text-muted">
+            Sorry, the page you are looking for doesn't exist or has been moved.
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-gold mt-3">Go Back Home</a>
+    </div>
+</section>
+{% endblock %}
