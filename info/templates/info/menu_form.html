@@ -7,14 +7,17 @@
             <h2 class="mb-4 text-center">{{ title }}</h2>
 
             <!-- Form -->
-            <form method="post">
+            <form method="post" class="needs-validation" novalidate>
                 {% csrf_token %}
 
+                <!-- Bootstrap Form Styling -->
                 <div class="mb-3">
                     {{ form.as_p }}
                 </div>
 
-                <button type="submit">Save</button>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
             </form>
         </div>
     </div>
