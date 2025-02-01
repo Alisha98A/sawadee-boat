@@ -99,7 +99,6 @@ body, main {
     border: 1px solid white;
     font-size: 18px;
     padding: 10px 16px;
-    border-radius: 6px;
     transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -120,6 +119,54 @@ body, main {
 .navbar-left { justify-content: flex-start; flex: 1; }
 .navbar-center { justify-content: center; flex: 1; }
 .navbar-right { justify-content: flex-end; flex: 1; }
+
+/* Apply equal spacing to both left and right navbar items */
+.navbar-left .nav-item,
+.navbar-right .nav-item {
+    margin: 0 12px;
+}
+
+/* Remove extra margin from the first and last items to avoid unnecessary gaps */
+.navbar-left .nav-item:first-child,
+.navbar-right .nav-item:first-child {
+    margin-left: 0;
+}
+
+.navbar-left .nav-item:last-child,
+.navbar-right .nav-item:last-child {
+    margin-right: 0;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+/* ===================================================================
+   Reserve Now Button Styles
+   =================================================================== */
+
+/* Target the "Reserve Now" button inside .navbar-right */
+.navbar-right .nav-item .btn-primary {
+    background: linear-gradient(to right, #d4af37, #b8860b) !important;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Hover Effect: Expands and adds a glow */
+.navbar-right .nav-item .btn-primary:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(to right, #b8860b, #d4af37) !important;
+    color: white !important;
+}
 
 /* ===================================================================
    Footer Styles
@@ -284,4 +331,3 @@ section#hero video {
     padding: 12px 25px;
 }
 }
-
