@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import Menu
+from .models import Menu, MenuItem
 from .forms import MenuForm, MenuItemForm
 
 
@@ -113,3 +113,17 @@ def add_menu_item(request):
         return redirect("staff_menu")
 
     return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu Item"})
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def edit_menu_item(request, menu_item_id):
+    """Allow staff to edit a menu category."""
+    menu_item = get_object_or_404(MenuItem, id=menu_item_id)
+    form = MenuItemForm(request.POST or None, instance=menu_item)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Menu category updated successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu Item"})
