@@ -31,10 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     window.location.href = data.redirect_url;
+                } else {
+                    console.error("Form submission failed:", data.errors);
                 }
             })
             .catch(error => console.error("Error:", error));
