@@ -6,14 +6,22 @@
     <!-- Welcome Message -->
     <div class="text-center my-5">
         <h2>Welcome, {{ user.first_name|default:user.username }}!</h2>
-        <p>
-            Enjoy a unique boat dining experience! Each reservation is for the entire boat, with a capacity of 4 to 20 guests. 
-            The 2-hour trip includes dining while traveling between the start and end destinations. Operating hours: 
-            <strong>10:00 AM to 10:00 PM, Monday through Friday.</strong>
-        </p>
-        <p>
-            Reservations must be made at least <strong>2 days in advance</strong>. We look forward to welcoming you aboard!
-        </p>
+        
+        {% if user.is_staff %}
+            <p>
+                This is the staff management view. Here, you can oversee all reservations and manage bookings for customers.
+                Ensure that bookings follow the guidelines and assist customers as needed.
+            </p>
+        {% else %}
+            <p>
+                Enjoy a unique boat dining experience! Each reservation is for the entire boat, with a capacity of 4 to 20 guests. 
+                The 2-hour trip includes dining while traveling between the start and end destinations. Operating hours: 
+                <strong>10:00 AM to 10:00 PM, Monday through Friday.</strong>
+            </p>
+            <p>
+                Reservations must be made at least <strong>2 days in advance</strong>. We look forward to welcoming you aboard!
+            </p>
+        {% endif %}
 
         <!-- Call-to-Action -->
         <a href="{% url 'reservations:reservation_create' %}" class="btn btn-primary btn-lg my-4">Create a Reservation</a>
@@ -33,10 +41,6 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Phone Number</th>
-                {% else %}
-                    <th style="display:none;">First Name</th>
-                    <th style="display:none;">Last Name</th>
-                    <th style="display:none;">Phone Number</th>
                 {% endif %}
                 <th>Date</th>
                 <th>Time Slot</th> 
@@ -57,10 +61,6 @@
                     <td>{{ reservation.first_name }}</td>
                     <td>{{ reservation.last_name }}</td>
                     <td>{{ reservation.phone_number }}</td>
-                {% else %}
-                    <td style="display:none;">{{ reservation.first_name }}</td>
-                    <td style="display:none;">{{ reservation.last_name }}</td>
-                    <td style="display:none;">{{ reservation.phone_number }}</td>
                 {% endif %}
                 <td>{{ reservation.booking_date }}</td>
                 <td>{{ reservation.time_slot }}</td>
@@ -81,13 +81,23 @@
     </table>
 
     {% if not reservations %}
-        <p class="text-center mt-4">You have no reservations yet. <a href="{% url 'reservations:reservation_create' %}">Make a reservation now!</a></p>
+        <p class="text-center mt-4">
+            {% if user.is_staff %}
+                No reservations yet. Stay prepared to assist customers with their bookings.
+            {% else %}
+                You have no reservations yet. <a href="{% url 'reservations:reservation_create' %}">Make a reservation now!</a>
+            {% endif %}
+        </p>
     {% endif %}
 </div>
 
 <!-- Additional Navigation -->
 <div class="text-center mt-5">
-    <a href="x" class="btn btn-secondary">View Menu</a>
+    {% if user.is_staff %}
+        <a href="{% url 'staff_menu' %}" class="btn btn-secondary">Menu Management</a>
+    {% else %}
+        <a href="x" class="btn btn-secondary">View Menu</a>
+    {% endif %}
     <a href="{% url 'profile' %}" class="btn btn-secondary">My Account</a>
 </div>
 
