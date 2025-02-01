@@ -127,3 +127,15 @@ def edit_menu_item(request, menu_item_id):
         return redirect("staff_menu")
 
     return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu Item"})
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def delete_menu_item(request, menu_item_id):
+    """Allow staff to delete a menu category."""
+    menu_item = get_object_or_404(MenuItem, id=menu_item_id)
+    if request.method == "POST":
+        menu_item.delete()
+        messages.success(request, "Menu category deleted successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/menu_confirm_delete.html", {"menu_item": menu_item})
