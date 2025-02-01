@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator
 from .models import Menu
 
 
@@ -42,3 +44,17 @@ def menu_view(request, menu_id=None):
         menu = Menu.objects.first()
 
     return render(request, "info/menu.html", {"menu": menu, "menu_list": Menu.objects.all()})
+
+# -------------------------------------
+# Staff Menu Management
+# -------------------------------------
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def staff_menu_view(request):
+    """Allow staff to manage menus, with pagination (5 per page)."""
+    menus = Menu.objects.all()
+    paginator = Paginator(menus, 5)
+    page_number = request.GET.get("page")
+    page_menus = paginator.get_page(page_number)
+
+    return render(request, "info/staff_menu.html", {"menus": page_menus})
