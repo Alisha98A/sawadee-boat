@@ -44,7 +44,7 @@ class CustomPasswordChangeView(PasswordChangeView):
     """Allow users to change their password with success/error messages."""
     def form_valid(self, form):
         messages.success(self.request, "Your password has been changed successfully.")
-        return redirect('account_profile')
+        return redirect('profile')
 
     def form_invalid(self, form):
         messages.error(self.request, "There was an error changing your password. Please try again.")
