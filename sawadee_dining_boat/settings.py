@@ -94,6 +94,7 @@ MIDDLEWARE = [
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROOT_URLCONF = 'sawadee_dining_boat.urls'
 
@@ -177,6 +178,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Limit maximum file upload size (Django-wide)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
