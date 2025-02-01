@@ -263,23 +263,30 @@ section#hero video {
 }
 
 /* ===================================================================
-   Button Styles
+   Button Styling (Luxury Gold Theme)
    =================================================================== */
 
-.btn-primary {
-    background-color: #ff6347; 
-    border-color: #ff4500;
-}
-
-.btn-outline-primary {
-    color: #ff6347;
-    border-color: #ff6347;
-}
-
-.btn-outline-primary:hover {
-    background-color: #ff6347;
-    color: white;
-}
+   .btn-primary,
+   .btn-outline-primary {
+       background: linear-gradient(to right, #d4af37, #b8860b);
+       color: white !important;
+       font-size: 18px;
+       font-weight: 600;
+       padding: 12px 24px;
+       border: none;
+       border-radius: 8px;
+       transition: all 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+       box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+   }
+   
+   /* Hover effect for buttons */
+   .btn-primary:hover,
+   .btn-outline-primary:hover {
+       transform: scale(1.08);
+       box-shadow: 0 6px 12px rgba(212, 175, 55, 0.5);
+       background: linear-gradient(to right, #b8860b, #d4af37);
+       color: white;
+   }
 
 /* ===================================================================
    Media Queries
