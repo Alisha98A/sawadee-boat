@@ -25,7 +25,10 @@ Sawadee Dining Boat was built to serve as a foundation for a potential real-worl
   * [Colour Scheme](#colour-scheme)
   * [Typography](#typography)
   * [Imagery](#imagery)
+ 
+* [Project Planning](#project_planning)
   * [Wireframes](#wireframes)
+  * [Database Schema](#database_schema)
 
 * [Features](#features)
   * [General Features on Each Page](#general-features-on-each-page)
@@ -163,6 +166,8 @@ The goal is to **transport visitors** into a **luxurious yet traditional Thai di
 ### Example Imagery  
 ![Thai Dining Boat](https://github.com/Alisha98A/sawadee-boat/blob/main/boatimagery.png?raw=true)  
 
+## Project Planning
+
 ### Wireframes
 
 The wireframes included in this project represent the initial design and layout of the core pages of the Sawadee Dining Boat website. These wireframes will serve as a blueprint for the development process, outlining the basic structure, key components, and user interface elements of the site.
@@ -185,6 +190,77 @@ By visualizing the flow of the website, the wireframes help to establish a clear
 <details><summary>Menu Page</summary> <p align="left"><img src="./documentation/wireframes/Menu%20page.png" alt="wireframes for the menu page" width="620"/></p> </details>
 
 <details><summary>About Us</summary> <p align="left"><img src="./documentation/wireframes/About%20page.png" alt="wireframes for the about us section" width="620"/></p> </details>
+
+### Database Schema
+
+The Sawadee Dining Boat project uses a relational database powered by PostgreSQL, hosted on Heroku. The database structure is designed to handle user authentication, reservation management, menu administration, and staff permissions efficiently.
+
+### Entity-Relationship Diagram (ERD)
+An ERD (Entity Relationship Diagram) was used to plan the database schema and visualize the relationships between tables. This helps ensure a well-structured database where entities interact logically. The ERD follows a progressive data modeling approach with three abstraction levels: conceptual, logical, and physical.
+
+### Business Goals
+The database structure is designed to meet the following business objectives:
+- The menu is visible on the website and can be managed by staff.
+- Customers must register to make reservations.
+- Each reservation books the entire boat, not individual tables.
+- Bookings are restricted to specific time slots (2-hour dining trips).
+- Each reservation must have between 4 to 20 guests.
+- Staff can manage all reservations, while users can only manage their own.
+- Reservations cannot overlap, ensuring only one booking per time slot.
+- Users can modify or cancel reservations before a set deadline.
+- Future scalability is considered for implementing additional features, such as customer loyalty programs or event-specific bookings.
+
+### Progressive Data Model
+A progressive data model was used to design the database, ensuring seamless collaboration between business stakeholders and the development team.
+
+#### Conceptual Model
+- The conceptual ERD was created to define the main entities and their relationships.
+- This model was used in the early planning phase to confirm the business needs of the project.
+- The key entities identified include:
+  - Users (customers and staff)
+  - Reservations (handles boat bookings)
+  - Menu (food items served on board)
+  - Time Slots (available 2-hour dining sessions)
+
+#### Logical Model
+- After the conceptual model was confirmed, the logical ERD was developed.
+- This stage defined table structures, attributes, and relationships in more detail.
+- Primary relationships between tables were mapped, such as:
+  - One-to-Many: A user can make multiple reservations.
+  - One-to-One: Each reservation has a unique time slot.
+  - Many-to-Many: Staff members can manage multiple reservations.
+
+#### Physical Model
+- The physical database schema was finalized, translating the logical model into SQL tables.
+- Specific data types were assigned to each column, ensuring optimized performance.
+- Indexes and foreign key constraints were implemented to maintain data integrity.
+
+### Agile Development Process
+The project followed agile principles, using Scrum as the methodology to develop and refine features iteratively.
+
+#### GitHub for Issue Tracking
+- User stories were created based on business and user needs.
+- Issues were assigned milestones to track progress in sprints.
+- Each feature was developed incrementally, following the MoSCoW prioritization method:
+  - Must-Have: Core functionalities like reservations, authentication, and menu management.
+  - Should-Have: Additional improvements like user profile customization.
+  - Could-Have: Optional enhancements such as email notifications.
+  - Won’t-Have (for now): Advanced features like dynamic pricing based on demand.
+
+#### Kanban Board
+- A Kanban board in GitHub Projects was used to track tasks.
+- Each user story moved through different stages:
+  - To Do → In Progress → Testing → Done.
+- Completed features were merged into the main branch after testing.
+
+### Scalability & Future Improvements
+The database is designed with scalability in mind, allowing future enhancements such as:
+- Loyalty programs for returning customers.
+- Event-specific bookings for special occasions.
+- Automated reminders for upcoming reservations.
+
+This structured database schema ensures that the Sawadee Dining Boat system runs efficiently while providing a seamless experience for both customers and staff.
+
 
 
 ## Features
@@ -1465,14 +1541,9 @@ Your application should now be live on Heroku! To view it, click the Open App bu
 
 
 
-<!-- TO-ADD: 
 ## Testing
 
-Start as you mean to go on - and get used to writing a TESTING.md file from the very first project!
-
-Testing requirements aren't massive for your first project, however if you start using a TESTING.md file from your first project you will thank yourself later when completing your later projects, which will contain much more information.
-  
-Use this part of the README to link to your TESTING.md file - you can view the example TESTING.md file [here](milestone1-testing.md)
+To keep this README concise, all testing details, including functionality tests, responsiveness checks, and browser compatibility tests, are documented in a separate file. You can find the full testing process in [Testing Documentation](TESTING.md).
 
 ## Credits
 
