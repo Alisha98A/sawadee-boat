@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}403 - Forbidden{% endblock %}
+
+{% block content %}
+<section class="text-center py-5">
+    <div class="container">
+        <h1 class="display-3 text-warning">403</h1>
+        <h2 class="fw-bold">Access Denied</h2>
+        <p class="lead text-muted">
+            You do not have permission to view this page.
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-gold mt-3">Return Home</a>
+    </div>
+</section>
+{% endblock %}
