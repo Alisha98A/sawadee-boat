@@ -15,6 +15,13 @@ def about(request):
     return render(request, 'info/about.html')
 
 # -------------------------------------
+# Staff Restriction
+# -------------------------------------
+def staff_required(user):
+    """Restrict access to staff members only."""
+    return user.is_authenticated and user.is_staff
+
+# -------------------------------------
 # Display Set Sail View template
 # -------------------------------------
 def set_sail_view(request):
