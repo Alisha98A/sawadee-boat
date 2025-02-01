@@ -5,6 +5,17 @@
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <h2 class="mb-4 text-center">{{ title }}</h2>
+
+            <!-- Form -->
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit">Save</button>
+            </form>
         </div>
     </div>
 </div>
