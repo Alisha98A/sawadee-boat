@@ -72,3 +72,17 @@ def add_menu(request):
         return redirect("staff_menu")
 
     return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu"})
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def edit_menu(request, menu_id):
+    """Allow staff to edit an existing menu."""
+    menu = get_object_or_404(Menu, id=menu_id)
+    form = MenuForm(request.POST or None, instance=menu)
+    
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Menu updated successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu"})
