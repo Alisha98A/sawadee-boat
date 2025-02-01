@@ -22,8 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById(formId);
         if (!form) return;
 
+        const errorDiv = document.getElementById("form-errors");
+        if (!errorDiv) return;
+
         form.addEventListener("submit", function (event) {
             event.preventDefault();
+            errorDiv.innerHTML = "";
+            errorDiv.style.display = "none";
             
             const formData = new FormData(form);
 
@@ -38,11 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 if (data.success) {
                     window.location.href = data.redirect_url;
+                } else if (data.errors && Array.isArray(data.errors)) {
+                    errorDiv.innerHTML = data.errors.join("<br>");
+                    errorDiv.style.display = "block";
                 } else {
-                    console.error("Form submission failed:", data.errors);
+                    errorDiv.innerHTML = "An unexpected error occurred. Please try again.";
+                    errorDiv.style.display = "block";
                 }
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => {
+                console.error("Error:", error);
+                errorDiv.innerHTML = "A network error occurred. Please check your connection and try again.";
+                errorDiv.style.display = "block";
+            });
         });
     }
 
