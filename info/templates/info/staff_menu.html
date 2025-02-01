@@ -10,5 +10,22 @@
         <a href="{% url 'add_menu_item' %}" class="btn btn-secondary">Add Category</a>
         <a href="{% url 'add_item' %}" class="btn btn-success">Add Item</a>
     </div>
+
+    <!-- Menus List -->
+    {% for menu in menus %}
+        <div class="card mb-4">
+            <div class="card-header {% if menu.is_active %}bg-success text-white{% else %}bg-primary text-white{% endif %}">
+                <h3 class="mb-0">{{ menu.name }}</h3>
+                <p class="mb-1">{{ menu.description }}</p>
+                {% if menu.is_active %}
+                    <span class="badge bg-light text-dark">Active Menu</span>
+                {% else %}
+                    <a href="{% url 'set_active_menu' menu.id %}" class="btn btn-light btn-sm">Set as Active</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <div class="alert alert-info text-center">No menus available. Start by adding one!</div>
+    {% endfor %}
 </div>
 {% endblock %}
