@@ -3,5 +3,12 @@
 {% block content %}
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Staff Menu Management</h2>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-center gap-2 mb-4">
+        <a href="{% url 'add_menu' %}" class="btn btn-primary">Add Menu</a>
+        <a href="{% url 'add_menu_item' %}" class="btn btn-secondary">Add Category</a>
+        <a href="{% url 'add_item' %}" class="btn btn-success">Add Item</a>
+    </div>
 </div>
 {% endblock %}
