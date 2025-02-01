@@ -176,8 +176,9 @@ USE_TZ = True
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+WHITENOISE_ROOT = BASE_DIR / "staticfiles"
 
 # Limit maximum file upload size (Django-wide)
 DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
