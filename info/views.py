@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Menu
+from .forms import MenuForm
 
 
 
@@ -58,3 +60,15 @@ def staff_menu_view(request):
     page_menus = paginator.get_page(page_number)
 
     return render(request, "info/staff_menu.html", {"menus": page_menus})
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def add_menu(request):
+    """Allow staff to add a new menu."""
+    form = MenuForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Menu added successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu"})
