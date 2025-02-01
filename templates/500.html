@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}500 - Server Error{% endblock %}
+
+{% block content %}
+<section class="text-center py-5">
+    <div class="container">
+        <h1 class="display-3 text-danger">500</h1>
+        <h2 class="fw-bold">Oops! Something Went Wrong</h2>
+        <p class="lead text-muted">
+            Our team has been notified, and we're working on fixing the issue.
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-gold mt-3">Return Home</a>
+    </div>
+</section>
+{% endblock %}
