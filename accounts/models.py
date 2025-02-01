@@ -14,3 +14,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
+# Ensure email is required in the User model
+User._meta.get_field('email').blank = False
+User._meta.get_field('email').null = False
