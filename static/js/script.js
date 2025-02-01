@@ -18,44 +18,44 @@ document.addEventListener("DOMContentLoaded", function() {
 // Handle AJAX Form Submissions
 // ===========================
 document.addEventListener("DOMContentLoaded", function () {
-    function handleFormSubmission(formId) {
+    async function handleFormSubmission(formId) {
         const form = document.getElementById(formId);
         if (!form) return;
 
         const errorDiv = document.getElementById("form-errors");
         if (!errorDiv) return;
 
-        form.addEventListener("submit", function (event) {
+        form.addEventListener("submit", async function (event) {
             event.preventDefault();
             errorDiv.innerHTML = "";
             errorDiv.style.display = "none";
             
             const formData = new FormData(form);
 
-            fetch(form.action, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => {
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
+                });
+
                 if (!response.ok) throw new Error("Network response was not ok");
-                return response.json();
-            })
-            .then(data => {
+
+                const data = await response.json();
+
                 if (data.success) {
                     window.location.href = data.redirect_url;
-                } else if (data.errors && Array.isArray(data.errors)) {
-                    errorDiv.innerHTML = data.errors.join("<br>");
-                    errorDiv.style.display = "block";
                 } else {
-                    errorDiv.innerHTML = "An unexpected error occurred. Please try again.";
+                    errorDiv.innerHTML = (data.errors && Array.isArray(data.errors))
+                        ? data.errors.join("<br>")
+                        : "An unexpected error occurred. Please try again.";
                     errorDiv.style.display = "block";
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error("Error:", error);
                 errorDiv.innerHTML = "A network error occurred. Please check your connection and try again.";
                 errorDiv.style.display = "block";
-            });
+            }
         });
     }
 
