@@ -15,17 +15,23 @@
     {% for menu in menus %}
         <div class="card mb-4">
             <div class="card-header {% if menu.is_active %}bg-success text-white{% else %}bg-primary text-white{% endif %}">
-                <h3 class="mb-0">{{ menu.name }}</h3>
-                <p class="mb-1">{{ menu.description }}</p>
-                {% if menu.is_active %}
-                    <span class="badge bg-light text-dark">Active Menu</span>
-                {% else %}
-                    <a href="{% url 'set_active_menu' menu.id %}" class="btn btn-light btn-sm">Set as Active</a>
-                {% endif %}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="mb-0">{{ menu.name }}</h3>
+                        <p class="mb-1">{{ menu.description }}</p>
+                        {% if menu.is_active %}
+                            <span class="badge bg-light text-dark">Active Menu</span>
+                        {% else %}
+                            <a href="{% url 'set_active_menu' menu.id %}" class="btn btn-light btn-sm">Set as Active</a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a href="{% url 'edit_menu' menu.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'delete_menu' menu.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
             </div>
         </div>
-    {% empty %}
-        <div class="alert alert-info text-center">No menus available. Start by adding one!</div>
     {% endfor %}
 </div>
 {% endblock %}
