@@ -87,18 +87,6 @@ def edit_menu(request, menu_id):
 
     return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu"})
 
-@login_required
-@user_passes_test(staff_required, login_url="no_access")
-def delete_menu(request, menu_id):
-    """Allow staff to delete a menu."""
-    menu = get_object_or_404(Menu, id=menu_id)
-    if request.method == "POST":
-        menu.delete()
-        messages.success(request, "Menu deleted successfully!")
-        return redirect("staff_menu")
-
-    return render(request, "info/menu_confirm_delete.html", {"menu": menu})
-
 # -------------------------------------
 # MenuItem (Category) Management
 # -------------------------------------
@@ -127,18 +115,6 @@ def edit_menu_item(request, menu_item_id):
         return redirect("staff_menu")
 
     return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu Item"})
-
-@login_required
-@user_passes_test(staff_required, login_url="no_access")
-def delete_menu_item(request, menu_item_id):
-    """Allow staff to delete a menu category."""
-    menu_item = get_object_or_404(MenuItem, id=menu_item_id)
-    if request.method == "POST":
-        menu_item.delete()
-        messages.success(request, "Menu category deleted successfully!")
-        return redirect("staff_menu")
-
-    return render(request, "info/menu_confirm_delete.html", {"menu_item": menu_item})
 
 # -------------------------------------
 # Item (Dish) Management
@@ -169,17 +145,24 @@ def edit_item(request, item_id):
 
     return render(request, "info/item_form.html", {"form": form, "title": "Edit Item"})
 
+# -------------------------------------
+# Generic Delete View (Replaces All Individual Delete Views)
+# -------------------------------------
 @login_required
 @user_passes_test(staff_required, login_url="no_access")
-def delete_item(request, item_id):
-    """Allow staff to delete a menu item."""
-    item = get_object_or_404(Item, id=item_id)
-    if request.method == "POST":
-        item.delete()
-        messages.success(request, "Menu item deleted successfully!")
-        return redirect("staff_menu")
+def delete_object(request, obj_id, model, redirect_url):
+    """Generic view to delete an object (menu, menu item, or item)."""
+    obj = get_object_or_404(model, id=obj_id)
+    
+    # Determine the correct name field
+    obj_name = getattr(obj, "name", getattr(obj, "category", "Unnamed Object"))
 
-    return render(request, "info/item_confirm_delete.html", {"item": item})
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, f"'{obj_name}' deleted successfully!")
+        return redirect(redirect_url)
+
+    return render(request, "info/confirm_delete.html", {"object": obj, "redirect_url": redirect_url})
 
 # -------------------------------------
 # Set Menu Active
