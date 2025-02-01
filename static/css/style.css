@@ -229,37 +229,83 @@ section#hero video {
    =================================================================== */
 
 #intro {
-    background-color: #f8f9fa;
+    background: #f8f9fa;
+    padding: 60px 0;
 }
 
 #intro h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #7a4b31;
 }
 
 #intro p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #5a3729;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* ===================================================================
    Info Columns Section Styles
    =================================================================== */
 
+#info-columns {
+    background: #faf3e0;
+    padding: 60px 0;
+}
+
+/* Enhance each column */
 #info-columns .col-md-4 {
+    padding: 20px;
+    border-radius: 12px;
     margin-bottom: 30px;
 }
 
+/* Column headings */
 #info-columns h3 {
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #7a4b31;
 }
 
+/* Paragraph styling for clarity */
 #info-columns p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    color: #5a3729;
+    max-width: 300px;
+    margin: 0 auto;
     margin-bottom: 1rem;
 }
 
+/* Center buttons in columns */
 #info-columns .btn {
+    display: inline-block;
     margin-top: 1rem;
+}
+
+/* Button consistency */
+#info-columns .btn-outline-primary {
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    transition: 0.3s ease-in-out;
+}
+
+#info-columns .btn-outline-primary:hover {
+    background: #d4af37;
+    color: white;
+}
+
+/* Ensure the row inside info-columns doesn't add extra space */
+#info-columns .row {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Remove Bootstrap's default container padding */
+#info-columns .container {
+    padding-bottom: 0 !important;
 }
 
 /* ===================================================================
