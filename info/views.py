@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Menu
-from .forms import MenuForm
+from .forms import MenuForm, MenuItemForm
 
 
 
@@ -98,3 +98,18 @@ def delete_menu(request, menu_id):
         return redirect("staff_menu")
 
     return render(request, "info/menu_confirm_delete.html", {"menu": menu})
+
+# -------------------------------------
+# MenuItem (Category) Management
+# -------------------------------------
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def add_menu_item(request):
+    """Allow staff to add a menu category."""
+    form = MenuItemForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Menu category added successfully!")
+        return redirect("staff_menu")
+
+    return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu Item"})
