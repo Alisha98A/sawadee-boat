@@ -63,3 +63,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     handleFormSubmission(["reservation-form", "reservation-edit-form"]);
 });
+
+// ===========================
+// Navbar Scroll Effect
+// ===========================
+document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.getElementById("navbar");
+
+    if (!navbar) return;
+
+    window.addEventListener("scroll", function() {
+        navbar.classList.toggle("navbar-scrolled", window.scrollY > 50);
+    });
+});
