@@ -556,7 +556,6 @@ At the bottom of the form, there are two buttons:
 - The form scales to fit **smaller screens** without breaking layout.
 - Buttons adjust to available space, ensuring usability on mobile.
   </details>
-  
 ---
 <details>
   <summary>Menu Item Form Page</summary>
@@ -607,7 +606,6 @@ At the bottom of the form, there are two buttons:
 - **Form fields and buttons** adjust dynamically for mobile users.
 - Buttons remain **large and clickable**, ensuring accessibility on small screens.
   </details>
-  
 ---
 <details>
   <summary>Delete Confirmation Page</summary>
@@ -966,7 +964,7 @@ The page customizes its content based on **user authentication status**:
   - **Buttons remain visible and accessible** on smaller devices.
 - **Navigation links** are **centered and properly spaced** for easy use.
 
-</details>
+  </details>
 ---
 <details>
 <summary>Reservation Creation Page </summary>
@@ -1021,7 +1019,7 @@ The Reservation Creation Page allows **users and staff members** to create new d
 - The form **scales properly** for smaller screens.  
 - **Buttons remain large and accessible** for mobile users.  
 
-</details>
+  </details>
 ---
 <details>
 <summary>Reservation Form Page</summary>
@@ -1077,8 +1075,8 @@ The Reservation Form Page allows **users and staff members** to **create or edit
 - **Buttons remain large and clickable** for ease of use.  
 - **Text fields and inputs adjust dynamically** for smaller screens.  
 
-</details>
---- 
+  </details>
+---
 <details>
 <summary>Delete Reservation Confirmation Page</summary>
 
@@ -1131,7 +1129,7 @@ The **Delete Reservation Confirmation Page** provides a **confirmation prompt** 
   - **Proper spacing between action buttons** for ease of use.
   - **Large clickable buttons** for better accessibility.
 
-</details>
+  </details>
 ---
 <details>
 <summary>Access Denied Page </summary>
@@ -1175,7 +1173,7 @@ The **Access Denied Page** is displayed when a user attempts to access a **restr
   - **Properly spaced elements** for usability.
   - **Large, accessible button** for navigation.
 
-</details>
+  </details>
 ---
 <details>
 <summary>Reservation Successful Page</summary>
@@ -1215,7 +1213,9 @@ The **Reservation Successful Page** confirms that a reservation has been success
   - **Buttons remain touch-friendly** on smaller screens.
   - **Text is easily readable** across all devices.
 
-</details>
+  </details>
+---
+
 
 ### Future Implementations
 
@@ -1232,17 +1232,44 @@ To prevent potential customers from being turned away due to fully booked slots,
 #### Adding More Boats
 To scale the business and accommodate more customers, I plan to add additional boats to the fleet. This will allow for greater flexibility in booking and help meet the growing demand as the restaurant gains popularity.
 
-<!-- TO-DO: ### Accessibility
+### Accessibility
 
-Be an amazing developer and get used to thinking about accessibility in all of your projects!
+Ensuring that **Sawadee Dining Boat** is accessible to all users is a key part of the development process. Several accessibility best practices have been implemented to enhance usability for a diverse audience.
 
-This is the place to make a note of anything you have done with accessibility in mind. Some examples include:
+### Color Contrast & Readability
+- The site follows **minimum contrast requirements** to ensure readability.
+- **Dark text on light backgrounds** and **white text on dark backgrounds** improve legibility.
+- Buttons and key elements are designed with **high-contrast colors**.
 
-Have you used icons and added aria-labels to enable screen readers to understand these?
-Have you ensured your site meets the minimum contrast requirements?
-Have you chosen fonts that are dyslexia/accessible friendly?
+### Font & Text Considerations
+- The **Lora** and **Playfair Display** fonts were chosen for **readability**.
+- The fonts used are **legible** and suitable for users with **dyslexia**.
+- Font sizes are **responsive** and adapt to different screen sizes.
 
-Code Institute have an amazing channel for all things accessibility (a11y-accessibility) I would highly recommend joining this channel as it contains a wealth of information about accessibility and what we can do as developers to be more inclusive. -->
+### Keyboard Navigation & ARIA Labels
+- The site is **fully navigable using only the keyboard**.
+- Important elements like **buttons and interactive links** have **focus states**.
+- **ARIA labels** are added to key elements such as:
+  - Navigation bar elements (`aria-label="Main navigation"`)
+  - Reservation buttons (`aria-label="Book a dining experience"`)
+  - Images (`alt` attributes for meaningful descriptions)
+
+### Screen Reader Compatibility
+- Semantic **HTML structure** improves accessibility for screen readers.
+- **Heading hierarchy** (`<h1>`, `<h2>`, `<h3>`) follows a logical order for better navigation.
+- Descriptive **alternative text** (`alt` attributes) is provided for all images.
+
+### Responsive & Inclusive Design
+- The layout adapts to **various screen sizes**, ensuring usability on **mobile, tablet, and desktop**.
+- Interactive elements are **large enough** to be tapped on **touchscreen devices**.
+- Forms have **clear labels** and **error messages** for better user guidance.
+
+### Future Improvements
+- Further **testing with assistive technologies** (screen readers, high contrast mode).
+- Additional **ARIA roles and attributes** to enhance accessibility.
+
+By following these **accessibility principles**, the site provides a **better experience** for all users, regardless of their abilities.
+
 
 ## Technologies Used
 
@@ -1254,6 +1281,7 @@ This project was developed using the following languages:
   * Python: The primary backend programming language used with Django to handle server-side logic, database management, and dynamic functionalities.
   * JavaScript: Added to enable interactive elements and enhance user experience, such as form validation, dynamic content updates, and improved navigation.
 
+---
 
 ### Frameworks, Libraries & Programs Used
 
@@ -1263,18 +1291,66 @@ This project was developed using the following languages:
  * Bootstrap 5.3 A CSS framework that simplifies responsive design and ensures consistent styling across the website.
 
 
-#### Libraries
- * Os, provides functions for interacting with the operating system
- * datetime, supplies classes to work with date and time
- * psycopg2, PostgreSQL database adapter for the Python programming language
- * dj-database-url, enables the ability to represent their database settings via a string
- * gunicorn, handles HTML rendering, authentication, administration, and backend logic
- * whitenoise, allows web app to serve its own static files
- * Allauth, dealing with account authentication, registration, management, and third-party (social) account authentication
- * django-crispy-forms, controls the rendering behavior of Django forms
- * crispy-bootstrap, enables crispy forms to use bootstrap for styling
- * pillow, image resizing, rotation and transformation
+#### Libraries Used
 
+
+The Sawadee Dining Boat project utilizes a range of libraries to handle authentication, database management, image processing, static file handling, and form styling.
+
+### Core Python Libraries
+- os – Provides functions for interacting with the operating system.
+- datetime – Supplies classes to work with date and time.
+
+### Django & Database Libraries
+- Django (4.2.17) – The core web framework used for handling HTML rendering, authentication, administration, and backend logic.
+- dj-database-url (0.5.0) – Enables the ability to represent database settings via a string.
+- psycopg2 (2.9.10) – PostgreSQL database adapter for Python.
+- sqlparse (0.5.3) – Used for parsing and formatting SQL queries in Django.
+
+### Authentication & User Management
+- django-allauth (0.57.2) – Handles user authentication, registration, and third-party (social) authentication.
+- oauthlib (3.2.2) – Implements OAuth authentication for third-party login integration.
+- requests-oauthlib (2.0.0) – Extends OAuth functionality for secure authentication requests.
+- python3-openid (3.2.0) – Adds support for OpenID authentication.
+
+### Static Files & Media Handling
+- whitenoise (6.5.0) – Allows Django to serve its own static files efficiently.
+- cloudinary (1.36.0) – Used for storing and serving images from Cloudinary.
+- dj3-cloudinary-storage (0.0.6) – Integrates Django with Cloudinary Storage for image handling.
+- pillow (11.1.0) – Enables image resizing, rotation, and transformation.
+
+### Forms & UI Styling
+- django-crispy-forms – Enhances Django form rendering with better control over layout.
+- crispy-bootstrap – Allows crispy forms to use Bootstrap for styling.
+- django-flatpickr (2.0.3) – Adds Flatpickr, a modern date and time picker for forms.
+
+### Environment Variables & Configuration
+- django-environ (0.12.0) – Allows secure handling of environment variables.
+- python-dotenv (1.0.1) – Loads environment variables from a .env file.
+
+### Security & Cryptography
+- cryptography (44.0.0) – Provides secure cryptographic functions.
+- PyJWT (2.10.1) – Handles JSON Web Token authentication.
+- cffi (1.17.1) – Supports C-based cryptographic functions.
+
+### HTTP Requests & URL Handling
+- requests (2.32.3) – A versatile HTTP library for making API calls.
+- urllib3 (1.26.20) – Enhances handling of HTTP requests.
+- idna (3.10) – Implements Internationalized Domain Names (IDN) support.
+- charset-normalizer (3.4.1) – Ensures correct character encoding in requests.
+
+### Miscellaneous Utilities
+- defusedxml (0.7.1) – Protects against XML-related security vulnerabilities.
+- pydantic (2.10.5) – Enables data validation and type checking.
+- pydantic-settings (2.7.1) – Provides configuration settings management.
+- pydantic-core (2.27.2) – Optimized core for fast data validation.
+- six (1.17.0) – Ensures Python 2/3 compatibility.
+- setuptools (75.8.0) – Used for package installation and distribution.
+- asgiref (3.8.1) – Provides ASGI support for Django applications.
+
+### Deployment & Server Management
+- gunicorn (20.1.0) – A Python WSGI HTTP server used for serving Django applications in production.
+
+----
 
 #### Programs & Tools
 
@@ -1294,8 +1370,98 @@ Programs
  * TinyPNG: To compress images, reducing file size for better website performance.
 
 
-<!-- TO-ADD: 
-## DEPLOYMENT PART -->
+## DEPLOYMENT PART 
+
+## Deployment & Local Development
+
+### Deployment
+
+#### Local Development
+
+##### How to Fork
+
+1. Log in to your GitHub account. If you don’t have an account, create one at GitHub.
+
+2. Navigate to the repository for this project (Sawadee Dining Boat).
+   *You can open the repository in a new tab by holding Ctrl (or Cmd on Mac) and clicking the link.*
+
+3. In the top right corner of the repository page, click the Fork button to create a copy of the project in your own GitHub account.
+
+
+#### How to Clone the repository
+
+1. Log in (or sign up) to your GitHub account.
+
+2. Go to the repository for this project, [Sawadee Dining Boat](https://github.com/Alisha98A/sawadee-boat) or the forked copy in your account.
+* Again, you can open the repository in a new tab by holding Ctrl (or Cmd) and clicking the link. *
+
+3. Click the Code button in the repository and choose the cloning method: HTTPS, SSH, or GitHub CLI. Copy the URL provided.
+
+4. Open your terminal or the terminal in your code editor.
+
+5. Navigate to the directory where you want to clone the project by using the cd command.
+
+6. Type git clone, followed by the URL you copied in step 3, and press Enter.
+
+7.  The project will be cloned to your development server.
+
+
+
+#### Setting Up the Development Environment
+
+1. Create an env.py file in the project directory. Add environment variables for:
+ * DATABASE_URL
+ * SECRET_KEY
+ * EMAIL_HOST_USER
+ * EMAIL_HOST_PASSWORD
+
+2. Create a virtual environment for the project:
+Use the command python -m venv venv (or your system’s equivalent).
+
+
+3. Activate the virtual environment:
+ * On Windows: venv\Scripts\activate
+ * On Mac/Linux: source venv/bin/activate
+
+4. Install the project’s dependencies:
+ * Run pip install -r requirements.txt in the terminal.
+
+5. Run the development server:
+ * Use the command python manage.py runserver.
+
+#### Updating Dependencies
+
+If you make changes that require new dependencies:
+1. Add the new dependencies to the requirements.txt file by running:
+* pip freeze > requirements.txt.
+2. Commit and push the updated requirements.txt file to GitHub.
+
+
+Deployment to Heroku
+
+Setting Up the Heroku App
+1. Log in to your Heroku account. If you don’t have one, sign up at Heroku ( https://www.heroku.com/ ).
+2. From the Heroku dashboard, click New and select Create New App.
+3. Follow the on-screen instructions to name your app and choose the appropriate region.
+
+ Configuring Environment Variables
+1. In the app’s dashboard, go to the Settings tab.
+2. Click Reveal Config Vars and add the following variables:
+        •        DATABASE_URL
+        •        SECRET_KEY
+        •        EMAIL_HOST_USER
+        •        EMAIL_HOST_PASSWORD
+
+Connecting Heroku to GitHub
+1. In the Heroku dashboard for your app, navigate to the Deploy tab.
+2. Under Deployment Method, select GitHub.
+3. Use the search bar to find and connect your GitHub repository.
+
+Deploying the Application
+1. In the Manual Deploy section, select the branch you want to deploy and click Deploy Branch.
+2. Alternatively, enable Automatic Deploys so Heroku deploys the app whenever new changes are pushed to the linked branch.
+
+Your application should now be live on Heroku! To view it, click the Open App button in the Heroku dashboard.
 
 
 
