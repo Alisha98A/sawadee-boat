@@ -13,3 +13,34 @@ document.addEventListener("DOMContentLoaded", function() {
         minDate: "today"
     });
 });
+
+// ===========================
+// Handle AJAX Form Submissions
+// ===========================
+document.addEventListener("DOMContentLoaded", function () {
+    function handleFormSubmission(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url;
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    }
+
+    handleFormSubmission("reservation-form");
+    handleFormSubmission("reservation-edit-form");
+});
