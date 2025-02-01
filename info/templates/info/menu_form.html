@@ -15,8 +15,13 @@
                     {{ form.as_p }}
                 </div>
 
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success">Save</button>
+                <div class="d-flex justify-content-center gap-2">
+                    <button type="submit" class="btn btn-success">
+                        Save
+                    </button>
+                    <a href="{% url 'staff_menu' %}" class="btn btn-secondary">
+                        Back to Menu Management
+                    </a>
                 </div>
             </form>
         </div>
