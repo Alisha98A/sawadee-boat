@@ -200,3 +200,10 @@ def set_active_menu(request, menu_id):
 
     messages.success(request, f"'{menu.name}' is now the active menu!")
     return redirect("staff_menu")
+
+# -------------------------------------
+# No Access Page
+# -------------------------------------
+def no_access(request):
+    """Render the 'No Access' page."""
+    return render(request, "info/no_access.html")
