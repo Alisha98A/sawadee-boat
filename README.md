@@ -97,31 +97,71 @@ Key Information for the Site
 
   - - -
 
-<!-- TO-DO: ## Design 
-
-👩🏻‍💻 View an example of a completed design section [here](https://github.com/kera-cudmore/earth-day-hackathon-2022#Design)
+## Design 
 
 ### Colour Scheme
 
-Add all information about your colour scheme for your site here. You can explain why you choose the colours you did?
+The color scheme for **Sawadee Dining Boat** is inspired by the rich and elegant aesthetics of **traditional Thai culture**, combined with a warm and inviting dining experience. The palette consists of **earthy tones, luxurious gold accents, and deep, warm browns** to reflect the essence of Thai hospitality, wooden boat interiors, and the golden hues often seen in Thai temples and traditional decorations.  
 
-I like to include a palette of the colour scheme here, my favourite site for creating a colour palette is [coolors](https://coolors.co/), but there are lots of other sites that also do the same thing, like [ColorSpace](https://mycolor.space/?hex=%23F5F5F5&sub=1), [Muzli Colors](https://colors.muz.li/), [Adobe Colour Wheel](https://color.adobe.com/create/color-wheel) and [Canva](https://www.canva.com/colors/color-palette-generator/) to name a few.
+###  **Color Palette**
+| Color | Hex Code | Description |
+|--------|---------|-------------|
+| **Cream** | `#fdf7f0` | Soft and neutral background for a warm, welcoming ambiance. |
+| **Deep Brown** | `#3e2723` | Rich wooden tones, reminiscent of traditional Thai teak boats. |
+| **Warm Sand** | `#7a4b31` | Earthy and natural, echoing the wooden textures of the boat. |
+| **Golden Yellow** | `#d4af37` | Represents Thai luxury, inspired by golden Thai temples and decorations. |
+| **Dark Gold** | `#b8860b` | A deeper, muted gold for a more refined and elegant touch. |
+| **Soft Beige** | `#faf3e0` | Complements the other warm tones, ensuring readability and harmony. |
+| **Muted Bronze** | `#724E2F` | Adds depth, resembling the aged woodwork on Thai riverboats. |
+
+![Sawadee Dining Boat Color Palette](https://github.com/Alisha98A/sawadee-boat/blob/main/documentation/colors.png?raw=true)
+
+
+### **Why These Colors?**
+- **Warm, earthy tones** – Reflect **traditional Thai wooden boats**, **bamboo interiors**, and the **natural elements of river dining**.
+- **Gold accents** – Symbolize **Thai elegance, prosperity, and traditional artistry**.
+- **Neutral beige and cream** – Maintain **balance and readability**, ensuring a **pleasant user experience** without overwhelming the eyes.
+- **Soft contrast** – The colors were chosen to provide a **smooth, luxurious feel** while ensuring **clarity and usability**.
+
+By combining these tones, the website captures the essence of a **traditional Thai dining boat experience**, making users feel immersed in an **authentic and visually appealing atmosphere**.
+
 
 ### Typography
 
-If you've imported fonts to use in your project, add some information about them here. You can include information like:
+The typography for **Sawadee Dining Boat** has been carefully selected to complement the elegant and traditional Thai dining experience. The chosen fonts provide a balance of luxury, readability, and authenticity, ensuring a sophisticated yet inviting feel throughout the website.
 
-Why did you choose the font you have?
-Is this an accessibly friendly font?
-What weights have you included?
 
-I also like to include an image of the fonts chosen as a reference.
+### Chosen Fonts
+| Font | Type | Weights Used | Description |
+|------|------|-------------|-------------|
+| **Playfair Display** | Serif | `500`, `700` | A classic, elegant font that enhances the refined and high-quality feel of the dining experience. |
+| **Lora** | Serif | `400`, `600` | A highly readable and warm serif font that blends well with the traditional Thai aesthetic. |
 
-[Google Fonts](https://fonts.google.com/) is a popular choice for importing fonts to use in your project, as it doesn't require you to download the fonts to use them.
+
+### Why These Fonts?
+- **Playfair Display** is a luxurious and stylish serif font that evokes sophistication, perfect for headings and branding elements.
+- **Lora** is a warm and welcoming serif font that ensures smooth readability in longer text, making it ideal for paragraphs and descriptions.
+- Both fonts are highly legible and accessible, ensuring a positive user experience for all visitors.
+
+### Font Preview
+
+![TPlayfair Display](https://github.com/Alisha98A/sawadee-boat/blob/main/documentation/fonts.png?raw=true)
 
 ### Imagery
 
-Use this section to explain what sort of imagery you plan to use through your site. -->
+
+The imagery used throughout this project is carefully selected to reflect the essence of an authentic **Thai dining boat experience**. The visuals aim to evoke a sense of tradition, elegance, and cultural richness while maintaining a welcoming and luxurious ambiance.  
+
+### Key Imagery Themes  
+- **Traditional Thai Aesthetic** – Images of Thai wooden boats, intricate carvings, and warm, inviting interiors to create an immersive experience.  
+- **Culinary Focus** – High-quality images of traditional Thai dishes, fresh ingredients, and artfully plated meals to showcase the dining experience.  
+- **Serene Waterscape** – Photos of river views, golden sunsets over water, and softly lit dining settings to enhance the tranquil and exclusive atmosphere.  
+- **Gold Accents & Warm Tones** – To complement the color scheme, imagery often incorporates golden hues, deep wood textures, and soft candlelit settings.  
+
+The goal is to **transport visitors** into a **luxurious yet traditional Thai dining journey**, making them feel as if they are already aboard the boat.  
+
+### Example Imagery  
+![Thai Dining Boat](https://github.com/Alisha98A/sawadee-boat/blob/main/boatimagery.png?raw=true)  
 
 ### Wireframes
 
