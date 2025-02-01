@@ -17,7 +17,7 @@
 
                 <!-- Reservations Section -->
                 <h3>Reservations</h3>
-                {% if profile.user.bookings.all %}
+                {% if has_upcoming_reservations %}
                     <p>You have upcoming reservations.</p>
                     <a href="{% url 'reservations:reservations_list' %}" class="btn btn-primary">View Reservations</a>
                 {% else %}
