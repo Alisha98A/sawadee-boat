@@ -9,6 +9,11 @@
             <!-- Form -->
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                
+                <!-- Bootstrap Form Styling -->
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
             </form>
         </div>
     </div>
