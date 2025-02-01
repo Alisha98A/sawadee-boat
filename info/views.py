@@ -180,3 +180,23 @@ def delete_item(request, item_id):
         return redirect("staff_menu")
 
     return render(request, "info/item_confirm_delete.html", {"item": item})
+
+# -------------------------------------
+# Set Menu Active
+# -------------------------------------
+
+@login_required
+@user_passes_test(staff_required, login_url="no_access")
+def set_active_menu(request, menu_id):
+    """Set the selected menu as the active menu, ensuring only one menu is active at a time."""
+    menu = get_object_or_404(Menu, id=menu_id)
+    
+    # Deactivate all menus first
+    Menu.objects.update(is_active=False)
+    
+    # Set the selected menu to active
+    menu.is_active = True
+    menu.save()
+
+    messages.success(request, f"'{menu.name}' is now the active menu!")
+    return redirect("staff_menu")
