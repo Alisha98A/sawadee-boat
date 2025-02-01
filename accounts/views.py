@@ -8,16 +8,27 @@ from django.contrib.auth.models import User
 from allauth.account.views import PasswordChangeView
 from .models import Profile
 from .forms import ProfileForm
-
+from django.utils.timezone import now
+from reservations.models import Reservation
 
 # -------------------------
 # Profile Views & Update
 # -------------------------
 @login_required
 def profile_view(request):
-    """Display the user's profile."""
+    """Display the user's profile with upcoming reservations."""
     profile, created = Profile.objects.get_or_create(user=request.user)
-    return render(request, 'accounts/profile.html', {'profile': profile})
+
+    upcoming_reservations = Reservation.objects.filter(user=request.user, booking_date__gte=now()).exists()
+
+    return render(
+        request,
+        'accounts/profile.html',
+        {
+            'profile': profile,
+            'has_upcoming_reservations': upcoming_reservations
+        }
+    )
 
 class ProfileUpdateView(UpdateView):
     model = Profile
