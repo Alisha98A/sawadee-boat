@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}400 - Bad Request{% endblock %}
+
+{% block content %}
+<section class="text-center py-5">
+    <div class="container">
+        <h1 class="display-3 text-secondary">400</h1>
+        <h2 class="fw-bold">Invalid Request</h2>
+        <p class="lead text-muted">
+            The request could not be understood by the server.
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-gold mt-3">Return Home</a>
+    </div>
+</section>
+{% endblock %}
