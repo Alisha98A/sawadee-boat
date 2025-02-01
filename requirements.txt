@@ -31,3 +31,4 @@ sqlparse==0.5.3
 typing_extensions==4.12.2
 urllib3==1.26.20
 whitenoise==6.5.0
+Pillow==11.1.0
