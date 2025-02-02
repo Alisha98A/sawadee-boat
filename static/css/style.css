@@ -389,3 +389,13 @@ section#hero video {
     height: 84px !important;
 }
 }
+@media (max-width: 991px) {
+    .navbar-collapse {
+        display: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar-collapse.show {
+        display: block;
+    }
+}
