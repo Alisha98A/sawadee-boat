@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-from info.forms import MenuForm, MenuItemForm
+from info.forms import MenuForm, MenuItemForm, ItemForm
 from info.models import Menu, MenuItem
 from PIL import Image
 import io
@@ -45,3 +45,19 @@ class TestItemForm(TestCase):
         image = Image.new("RGB", (100, 100), color="red")
         image.save(image_io, format="JPEG")
         return SimpleUploadedFile("test.jpg", image_io.getvalue(), content_type="image/jpeg")
+
+    def test_item_form_is_valid(self):
+        """Test valid ItemForm submission"""
+        image_file = self.create_test_image()
+        form = ItemForm(data={
+            'menu_item': self.menu_item.id,
+            'name': 'Spaghetti',
+            'description': 'Delicious spaghetti with tomato sauce',
+            'price': 15.99,
+        }, files={'image': image_file})
+
+        print("\nDebug - test_item_form_is_valid")
+        print("Is form valid?:", form.is_valid())
+        print("Form errors:", form.errors)
+
+        self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid but failed with errors: {form.errors}")
