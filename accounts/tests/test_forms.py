@@ -74,3 +74,15 @@ class ProfileFormTest(TestCase):
         }
         form = ProfileForm(data=form_data)
         self.assertTrue(form.is_valid())  # Should pass for valid address
+
+    def test_invalid_address_characters(self):
+        form_data = {
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'phone_number': '1234567890',
+            'birth_date': '2000-01-01',
+            'address': '123 Main $t',  # Invalid address (contains $)
+        }
+        form = ProfileForm(data=form_data)
+        self.assertFalse(form.is_valid())  # Should fail
+        self.assertEqual(form.errors['address'], ['Address contains invalid characters.'])
