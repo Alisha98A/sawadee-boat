@@ -33,6 +33,11 @@ Before running the tests, ensure that the following requirements are met:
 
 The project includes a comprehensive set of **automatic tests** that validate the behavior of the form (`ProfileForm`, `MenuForm`, `MenuItemForm`, and `ItemForm`). These tests run automatically using Django’s test framework and ensure that form validation works correctly for various scenarios.
 
+
+### Testing forms.py in accounts app
+![Bug](documentation/testing/test_forms.png)
+All tests passed
+
 <details>
   <summary>Phone Number Validation</summary>
 
@@ -195,6 +200,12 @@ def test_form_invalid_data(self):
 ```
   </details>
 ---
+
+### Testing forms.py in info app
+
+![Bug](documentation/testing/test_forms.pass.png)
+All tests passed
+
 <details>
   <summary>MenuForm Tests</summary>
 
