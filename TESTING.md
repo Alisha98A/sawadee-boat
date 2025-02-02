@@ -279,19 +279,395 @@ def test_item_form_is_invalid_due_to_large_file(self):
 ```
   </details>
 ---
+
 ### Testing urls.py in info app
 
 ![Urls testing](documentation/testing/test_infourls.png)
 All tests passed
 
-The only thing to note is the UnorderedObjectListWarning in views.py:59, which is related to pagination. This happens because the Menu queryset isn’t explicitly ordered, which could lead to inconsistent pagination results.
+<details>
+  <summary>Test Setup</summary>
 
-Solution: 
+The test setup initializes a superuser and logs them in before executing the URL tests.
+
+Test Cases:
+* Creates a superuser for authentication.
+* Verifies the user is logged in.
+
+
 ```python
-menus = Menu.objects.all().order_by('id')
-paginator = Paginator(menus, 5)
+def setUp(self):
+    username = "testuser"
+    email = "testapp@test.com"
+    password = "12339292sss4"
+    user_model = get_user_model()
+    self.user = user_model.objects.create_superuser(
+        email=email,
+        password=password,
+        username=username
+    )
+    login = self.client.login(email=email, password=password)
+    self.assertTrue(login)
+    self.assertTrue(self.user.is_superuser)
 ```
-This ensures that pagination always returns consistent results.
+
+  </details>
+---
+<details>
+  <summary>Public Page URL Tests</summary>
+
+  These tests verify that public pages load successfully.
+
+Test Cases:
+* test_home_page: Tests the home page (/).
+* test_about_page: Tests the about page (/about/).
+* test_menu_page: Tests the menu page (/menu/).
+* test_set_sail_page: Tests the set sail page (/set-sail/).
+
+```python
+def test_home_page(self):
+    response = self.client.get("/")
+    self.assertEqual(response.status_code, 200)
+
+def test_about_page(self):
+    response = self.client.get("/about/")
+    self.assertEqual(response.status_code, 200)
+
+def test_menu_page(self):
+    response = self.client.get("/menu/")
+    self.assertEqual(response.status_code, 200)
+
+def test_set_sail_page(self):
+    response = self.client.get("/set-sail/")
+    self.assertEqual(response.status_code, 200)
+```
+  </details>
+---
+<details>
+  <summary>Staff Menu URL Tests</summary>
+
+These tests verify that staff menu pages are accessible to logged-in staff members.
+
+Test Cases:
+* test_staff_menu_page: Tests the staff menu page (/staff/menu/).
+* test_staff_menu_page_logout: Tests staff menu access after logout.
+
+```python
+def test_staff_menu_page(self):
+    response = self.client.get("/staff/menu/")
+    self.assertEqual(response.status_code, 200)
+
+def test_staff_menu_page_logout(self):
+    self.client.logout()
+    response = self.client.get("/staff/menu/")
+    self.assertEqual(response.status_code, 302)  # Redirected to login
+```
+  </details>
+---
+<details>
+  <summary>Menu Management URL Tests</summary>
+
+  These tests ensure that menu management pages return the expected HTTP status.
+
+Test Cases:
+* test_add_menu_page: Tests adding a menu (/staff/menu/add/).
+* test_edit_menu_page: Tests editing a menu (/staff/menu/edit/<id>/).
+* test_delete_menu_page: Tests deleting a menu (/staff/menu/delete/<id>/).
+* test_set_active_menu_page: Tests activating a menu (/staff/menu/set-active/<id>/).
+
+```python
+def test_add_menu_page(self):
+    response = self.client.get("/staff/menu/add/")
+    self.assertEqual(response.status_code, 200)
+
+def test_edit_menu_page(self):
+    response = self.client.get("/staff/menu/edit/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+
+def test_delete_menu_page(self):
+    response = self.client.get("/staff/menu/delete/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+
+def test_set_active_menu_page(self):
+    response = self.client.get("/staff/menu/set-active/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+```
+
+  </details>
+---
+<details>
+  <summary>Menu Item (Category) Management URL Tests</summary>
+
+  These tests verify that menu item (category) management routes function correctly.
+
+Test Cases:
+* test_add_menu_item_page: Tests adding a menu item (/staff/menu-item/add/).
+* test_edit_menu_item_page: Tests editing a menu item (/staff/menu-item/edit/<id>/).
+* test_delete_menu_item_page: Tests deleting a menu item (/staff/menu-item/delete/<id>/).
+
+```python
+def test_add_menu_item_page(self):
+    response = self.client.get("/staff/menu-item/add/")
+    self.assertEqual(response.status_code, 200)
+
+def test_edit_menu_item_page(self):
+    response = self.client.get("/staff/menu-item/edit/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+
+def test_delete_menu_item_page(self):
+    response = self.client.get("/staff/menu-item/delete/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+```
+
+  </details>
+---
+<details>
+  <summary>Item (Dish) Management URL Tests</summary>
+
+  These tests verify that dish/item management pages are accessible.
+
+Test Cases:
+* test_add_item_page: Tests adding an item (/staff/item/add/).
+* test_edit_item_page: Tests editing an item (/staff/item/edit/<id>/).
+* test_delete_item_page: Tests deleting an item (/staff/item/delete/<id>/).
+
+```python
+def test_add_item_page(self):
+    response = self.client.get("/staff/item/add/")
+    self.assertEqual(response.status_code, 200)
+
+def test_edit_item_page(self):
+    response = self.client.get("/staff/item/edit/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+
+def test_delete_item_page(self):
+    response = self.client.get("/staff/item/delete/1/")
+    self.assertEqual(response.status_code, 404)  # ID doesn't exist
+```
+
+</details>
+---
+<details>
+  <summary>No Access Page URL Test</summary>
+
+  This test ensures that the No Access page (/no-access/) loads successfully.
+
+Test Cases:
+* test_no_access_page: Tests the no-access page.
+
+```python
+def test_no_access_page(self):
+    response = self.client.get("/no-access/")
+    self.assertEqual(response.status_code, 200)
+```
+
+</details>
+
+### Testing views.py in info app
+
+![Views Automatic Testing](documentation/testing/test_views_info.png)
+All tests passed
+
+---
+<details>
+  <summary>Test Setup</summary>
+
+The test setup initializes test data, including users (normal and staff), menus, menu items, and individual dishes.
+
+Test Cases:
+* Creates a regular user and a staff user.
+* Creates a sample menu, menu category, and menu item.
+
+```python
+def setUp(self):
+    self.client = Client()
+    self.user = get_user_model().objects.create_user(
+        username="testuser", email="user@test.com", password="password123"
+    )
+    self.staff_user = get_user_model().objects.create_superuser(
+        username="staffuser", email="staff@test.com", password="password123"
+    )
+    self.menu = Menu.objects.create(name="Test Menu", description="Sample menu description", is_active=True)
+    self.menu_item = MenuItem.objects.create(menu=self.menu, category="Test Category")
+    self.item = Item.objects.create(
+        menu_item=self.menu_item,
+        name="Test Dish",
+        description="Test Description",
+        price=9.99,
+        image="https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
+    )
+```
+  </details>
+---
+<details>
+  <summary>Home & About View Tests</summary>
+
+These tests ensure that the home and about pages load successfully and use the correct templates.
+
+Test Cases:
+* test_home_view: Ensures the home page loads and renders info/home.html.
+* test_about_view: Ensures the about page loads and renders info/about.html.
+
+```python
+def test_home_view(self):
+    response = self.client.get(reverse("home"))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "info/home.html")
+
+def test_about_view(self):
+    response = self.client.get(reverse("about"))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "info/about.html")
+```
+  </details>
+---
+<details>
+  <summary>Menu View Tests</summary>
+
+  These tests verify that the menu page correctly displays an active menu.
+
+Test Cases:
+* test_menu_view: Ensures the menu page loads with an active menu and renders info/menu.html.
+
+```python
+  def test_menu_view(self):
+    response = self.client.get(reverse("menu"))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "info/menu.html")
+    self.assertIn("menu", response.context)
+```
+
+  </details>
+---
+<details>
+  <summary>Staff Menu Access Tests</summary>
+
+These tests confirm that staff-only views require authentication.
+
+Test Cases:
+* test_staff_menu_requires_login: Redirects unauthenticated users.
+* test_staff_menu_accessible_by_staff: Allows staff users to access the menu management page.
+
+```python
+def test_staff_menu_requires_login(self):
+    response = self.client.get(reverse("staff_menu"))
+    self.assertEqual(response.status_code, 302)  # Redirect to login
+
+def test_staff_menu_accessible_by_staff(self):
+    self.client.login(email="staff@test.com", password="password123")
+    response = self.client.get(reverse("staff_menu"))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "info/staff_menu.html")
+```
+
+  </details>
+---
+<details>
+  <summary>Menu CRUD Permission Tests</summary>
+
+These tests ensure that only staff users can create, edit, and delete menus.
+
+Test Cases:
+* test_add_menu_requires_staff: Blocks regular users from adding a menu.
+* test_edit_menu_requires_staff: Blocks regular users from editing a menu.
+* test_delete_menu_requires_staff: Blocks regular users from deleting a menu.
+
+```python
+def test_add_menu_requires_staff(self):
+    response = self.client.post(reverse("add_menu"), {"name": "New Menu"})
+    self.assertEqual(response.status_code, 302)  # Redirect to login
+
+def test_edit_menu_requires_staff(self):
+    response = self.client.post(reverse("edit_menu", args=[self.menu.id]), {"name": "Updated Menu"})
+    self.assertEqual(response.status_code, 302)  # Redirect to login
+
+def test_delete_menu_requires_staff(self):
+    response = self.client.post(reverse("delete_menu", args=[self.menu.id]))
+    self.assertEqual(response.status_code, 302)
+```
+  </details>
+---
+<details>
+  <summary>Menu Item (Category) CRUD Tests</summary>
+
+These tests ensure that only staff users can create, edit, and delete menu categories.
+
+Test Cases:
+* test_add_menu_item_requires_staff: Blocks regular users from adding a menu category.
+* test_edit_menu_item_requires_staff: Blocks regular users from editing a menu category.
+* test_delete_menu_item_requires_staff: Blocks regular users from deleting a menu category.
+
+```python
+def test_add_menu_item_requires_staff(self):
+    response = self.client.post(reverse("add_menu_item"), {"category": "New Category"})
+    self.assertEqual(response.status_code, 302)
+
+def test_edit_menu_item_requires_staff(self):
+    response = self.client.post(reverse("edit_menu_item", args=[self.menu_item.id]), {"category": "Updated Category"})
+    self.assertEqual(response.status_code, 302)
+
+def test_delete_menu_item_requires_staff(self):
+    response = self.client.post(reverse("delete_menu_item", args=[self.menu_item.id]))
+    self.assertEqual(response.status_code, 302)
+```
+  </details>
+---
+<details>
+  <summary>Item (Dish) CRUD Tests</summary>
+
+  These tests ensure that only staff users can create, edit, and delete menu items.
+
+Test Cases:
+* test_add_item_requires_staff: Blocks regular users from adding an item.
+* test_edit_item_requires_staff: Blocks regular users from editing an item.
+* test_delete_item_requires_staff: Blocks regular users from deleting an item.
+
+```python
+def test_add_item_requires_staff(self):
+    response = self.client.post(reverse("add_item"), {
+        "menu_item": self.menu_item.id,
+        "name": "New Dish",
+        "description": "New Description",
+        "price": 12.99,
+        "image": "https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
+    })
+    self.assertEqual(response.status_code, 302)
+
+def test_edit_item_requires_staff(self):
+    response = self.client.post(reverse("edit_item", args=[self.item.id]), {
+        "menu_item": self.menu_item.id,
+        "name": "Updated Dish",
+        "description": "Updated Description",
+        "price": 15.99,
+        "image": "https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
+    })
+    self.assertEqual(response.status_code, 302)
+
+def test_delete_item_requires_staff(self):
+    response = self.client.post(reverse("delete_item", args=[self.item.id]))
+    self.assertEqual(response.status_code, 302)
+```
+
+  </details>
+---
+<details>
+  <summary>No Access Page Test</summary>
+
+This test verifies that the “No Access” page loads correctly for unauthorized users.
+
+Test Cases:
+* test_no_access_page: Ensures the page renders correctly.
+
+```python
+  def test_no_access_page(self):
+    response = self.client.get(reverse("no_access"))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "info/no_access.html")
+```
+
+</details>
+
+
 
 ## BUGS
 
@@ -328,3 +704,19 @@ def validate_phone_number(value):
     
     return cleaned_value
 ```
+
+### Potential Bug/ 2
+When doing automatic tests for views.py, I passed all tests. But found a warning on UnorderedObjectListWarning, which happens because I was paginating a queryset without an explicit order. To fix this, I had to update my views.py where I paginate the Menu objects.
+
+Before:
+
+```python
+menus = Menu.objects.filter(is_active=True)
+```
+![Views Automatic Testing With Warning](documentation/testing/test_views_warning_info.png)
+
+After: 
+```python
+menus = Menu.objects.filter(is_active=True).order_by("-created_on")
+```
+![Views Automatic Testing](documentation/testing/test_views_info.png)
