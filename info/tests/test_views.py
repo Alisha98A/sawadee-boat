@@ -94,3 +94,30 @@ class TestViews(TestCase):
         """Test that editing a menu category is restricted to staff users."""
         response = self.client.post(reverse("edit_menu_item", args=[self.menu_item.id]), {"category": "Updated Category"})
         self.assertEqual(response.status_code, 302)
+
+    def test_add_item_requires_staff(self):
+        """Test that adding a menu item is restricted to staff users."""
+        response = self.client.post(reverse("add_item"), {
+            "menu_item": self.menu_item.id,
+            "name": "New Dish",
+            "description": "New Description",
+            "price": 12.99,
+            "image": "https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_edit_item_requires_staff(self):
+        """Test that editing a menu item is restricted to staff users."""
+        response = self.client.post(reverse("edit_item", args=[self.item.id]), {
+            "menu_item": self.menu_item.id,
+            "name": "Updated Dish",
+            "description": "Updated Description",
+            "price": 15.99,
+            "image": "https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_item_requires_staff(self):
+        """Test that deleting a menu item is restricted to staff users."""
+        response = self.client.post(reverse("delete_item", args=[self.item.id]))
+        self.assertEqual(response.status_code, 302)
