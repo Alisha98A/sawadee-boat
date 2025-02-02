@@ -201,7 +201,7 @@ def test_form_invalid_data(self):
   </details>
 ---
 
-### Testing forms.py in info app
+### Automated Forms Tests in Info App
 
 ![Testing forms.py](documentation/testing/test_forms.pass.png)
 All tests passed
@@ -280,7 +280,7 @@ def test_item_form_is_invalid_due_to_large_file(self):
   </details>
 ---
 
-### Testing urls.py in info app
+### Automated Urls Tests in Info app
 
 ![Urls testing](documentation/testing/test_infourls.png)
 All tests passed
@@ -463,7 +463,91 @@ def test_no_access_page(self):
 
 </details>
 
-### Testing views.py in info app
+### Automated Model Tests in Info app
+
+![Views Automatic Testing](documentation/testing/test_models_info.png)
+All tests passed
+
+The following tests ensure that the database models for **Menu**, **MenuItem**, and **Item** work as expected.
+
+#### Menu Model Tests
+
+<details>
+  <summary>Menu Model</summary>
+
+The `Menu` model represents a menu containing multiple categories and items.
+
+#### Test Cases:
+- **String Representation:** Ensures the `__str__` method returns the menu's name.
+- **Menu Creation:** Ensures that a menu can be created, retrieved, and its attributes match the expected values.
+
+```python
+def test_menu_str(self):
+    """Test the string representation of the Menu model."""
+    self.assertEqual(str(self.menu), "Dinner Menu")
+
+def test_menu_creation(self):
+    """Test that a menu can be created and retrieved."""
+    menu = Menu.objects.get(name="Dinner Menu")
+    self.assertEqual(menu.description, "A delicious dinner selection.")
+    self.assertTrue(menu.is_active)
+```
+
+</details>
+---
+<details>
+  <summary>MenuItem Model</summary>
+
+  The MenuItem model represents categories within a menu.
+
+Test Cases:
+* String Representation: Ensures the __str__ method returns the format {menu.name} - {category}.
+* MenuItem Creation: Ensures a menu item can be created and correctly associated with a menu.
+
+```python
+def test_menu_item_str(self):
+    """Test the string representation of the MenuItem model."""
+    self.assertEqual(str(self.menu_item), "Lunch Menu - Appetizers")
+
+def test_menu_item_creation(self):
+    """Test that a menu item can be created and retrieved."""
+    menu_item = MenuItem.objects.get(category="Appetizers")
+    self.assertEqual(menu_item.menu.name, "Lunch Menu")
+```
+
+</details>
+---
+<details>
+  <summary>Item Model</summary>
+
+  The Item model represents dishes within a menu category.
+
+Test Cases:
+* String Representation: Ensures the __str__ method returns the item’s name.
+* Item Creation: Ensures an item can be created and retrieved with the correct attributes.
+* Foreign Key Relation: Ensures an item is correctly linked to a MenuItem and Menu.
+
+```python
+def test_item_str(self):
+    """Test the string representation of the Item model."""
+    self.assertEqual(str(self.item), "Orange Juice")
+
+def test_item_creation(self):
+    """Test that an item can be created and retrieved."""
+    item = Item.objects.get(name="Orange Juice")
+    self.assertEqual(item.description, "Freshly squeezed orange juice")
+    self.assertEqual(float(item.price), 4.99)  # Convert Decimal to float
+
+def test_item_foreign_key(self):
+    """Test that an item is correctly related to a menu item."""
+    self.assertEqual(self.item.menu_item.category, "Drinks")
+    self.assertEqual(self.item.menu_item.menu.name, "Breakfast Menu")
+```
+
+</details>
+---
+
+### Automated Views Tests in Info app
 
 ![Views Automatic Testing](documentation/testing/test_views_info.png)
 All tests passed
