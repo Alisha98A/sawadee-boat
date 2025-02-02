@@ -383,4 +383,9 @@ section#hero video {
     font-size: 1.2rem;
     padding: 12px 25px;
 }
+/* Favicon in navbar*/
+.navbar-center img {
+    width: 84px !important;
+    height: 84px !important;
+}
 }
