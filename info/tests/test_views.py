@@ -55,3 +55,10 @@ class TestViews(TestCase):
         response = self.client.get(reverse("set_sail"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "info/setsail.html")
+
+    def test_menu_view(self):
+        """Test that the menu page displays an active menu."""
+        response = self.client.get(reverse("menu"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/menu.html")
+        self.assertIn("menu", response.context)
