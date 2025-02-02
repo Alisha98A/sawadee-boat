@@ -62,3 +62,15 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "info/menu.html")
         self.assertIn("menu", response.context)
+
+    def test_staff_menu_requires_login(self):
+        """Test that the staff menu is restricted to logged-in users."""
+        response = self.client.get(reverse("staff_menu"))
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+
+    def test_staff_menu_accessible_by_staff(self):
+        """Test that the staff menu is accessible by staff users."""
+        self.client.login(email="staff@test.com", password="password123")
+        response = self.client.get(reverse("staff_menu"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/staff_menu.html")
