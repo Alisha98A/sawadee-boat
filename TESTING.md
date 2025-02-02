@@ -203,7 +203,7 @@ def test_form_invalid_data(self):
 
 ### Testing forms.py in info app
 
-![Bug](documentation/testing/test_forms.pass.png)
+![Testing forms.py](documentation/testing/test_forms.pass.png)
 All tests passed
 
 <details>
@@ -279,7 +279,19 @@ def test_item_form_is_invalid_due_to_large_file(self):
 ```
   </details>
 ---
+### Testing urls.py in info app
 
+![Urls testing](documentation/testing/test_infourls.png)
+All tests passed
+
+The only thing to note is the UnorderedObjectListWarning in views.py:59, which is related to pagination. This happens because the Menu queryset isn’t explicitly ordered, which could lead to inconsistent pagination results.
+
+Solution: 
+```python
+menus = Menu.objects.all().order_by('id')
+paginator = Paginator(menus, 5)
+```
+This ensures that pagination always returns consistent results.
 
 ## BUGS
 
