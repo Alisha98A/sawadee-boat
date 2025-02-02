@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from info.models import Menu, MenuItem, Item
 
-
 class TestViews(TestCase):
     """Tests for the info app views."""
 
@@ -117,7 +116,23 @@ class TestViews(TestCase):
         })
         self.assertEqual(response.status_code, 302)
 
+    def test_delete_menu_requires_staff(self):
+        """Test that deleting a menu is restricted to staff users."""
+        response = self.client.post(reverse("delete_menu", args=[self.menu.id]))
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_menu_item_requires_staff(self):
+        """Test that deleting a menu category is restricted to staff users."""
+        response = self.client.post(reverse("delete_menu_item", args=[self.menu_item.id]))
+        self.assertEqual(response.status_code, 302)
+
     def test_delete_item_requires_staff(self):
         """Test that deleting a menu item is restricted to staff users."""
         response = self.client.post(reverse("delete_item", args=[self.item.id]))
         self.assertEqual(response.status_code, 302)
+
+    def test_no_access_page(self):
+        """Test that the no-access page renders successfully."""
+        response = self.client.get(reverse("no_access"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/no_access.html")
