@@ -63,3 +63,14 @@ class ProfileFormTest(TestCase):
         form = ProfileForm(data=form_data)
         self.assertFalse(form.is_valid())  # Should fail
         self.assertEqual(form.errors['birth_date'], ['You must be at least 18 years old.'])
+
+    def test_valid_address(self):
+        form_data = {
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'phone_number': '1234567890',
+            'birth_date': '2000-01-01',
+            'address': '123 Main St',  # Valid address
+        }
+        form = ProfileForm(data=form_data)
+        self.assertTrue(form.is_valid())  # Should pass for valid address
