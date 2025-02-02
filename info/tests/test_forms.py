@@ -77,3 +77,19 @@ class TestItemForm(TestCase):
         print("Form errors:", form.errors)
 
         self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid even without a description, but errors: {form.errors}")
+
+    def test_item_form_is_invalid_due_to_large_file(self):
+        """Test that the form rejects large images"""
+        large_image = SimpleUploadedFile("large.jpg", b"x" * (2 * 1024 * 1024 + 1), content_type="image/jpeg")
+        form = ItemForm(data={
+            'menu_item': self.menu_item.id,
+            'name': 'Burger',
+            'description': 'Juicy beef burger',
+            'price': 10.99,
+        }, files={'image': large_image})
+
+        print("\nDebug - test_item_form_is_invalid_due_to_large_file")
+        print("Is form valid?:", form.is_valid())
+        print("Form errors:", form.errors)
+
+        self.assertFalse(form.is_valid(), msg="ItemForm should be invalid due to large image size")
