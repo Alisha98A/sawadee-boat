@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Menu, MenuItem, Item
@@ -51,7 +52,7 @@ def menu_view(request, menu_id=None):
 # Staff Menu Management
 # -------------------------------------
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def staff_menu_view(request):
     """Allow staff to manage menus, with pagination (5 per page)."""
     menus = Menu.objects.all()
@@ -62,7 +63,7 @@ def staff_menu_view(request):
     return render(request, "info/staff_menu.html", {"menus": page_menus})
 
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def add_menu(request):
     """Allow staff to add a new menu."""
     form = MenuForm(request.POST or None)
@@ -74,7 +75,7 @@ def add_menu(request):
     return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu"})
 
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def edit_menu(request, menu_id):
     """Allow staff to edit an existing menu."""
     menu = get_object_or_404(Menu, id=menu_id)
@@ -91,7 +92,7 @@ def edit_menu(request, menu_id):
 # MenuItem (Category) Management
 # -------------------------------------
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def add_menu_item(request):
     """Allow staff to add a menu category."""
     form = MenuItemForm(request.POST or None)
@@ -103,7 +104,7 @@ def add_menu_item(request):
     return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu Item"})
 
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def edit_menu_item(request, menu_item_id):
     """Allow staff to edit a menu category."""
     menu_item = get_object_or_404(MenuItem, id=menu_item_id)
@@ -120,7 +121,7 @@ def edit_menu_item(request, menu_item_id):
 # Item (Dish) Management
 # -------------------------------------
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def add_item(request):
     """Allow staff to add a menu item."""
     form = ItemForm(request.POST or None, request.FILES or None)
@@ -132,7 +133,7 @@ def add_item(request):
     return render(request, "info/item_form.html", {"form": form, "title": "Add Item"})
 
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def edit_item(request, item_id):
     """Allow staff to edit a menu item."""
     item = get_object_or_404(Item, id=item_id)
@@ -149,7 +150,7 @@ def edit_item(request, item_id):
 # Generic Delete View (Replaces All Individual Delete Views)
 # -------------------------------------
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def delete_object(request, obj_id, model, redirect_url):
     """Generic view to delete an object (menu, menu item, or item)."""
     obj = get_object_or_404(model, id=obj_id)
@@ -169,7 +170,7 @@ def delete_object(request, obj_id, model, redirect_url):
 # -------------------------------------
 
 @login_required
-@user_passes_test(staff_required, login_url="no_access")
+@staff_member_required
 def set_active_menu(request, menu_id):
     """Set the selected menu as the active menu, ensuring only one menu is active at a time."""
     menu = get_object_or_404(Menu, id=menu_id)
