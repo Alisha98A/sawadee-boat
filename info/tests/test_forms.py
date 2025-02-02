@@ -93,3 +93,19 @@ class TestItemForm(TestCase):
         print("Form errors:", form.errors)
 
         self.assertFalse(form.is_valid(), msg="ItemForm should be invalid due to large image size")
+
+    def test_item_form_is_invalid_due_to_wrong_file_type(self):
+        """Test that the form rejects invalid file types"""
+        invalid_file = SimpleUploadedFile("document.pdf", b"%PDF-1.4", content_type="application/pdf")
+        form = ItemForm(data={
+            'menu_item': self.menu_item.id,
+            'name': 'Steak',
+            'description': 'Grilled steak with herbs',
+            'price': 22.99,
+        }, files={'image': invalid_file})
+
+        print("\nDebug - test_item_form_is_invalid_due_to_wrong_file_type")
+        print("Is form valid?:", form.is_valid())
+        print("Form errors:", form.errors)
+
+        self.assertFalse(form.is_valid(), msg="ItemForm should be invalid due to non-image file")
