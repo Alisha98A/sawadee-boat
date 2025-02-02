@@ -268,3 +268,40 @@ def test_item_form_is_invalid_due_to_large_file(self):
 ```
   </details>
 ---
+
+
+## BUGS
+
+### Bug 1: Invalid Phone Number Input
+
+### Problem:
+While running tests for the `ProfileForm`, I encountered an issue with the phone number validation. The form was accepting phone numbers that contained non-numeric characters, which should not be allowed. Specifically, the test failed when I tried to submit a phone number like `12a34567b890`, which contains both digits and letters. 
+
+Without proper validation, such phone numbers could have been processed and stored in the system, potentially causing errors or inconsistencies in data.
+
+![Bug](documentation/testing/solved_bug_test_forms.png)
+
+### Solution:
+To fix this issue, I added an extra validation step in the `validate_phone_number` function to ensure that the phone number contains **only numeric characters**.
+
+I updated the validation function as follows:
+
+```python
+def validate_phone_number(value):
+    """
+    Custom validator for phone number:
+    - Ensures the phone number contains only digits.
+    - Removes non-digit characters.
+    - Ensures the phone number is between 9 and 15 digits.
+    """
+    if not value.isdigit():  # Added check for non-digit characters
+        raise ValidationError("Phone number must only contain digits.")
+    
+    cleaned_value = ''.join(filter(str.isdigit, value))
+
+    # Ensure phone number length is within the valid range
+    if len(cleaned_value) < 9 or len(cleaned_value) > 15:
+        raise ValidationError("Phone number must be between 9 and 15 digits.")
+    
+    return cleaned_value
+```
