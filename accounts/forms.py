@@ -9,6 +9,9 @@ def validate_phone_number(value):
     - Removes non-digit characters.
     - Ensures the phone number is between 9 and 15 digits.
     """
+    if not value.isdigit():
+        raise ValidationError("Phone number must only contain digits.")
+    
     cleaned_value = ''.join(filter(str.isdigit, value))
 
     # Ensure phone number length is within the valid range
