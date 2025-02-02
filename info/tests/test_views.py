@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from info.models import Menu, MenuItem, Item
 
@@ -36,3 +37,21 @@ class TestViews(TestCase):
             price=9.99,
             image="https://res.cloudinary.com/demo/image/upload/v1581091179/sample.jpg",
         )
+
+    def test_home_view(self):
+        """Test that the home page renders successfully."""
+        response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/home.html")
+
+    def test_about_view(self):
+        """Test that the about page renders successfully."""
+        response = self.client.get(reverse("about"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/about.html")
+
+    def test_set_sail_view(self):
+        """Test that the set sail page renders successfully."""
+        response = self.client.get(reverse("set_sail"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "info/setsail.html")
