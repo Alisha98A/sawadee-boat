@@ -1,6 +1,6 @@
 from django.test import TestCase
-from info.forms import MenuForm
-
+from info.forms import MenuForm, MenuItemForm
+from info.models import Menu
 
 class TestMenuForm(TestCase):
     
@@ -11,3 +11,18 @@ class TestMenuForm(TestCase):
     def test_menu_form_is_invalid(self):
         form = MenuForm({'name': '', 'description': 'No name provided', 'is_active': True})
         self.assertFalse(form.is_valid(), msg="MenuForm should be invalid due to missing name")
+
+
+class TestMenuItemForm(TestCase):
+    
+    def setUp(self):
+        """Create a menu instance for testing"""
+        self.menu = Menu.objects.create(name="Test Menu", description="Test Description", is_active=True)
+
+    def test_menu_item_form_is_valid(self):
+        form = MenuItemForm({'menu': self.menu.id, 'category': 'Drinks'})
+        self.assertTrue(form.is_valid(), msg="MenuItemForm should be valid")
+
+    def test_menu_item_form_is_invalid(self):
+        form = MenuItemForm({'menu': '', 'category': 'Desserts'})
+        self.assertFalse(form.is_valid(), msg="MenuItemForm should be invalid due to missing menu")
