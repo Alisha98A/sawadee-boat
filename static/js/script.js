@@ -67,12 +67,21 @@ document.addEventListener("DOMContentLoaded", function () {
 // ===========================
 // Navbar Scroll Effect
 // ===========================
-document.addEventListener("DOMContentLoaded", function() {
-    const navbar = document.getElementById("navbar");
+document.addEventListener("DOMContentLoaded", function () {
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarCollapse = document.querySelector("#navbarNav");
 
-    if (!navbar) return;
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener("click", function () {
+            navbarCollapse.classList.toggle("show"); 
+        });
 
-    window.addEventListener("scroll", function() {
-        navbar.classList.toggle("navbar-scrolled", window.scrollY > 50);
-    });
+        // Close the navbar when a link is clicked
+        const navLinks = navbarCollapse.querySelectorAll(".nav-link");
+        navLinks.forEach(link => {
+            link.addEventListener("click", function () {
+                navbarCollapse.classList.remove("show");
+            });
+        });
+    }
 });
