@@ -39,3 +39,15 @@ class ProfileFormTest(TestCase):
         form = ProfileForm(data=form_data)
         self.assertFalse(form.is_valid())  # Should fail
         self.assertEqual(form.errors['phone_number'], ['Phone number must only contain digits.'])
+
+    def test_birth_date_in_future(self):
+        form_data = {
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'phone_number': '1234567890',
+            'birth_date': str(date.today().year + 1) + '-01-01',  # Future birthdate
+            'address': '123 Main St',
+        }
+        form = ProfileForm(data=form_data)
+        self.assertFalse(form.is_valid())  # Should fail
+        self.assertEqual(form.errors['birth_date'], ['Birth date cannot be in the future.'])
