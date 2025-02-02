@@ -86,3 +86,15 @@ class ProfileFormTest(TestCase):
         form = ProfileForm(data=form_data)
         self.assertFalse(form.is_valid())  # Should fail
         self.assertEqual(form.errors['address'], ['Address contains invalid characters.'])
+
+    def test_form_invalid_data(self):
+        form_data = {
+            'first_name': '',  # Missing first name
+            'last_name': 'Doe',
+            'phone_number': '1234567890',
+            'birth_date': '2000-01-01',
+            'address': '123 Main St',
+        }
+        form = ProfileForm(data=form_data)
+        self.assertFalse(form.is_valid())  # Should fail due to missing first name
+        self.assertEqual(form.errors['first_name'], ['This field is required.'])
