@@ -74,3 +74,18 @@ class TestViews(TestCase):
         response = self.client.get(reverse("staff_menu"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "info/staff_menu.html")
+
+    def test_add_menu_requires_staff(self):
+        """Test that adding a menu is restricted to staff users."""
+        response = self.client.post(reverse("add_menu"), {"name": "New Menu"})
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+
+    def test_edit_menu_requires_staff(self):
+        """Test that editing a menu is restricted to staff users."""
+        response = self.client.post(reverse("edit_menu", args=[self.menu.id]), {"name": "Updated Menu"})
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+
+    def test_delete_menu_requires_staff(self):
+        """Test that deleting a menu is restricted to staff users."""
+        response = self.client.post(reverse("delete_menu", args=[self.menu.id]))
+        self.assertEqual(response.status_code, 302)
