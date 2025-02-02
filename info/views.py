@@ -7,7 +7,6 @@ from .models import Menu, MenuItem, Item
 from .forms import MenuForm, MenuItemForm, ItemForm
 
 
-
 # -------------------------------------
 # Home & About Views
 # -------------------------------------
@@ -55,7 +54,7 @@ def menu_view(request, menu_id=None):
 @staff_member_required
 def staff_menu_view(request):
     """Allow staff to manage menus, with pagination (5 per page)."""
-    menus = Menu.objects.all()
+    menus = Menu.objects.all().order_by("-created_on")
     paginator = Paginator(menus, 5)
     page_number = request.GET.get("page")
     page_menus = paginator.get_page(page_number)
