@@ -61,3 +61,19 @@ class TestItemForm(TestCase):
         print("Form errors:", form.errors)
 
         self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid but failed with errors: {form.errors}")
+
+    def test_item_form_without_description(self):
+        """Ensure item can be created without a description"""
+        image_file = self.create_test_image()
+        form = ItemForm(data={
+            'menu_item': self.menu_item.id,
+            'name': 'Pizza',
+            'description': '',
+            'price': 12.99,
+        }, files={'image': image_file})
+
+        print("\nDebug - test_item_form_without_description")
+        print("Is form valid?:", form.is_valid())
+        print("Form errors:", form.errors)
+
+        self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid even without a description, but errors: {form.errors}")
