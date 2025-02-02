@@ -40,3 +40,33 @@ class TestMenuItemModel(TestCase):
         """Test that a menu item can be created and retrieved."""
         menu_item = MenuItem.objects.get(category="Appetizers")
         self.assertEqual(menu_item.menu.name, "Lunch Menu")
+
+
+class TestItemModel(TestCase):
+    """Tests for the Item model."""
+
+    def setUp(self):
+        """Set up test menu, menu item, and item."""
+        self.menu = Menu.objects.create(name="Breakfast Menu")
+        self.menu_item = MenuItem.objects.create(menu=self.menu, category="Drinks")
+        self.item = Item.objects.create(
+            menu_item=self.menu_item,
+            name="Orange Juice",
+            description="Freshly squeezed orange juice",
+            price=4.99
+        )
+
+    def test_item_str(self):
+        """Test the string representation of the Item model."""
+        self.assertEqual(str(self.item), "Orange Juice")
+
+    def test_item_creation(self):
+        """Test that an item can be created and retrieved."""
+        item = Item.objects.get(name="Orange Juice")
+        self.assertEqual(item.description, "Freshly squeezed orange juice")
+        self.assertEqual(float(item.price), 4.99)
+
+    def test_item_foreign_key(self):
+        """Test that an item is correctly related to a menu item."""
+        self.assertEqual(self.item.menu_item.category, "Drinks")
+        self.assertEqual(self.item.menu_item.menu.name, "Breakfast Menu")
