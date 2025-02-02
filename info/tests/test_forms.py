@@ -10,11 +10,11 @@ class TestMenuForm(TestCase):
     
     def test_menu_form_is_valid(self):
         form = MenuForm({'name': 'Lunch Menu', 'description': 'A delicious lunch menu', 'is_active': True})
-        self.assertTrue(form.is_valid(), msg="MenuForm should be valid")
+        self.assertTrue(form.is_valid())
 
     def test_menu_form_is_invalid(self):
         form = MenuForm({'name': '', 'description': 'No name provided', 'is_active': True})
-        self.assertFalse(form.is_valid(), msg="MenuForm should be invalid due to missing name")
+        self.assertFalse(form.is_valid())
 
 
 class TestMenuItemForm(TestCase):
@@ -25,11 +25,11 @@ class TestMenuItemForm(TestCase):
 
     def test_menu_item_form_is_valid(self):
         form = MenuItemForm({'menu': self.menu.id, 'category': 'Drinks'})
-        self.assertTrue(form.is_valid(), msg="MenuItemForm should be valid")
+        self.assertTrue(form.is_valid())
 
     def test_menu_item_form_is_invalid(self):
         form = MenuItemForm({'menu': '', 'category': 'Desserts'})
-        self.assertFalse(form.is_valid(), msg="MenuItemForm should be invalid due to missing menu")
+        self.assertFalse(form.is_valid())
 
 
 class TestItemForm(TestCase):
@@ -56,11 +56,7 @@ class TestItemForm(TestCase):
             'price': 15.99,
         }, files={'image': image_file})
 
-        print("\nDebug - test_item_form_is_valid")
-        print("Is form valid?:", form.is_valid())
-        print("Form errors:", form.errors)
-
-        self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid but failed with errors: {form.errors}")
+        self.assertTrue(form.is_valid())
 
     def test_item_form_without_description(self):
         """Ensure item can be created without a description"""
@@ -72,11 +68,7 @@ class TestItemForm(TestCase):
             'price': 12.99,
         }, files={'image': image_file})
 
-        print("\nDebug - test_item_form_without_description")
-        print("Is form valid?:", form.is_valid())
-        print("Form errors:", form.errors)
-
-        self.assertTrue(form.is_valid(), msg=f"ItemForm should be valid even without a description, but errors: {form.errors}")
+        self.assertTrue(form.is_valid())
 
     def test_item_form_is_invalid_due_to_large_file(self):
         """Test that the form rejects large images"""
@@ -88,11 +80,7 @@ class TestItemForm(TestCase):
             'price': 10.99,
         }, files={'image': large_image})
 
-        print("\nDebug - test_item_form_is_invalid_due_to_large_file")
-        print("Is form valid?:", form.is_valid())
-        print("Form errors:", form.errors)
-
-        self.assertFalse(form.is_valid(), msg="ItemForm should be invalid due to large image size")
+        self.assertFalse(form.is_valid())
 
     def test_item_form_is_invalid_due_to_wrong_file_type(self):
         """Test that the form rejects invalid file types"""
@@ -104,8 +92,4 @@ class TestItemForm(TestCase):
             'price': 22.99,
         }, files={'image': invalid_file})
 
-        print("\nDebug - test_item_form_is_invalid_due_to_wrong_file_type")
-        print("Is form valid?:", form.is_valid())
-        print("Form errors:", form.errors)
-
-        self.assertFalse(form.is_valid(), msg="ItemForm should be invalid due to non-image file")
+        self.assertFalse(form.is_valid())
