@@ -78,8 +78,6 @@ All my HTML pages were successfully validated, receiving a “No errors or warni
 | Add Item | 0 | 0 |
 | Edit Item | 0 | 0 |
 | Delete Item | 0 | 0 |
-
-
 | Profile | 0 | 0 |
 | Edit Profile | 0 | 0 |
 | Delete Account | 0 | 0 |
@@ -88,12 +86,13 @@ All my HTML pages were successfully validated, receiving a “No errors or warni
 | Create Reservation | 0 | 0 |
 | Edit Reservation | 0 | 0 |
 | Delete Reservation | 0 | 0 |
-| Reservation Success | 0 | 0 |
+
+| Reservation Success | 0 | 0 |        NOT TESTED YET (PAGE NOT FOUND)
 | No Access | 0 | 0 |
-| Error 400 | 0 | 0 |
+| Error 400 | 0 | 0 |                   NOT TESTED YET (PAGE NOT FOUND)
 | Error 403 | 0 | 0 |
 | Error 404 | 0 | 0 |
-| Error 500 | 0 | 0 |
+| Error 500 | 0 | 0 |                   NOT TESTED YET (PAGE NOT FOUND)
 
 ### Validation Checker
 
@@ -185,14 +184,143 @@ Checked by "Validate by input"
   </details>
 
 
+  <details>
+  <summary>Profile Page</summary>
+
+![Profile Page](documentation/testing/profile_html.png)
+Checked by "Validate by input"
+  </details>
+
+  <details>
+  <summary>Edit Profile Page</summary>
+
+![Edit Profile Page](documentation/testing/editprofile_html.png)
+Checked by "Validate by input"
+  </details>
+
+  <details>
+  <summary>Delete Profile Page</summary>
+
+![Delete Profile Page](documentation/testing/deleteaccount_html.png)
+Checked by "Validate by input"
+  </details>
+
+  <details>
+  <summary>Change Password Page</summary>
+
+![Change Password Page](documentation/testing/editpassword_html.png)
+Checked by "Validate by input"
+  </details>
+
+
+  <details>
+  <summary>Reservation List Page</summary>
+
+![Reservation List Page](documentation/testing/reservation_list_html.png)
+Checked by "Validate by input"
+  </details>
+
+  <details>
+  <summary>Edit Reservation Page</summary>
+
+![Edit Reservation Page](documentation/testing/createreservation_html.png)
+Checked by "Validate by input"
+  </details>
+
+
+  <details>
+  <summary>Delete Reservation Page</summary>
+
+![Delete Reservation Page](documentation/testing/deletereservation_html.png)
+Checked by "Validate by input"
+  </details>
+
+ <details>
+  <summary>No Access Page</summary>
+
+![No Access Page](documentation/testing/noaccess_html.png)
+  </details>
+
+ <details>
+  <summary>403</summary>
+
+![403](documentation/testing/403_html.png)
+  </details>
+
+
+
 <hr>  
 
+### JavaScript Validation
+
+[JSHint](https://jshint.com/) was used to validate the JavaScript code added to the project. 
+External JS, for Bootstrap purposes, obtained via [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js) was not validated through JSHint
+
+| Page | Screenshot | Errors | Warnings |
+| ---- | ---------- | ------ | -------- |
+| base.html | ![js from base.html](x) | none | none |
+| gallery.html | ![js from gallery.html](x) | none | none |
+| profile.html | ![js from profile.html](x) | none | none |
+
+<hr>
+
+<hr>
+
+### Python Validation
+
+[CI Python Linter](https://pep8ci.herokuapp.com/#) was used to validate the Python files that were created or edited by myself. No issues presented and line lengths were double checked. I have included some screenshots with the results below.
+
+| Feature | admin.py | forms.py | models.py | urls.py | views.py |
+|---------|----------|----------|-----------|---------|----------|
+| Accounts | [no errors](documentation/testing/accountsadminpy.png) | [no errors](x) | [no errors](x) | [no errors](documentation/testing/art_urls.png) | [no errors](documentation/testing/art_views.png) |
+| Booking  | [no errors](x) | [no errors](x) | [no errors](xg) | [no errors](documentation/testing/book_urls.png) | [no errors](documentation/testing/book_views.png) |
+| FreeFido main app | na | na | na | [no errors](x) | na |
+| Gallery | [no errors](documentation/testing/gallery_admin.png) | [no errors](documentation/testing/gallery_form.png) | [no errors](dx) | [no errors](documentation/testing/gallery_urls.png) | [no errors](documentation/testing/gallery_views.png) |
+| Home | na | na | na | [no errors](documentation/testing/home_urls.png) | [no errors](documentation/testing/home_views.png) |
+| Profiles | [no errors](documentation/testing/profile_admin.png) | [no errors](documentation/testing/profile_forms.png) | [no errors](dx) | [no errors](documentation/testing/profile_urls.png) | [no errors](x) |
+| Visit | na | na | na | [no errors](dx) | [no errors](documentation/testing/visit_views.png) |
+
+<hr>
 
 
+### CSS Validation 
 
+[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate my CSS file. External CSS for Bootstrap, provided by [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css) was not tested. Warnings were present, these were related to my use of variables for colors and fonts in my CSS file.
 
+![css validation](documentation/testing/css_valid.png)
+  
+<hr> 
 
+   
+### Lighthouse Scores
 
+Lighthouse testing was carried out in Incognito mode to acheive the best result. Performance was lower than preferred due to the site being image heavy. Images used in the sites design were saved in webp and png format, and compressed using [tinypng](https://tinypng.com/) and [Convertio](https://www.convertio.co) to offer the best chance for a decent performance score. The CDNs used for Bootstrap were also noted in the Lighthouse report as causing issue with performance. This report will be reviewed for future development of Freefido to raise this score.
+
+**Desktop**  
+
+![Lighthouse scores desktop](documentation/testing/desktop_lh.png)  
+*Desktop Home Page*  
+  
+![Lighthouse scores desktop](documentation/testing/dt_art_lh.png)  
+*Desktop Article Page*
+  
+**Mobile**  
+
+![Lighthouse scores mobile](documentation/testing/mobile_lh.png) 
+*Mobile Home Page*  
+  
+![Lighthouse scores mobile](documentation/testing/mob_art_lh.png) 
+*Mobile Article Page*
+  
+<hr> 
+
+### Wave Accessibility Evaluation
+
+![WAVE Web Accessibility Evaluation Tools](documentation/testing/wave_report.png)  
+  
+Accessibility was included in every planning stage for FreeFido, through the use of the WAVE report tool I could ensure that any necessary changes were made to make the website as accessible as it could be. A minor contrast issue with a word rendered in orange for the feature theme and the absence of text in article image cards, due to their design, was noted in the report. These will be considered in the next version of FreeFido to better it's score.
+  
+<hr>  
 
 
 
