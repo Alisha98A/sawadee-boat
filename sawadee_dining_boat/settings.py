@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'cloudinary',
+    'django.contrib.staticfiles',
     'cloudinary_storage',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'cloudinary',
+    'allauth',
+    'allauth.account',
+    
     'reservations',
     'info',
     'accounts',
@@ -175,30 +176,33 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Static file handling with WhiteNoise
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage", 
-    },
-}
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage", 
+#     },
+# }
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 
-CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+# CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
-if CLOUDINARY_URL:
-    cloudinary.config(cloudinary_url=CLOUDINARY_URL)
-else:
-    raise ValueError("CLOUDINARY_URL is missing. Ensure it is set in Heroku.")
+# if CLOUDINARY_URL:
+#     cloudinary.config(cloudinary_url=CLOUDINARY_URL)
+# else:
+#     raise ValueError("CLOUDINARY_URL is missing. Ensure it is set in Heroku.")
 
 # Limit maximum file upload size (Django-wide)
-DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
