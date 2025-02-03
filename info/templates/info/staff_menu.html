@@ -33,9 +33,16 @@
             </div>
 
             <div class="card-body">
+                <!-- Loop for Menu Items (Categories) -->
                 {% for menu_item in menu.items.all %}
                     <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-secondary mb-0">{{ menu_item.category }}</h4>
+                            <div>
+                                <a href="{% url 'edit_menu_item' menu_item.id %}" class="btn btn-outline-warning btn-sm me-2">Edit Category</a>
+                                <a href="{% url 'delete_menu_item' menu_item.id %}" class="btn btn-outline-danger btn-sm">Delete Category</a>
+                            </div>
+                        </div>
 
                         {% if menu_item.menu_items.all %}
                             <table class="table table-striped mt-2">
