@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -27,19 +27,14 @@ def reservation_view(request):
             reservation.user = request.user
             reservation.save()
             messages.success(request, "Reservation successfully created!")
-            return redirect("reservation_success")
+            return redirect("reservations:reservations_list")
         else:
             messages.error(request, "Please correct the errors below.")
 
     return render(
-        request, "reservation_form.html",
+        request, "reservations/reservation_form.html",
         {"form": form, "user_type": "staff" if request.user.is_staff else "guest"}
     )
-
-@login_required
-def reservation_success(request):
-    """Displays a success page after creating a reservation."""
-    return render(request, "reservation_success.html")
 
 
 # ---------------------------------
@@ -120,14 +115,11 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         reservation.save()
 
         messages.success(self.request, "Reservation successfully created!")
-        return super().form_valid(form)
+        return redirect("reservations:reservations_list")
 
     def form_invalid(self, form):
         messages.error(self.request, "There were errors in your submission. Please check your inputs.")
         return self.render_to_response(self.get_context_data(form=form))
-
-    def get_success_url(self):
-        return reverse_lazy("reservations:reservations_list")
 
 
 # ---------------------------------
