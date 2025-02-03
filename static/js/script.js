@@ -1,3 +1,5 @@
+/* global flatpickr */
+
 // ===========================
 // Initialize Flatpickr Inputs
 // ===========================
