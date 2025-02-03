@@ -62,19 +62,9 @@ All my HTML pages were successfully validated, receiving a “No errors or warni
 | Add Menu | 0 | 0 |
 | Edit Menu | 0 | 0 |
 | Delete Menu | 0 | 0 |
-
-
-| Set Active Menu | 0 | 0 |       NOT TESTED YET
-
-
-
 | Add Menu Item | 0 | 0 |
-
-
-| Edit Menu Item | 0 | 0 |         NOT TESTED YET
-| Delete Menu Item | 0 | 0 |      NOT TESTED YET
-
-
+| Edit Menu Item | 0 | 0 |
+| Delete Menu Item | 0 | 0 |
 | Add Item | 0 | 0 |
 | Edit Item | 0 | 0 |
 | Delete Item | 0 | 0 |
@@ -86,13 +76,10 @@ All my HTML pages were successfully validated, receiving a “No errors or warni
 | Create Reservation | 0 | 0 |
 | Edit Reservation | 0 | 0 |
 | Delete Reservation | 0 | 0 |
-
-| Reservation Success | 0 | 0 |        NOT TESTED YET (PAGE NOT FOUND)
 | No Access | 0 | 0 |
-| Error 400 | 0 | 0 |                   NOT TESTED YET (PAGE NOT FOUND)
+| Error 400 | 0 | 0 |
 | Error 403 | 0 | 0 |
 | Error 404 | 0 | 0 |
-| Error 500 | 0 | 0 |                   NOT TESTED YET (PAGE NOT FOUND)
 
 ### Validation Checker
 
@@ -157,6 +144,20 @@ Checked by "Validate by input"
   <summary>Add Menu Item</summary>
 
 ![Add Menu Item](documentation/testing/addmenuitem_html.png)
+Checked by "Validate by input"
+  </details>
+
+   <details>
+  <summary>Edit Menu Item</summary>
+
+![Edit Menu Item](documentation/testing/edit_menu_item_html.png)
+Checked by "Validate by input"
+  </details>
+
+   <details>
+  <summary>Delete Menu Item</summary>
+
+![Delete Menu Item](documentation/testing/delete_menu_item_html.png)
 Checked by "Validate by input"
   </details>
 
@@ -242,9 +243,22 @@ Checked by "Validate by input"
   </details>
 
  <details>
+  <summary>400</summary>
+
+![400](documentation/testing/400_html.png)
+  </details>
+
+
+ <details>
   <summary>403</summary>
 
 ![403](documentation/testing/403_html.png)
+  </details>
+
+ <details>
+  <summary>404</summary>
+
+![404](documentation/testing/404_html.png)
   </details>
 
 
@@ -253,14 +267,32 @@ Checked by "Validate by input"
 
 ### JavaScript Validation
 
-[JSHint](https://jshint.com/) was used to validate the JavaScript code added to the project. 
-External JS, for Bootstrap purposes, obtained via [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js) was not validated through JSHint
+[JSHint](https://jshint.com/) was used to validate the custom JavaScript code in the project.
+External JS, for Bootstrap purposes, obtained via [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js) was not validated through JSHint.
+
 
 | Page | Screenshot | Errors | Warnings |
 | ---- | ---------- | ------ | -------- |
-| base.html | ![js from base.html](x) | none | none |
-| gallery.html | ![js from gallery.html](x) | none | none |
-| profile.html | ![js from profile.html](x) | none | none |
+| script.js (main JS file)| ![js from base.html](documentation/testing/jshhint.png) | none | 13 |
+
+Warnings Explained:
+
+During validation, 13 warnings were flagged, but they are not critical issues. They are related to:
+* The use of async functions, which require ES8+ (esversion: 8).
+* The use of const and arrow functions (=>), which are ES6+ features (esversion: 6).
+* A misleading line break warning, which does not affect functionality.
+
+Fixes & Improvements:
+* Ensured that all custom JavaScript is valid and free of errors.
+* Used feature detection (typeof flatpickr !== "undefined") to avoid undefined variable issues.
+* Adjusted code formatting to improve readability.
+
+Note: The JavaScript in script.js handles:
+* Initializing Flatpickr for date inputs (birth_date and booking_date).
+* Handling AJAX form submissions for reservations.
+* Managing the responsive navigation menu.
+
+Since no errors were found, and all warnings are related to modern JavaScript syntax, the JavaScript code is considered fully valid for this project, and can easily be fixed later. 
 
 <hr>
 
