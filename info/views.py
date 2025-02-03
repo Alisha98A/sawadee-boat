@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -12,11 +12,13 @@ from .forms import MenuForm, MenuItemForm, ItemForm
 # -------------------------------------
 def home(request):
     """Render the home page."""
-    return render(request, 'info/home.html')
+    return render(request, "info/home.html")
+
 
 def about(request):
     """Render the about page."""
-    return render(request, 'info/about.html')
+    return render(request, "info/about.html")
+
 
 # -------------------------------------
 # Staff Restriction
@@ -25,27 +27,38 @@ def staff_required(user):
     """Restrict access to staff members only."""
     return user.is_authenticated and user.is_staff
 
+
 # -------------------------------------
 # Display Set Sail View template
 # -------------------------------------
 def set_sail_view(request):
+    """Render the set sail page."""
     return render(request, "info/setsail.html")
 
+
 # -------------------------------------
-# Menu 
+# Menu
 # -------------------------------------
 def menu_view(request, menu_id=None):
     """Fetch the active menu or a specific menu if requested."""
     if menu_id:
-        menu = get_object_or_404(Menu, id=menu_id)  
+        menu = get_object_or_404(Menu, id=menu_id)
     else:
-        menu = Menu.objects.filter(is_active=True).first()  
+        menu = Menu.objects.filter(is_active=True).first()
 
     # If no active menu is set, fall back to the first available menu
     if not menu:
         menu = Menu.objects.first()
 
-    return render(request, "info/menu.html", {"menu": menu, "menu_list": Menu.objects.all()})
+    return render(
+        request,
+        "info/menu.html",
+        {
+            "menu": menu,
+            "menu_list": Menu.objects.all(),
+        },
+    )
+
 
 # -------------------------------------
 # Staff Menu Management
@@ -59,7 +72,10 @@ def staff_menu_view(request):
     page_number = request.GET.get("page")
     page_menus = paginator.get_page(page_number)
 
-    return render(request, "info/staff_menu.html", {"menus": page_menus})
+    return render(
+        request, "info/staff_menu.html", {"menus": page_menus}
+    )
+
 
 @login_required
 @staff_member_required
@@ -71,7 +87,12 @@ def add_menu(request):
         messages.success(request, "Menu added successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu"})
+    return render(
+        request,
+        "info/menu_form.html",
+        {"form": form, "title": "Add Menu"},
+    )
+
 
 @login_required
 @staff_member_required
@@ -79,13 +100,18 @@ def edit_menu(request, menu_id):
     """Allow staff to edit an existing menu."""
     menu = get_object_or_404(Menu, id=menu_id)
     form = MenuForm(request.POST or None, instance=menu)
-    
+
     if form.is_valid():
         form.save()
         messages.success(request, "Menu updated successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu"})
+    return render(
+        request,
+        "info/menu_form.html",
+        {"form": form, "title": "Edit Menu"},
+    )
+
 
 # -------------------------------------
 # MenuItem (Category) Management
@@ -100,7 +126,12 @@ def add_menu_item(request):
         messages.success(request, "Menu category added successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/menu_form.html", {"form": form, "title": "Add Menu Item"})
+    return render(
+        request,
+        "info/menu_form.html",
+        {"form": form, "title": "Add Menu Item"},
+    )
+
 
 @login_required
 @staff_member_required
@@ -114,7 +145,12 @@ def edit_menu_item(request, menu_item_id):
         messages.success(request, "Menu category updated successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/menu_form.html", {"form": form, "title": "Edit Menu Item"})
+    return render(
+        request,
+        "info/menu_form.html",
+        {"form": form, "title": "Edit Menu Item"},
+    )
+
 
 # -------------------------------------
 # Item (Dish) Management
@@ -129,7 +165,12 @@ def add_item(request):
         messages.success(request, "Menu item added successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/item_form.html", {"form": form, "title": "Add Item"})
+    return render(
+        request,
+        "info/item_form.html",
+        {"form": form, "title": "Add Item"},
+    )
+
 
 @login_required
 @staff_member_required
@@ -143,7 +184,12 @@ def edit_item(request, item_id):
         messages.success(request, "Menu item updated successfully!")
         return redirect("staff_menu")
 
-    return render(request, "info/item_form.html", {"form": form, "title": "Edit Item"})
+    return render(
+        request,
+        "info/item_form.html",
+        {"form": form, "title": "Edit Item"},
+    )
+
 
 # -------------------------------------
 # Generic Delete View (Replaces All Individual Delete Views)
@@ -153,7 +199,7 @@ def edit_item(request, item_id):
 def delete_object(request, obj_id, model, redirect_url):
     """Generic view to delete an object (menu, menu item, or item)."""
     obj = get_object_or_404(model, id=obj_id)
-    
+
     # Determine the correct name field
     obj_name = getattr(obj, "name", getattr(obj, "category", "Unnamed Object"))
 
@@ -162,27 +208,32 @@ def delete_object(request, obj_id, model, redirect_url):
         messages.success(request, f"'{obj_name}' deleted successfully!")
         return redirect(redirect_url)
 
-    return render(request, "info/confirm_delete.html", {"object": obj, "redirect_url": redirect_url})
+    return render(
+        request,
+        "info/confirm_delete.html",
+        {"object": obj, "redirect_url": redirect_url},
+    )
+
 
 # -------------------------------------
 # Set Menu Active
 # -------------------------------------
-
 @login_required
 @staff_member_required
 def set_active_menu(request, menu_id):
-    """Set the selected menu as the active menu, ensuring only one menu is active at a time."""
+    """Set the selected menu as the active menu."""
     menu = get_object_or_404(Menu, id=menu_id)
-    
+
     # Deactivate all menus first
     Menu.objects.update(is_active=False)
-    
+
     # Set the selected menu to active
     menu.is_active = True
     menu.save()
 
     messages.success(request, f"'{menu.name}' is now the active menu!")
     return redirect("staff_menu")
+
 
 # -------------------------------------
 # No Access Page
@@ -196,13 +247,20 @@ def no_access(request):
 # Error handlers
 # -------------------------------------
 def custom_404_view(request, exception):
+    """Render custom 404 page."""
     return render(request, "404.html", status=404)
 
+
 def custom_403_view(request, exception):
+    """Render custom 403 page."""
     return render(request, "403.html", status=403)
 
+
 def custom_500_view(request):
+    """Render custom 500 page."""
     return render(request, "500.html", status=500)
 
+
 def custom_400_view(request, exception):
+    """Render custom 400 page."""
     return render(request, "400.html", status=400)
