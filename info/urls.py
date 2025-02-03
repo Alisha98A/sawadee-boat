@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import menu_view, set_sail_view, staff_menu_view, add_menu, edit_menu, delete_object, no_access
+from .views import menu_view, set_sail_view
 from .models import Menu, MenuItem, Item
 from functools import partial
 
