@@ -304,13 +304,10 @@ Since no errors were found, and all warnings are related to modern JavaScript sy
 
 | Feature | admin.py | forms.py | models.py | urls.py | views.py |
 |---------|----------|----------|-----------|---------|----------|
-| Accounts | [no errors](documentation/testing/accountsadminpy.png) | [no errors](x) | [no errors](x) | [no errors](documentation/testing/art_urls.png) | [no errors](documentation/testing/art_views.png) |
-| Booking  | [no errors](x) | [no errors](x) | [no errors](xg) | [no errors](documentation/testing/book_urls.png) | [no errors](documentation/testing/book_views.png) |
-| FreeFido main app | na | na | na | [no errors](x) | na |
-| Gallery | [no errors](documentation/testing/gallery_admin.png) | [no errors](documentation/testing/gallery_form.png) | [no errors](dx) | [no errors](documentation/testing/gallery_urls.png) | [no errors](documentation/testing/gallery_views.png) |
-| Home | na | na | na | [no errors](documentation/testing/home_urls.png) | [no errors](documentation/testing/home_views.png) |
-| Profiles | [no errors](documentation/testing/profile_admin.png) | [no errors](documentation/testing/profile_forms.png) | [no errors](dx) | [no errors](documentation/testing/profile_urls.png) | [no errors](x) |
-| Visit | na | na | na | [no errors](dx) | [no errors](documentation/testing/visit_views.png) |
+| Accounts (app) | [no errors](documentation/testing/accountsadminpy.png) | [no errors](documentation/testing/forms_accounts.png) | [no errors](documentation/testing/models_accounts.png) | [no errors](documentation/testing/urls_accounts.png) | [no errors](documentation/testing/views_accounts.png) | 
+| Info (app)| [no errors](documentation/testing/admin_info.png) | [no errors](documentation/testing/forms_info.png) | [no errors](documentation/testing/models_info.png) | [no errors](documentation/testing/urls_info.png) | [no errors](documentation/testing/views_info.png) |
+| Reservations (app)| [no errors](documentation/testing/admin_reservations.png) | [no errors](documentation/testing/forms_reservations.png) | [no errors](documentation/testing/models_reservations.png) | [no errors](documentation/testing/urls_reservations.png) | [no errors](documentation/testing/views_reservations.png) |
+| Sawadee Dining Boat (project)| no file | no file | no file | [no errors](documentation/testing/urls.sawadee.png) | no file |
 
 <hr>
 
