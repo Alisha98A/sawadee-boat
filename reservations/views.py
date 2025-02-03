@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView, CreateView, UpdateView, DeleteView
+)
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, UserPassesTestMixin
+)
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Reservation
@@ -12,13 +16,18 @@ from datetime import date
 # View & Create Reservation
 # ---------------------------------
 
+
 @login_required
 def reservation_view(request):
     """
     Handles reservation form for users and staff.
-    Staff can create a reservation for any user, while normal users can only create their own reservations.
+    Staff can create a reservation for any user,
+    while normal users can only create their own reservations.
     """
-    form_class = ReservationFormForStaff if request.user.is_staff else ReservationFormForUser
+    form_class = (
+        ReservationFormForStaff if request.user.is_staff
+        else ReservationFormForUser
+    )
     form = form_class(request.POST or None)
 
     if request.method == "POST":
@@ -26,20 +35,27 @@ def reservation_view(request):
             reservation = form.save(commit=False)
             reservation.user = request.user
             reservation.save()
-            messages.success(request, "Reservation successfully created!")
+            messages.success(
+                request, "Reservation successfully created!"
+            )
             return redirect("reservations:reservations_list")
         else:
             messages.error(request, "Please correct the errors below.")
 
     return render(
-        request, "reservations/reservation_form.html",
-        {"form": form, "user_type": "staff" if request.user.is_staff else "guest"}
+        request,
+        "reservations/reservation_form.html",
+        {
+            "form": form,
+            "user_type": "staff" if request.user.is_staff else "guest",
+        },
     )
 
 
 # ---------------------------------
 # List of Reservations
 # ---------------------------------
+
 
 class ReservationListView(LoginRequiredMixin, ListView):
     """
@@ -53,13 +69,18 @@ class ReservationListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Reservation.objects.all().order_by("booking_date", "time_slot")
-        return Reservation.objects.filter(user=self.request.user).order_by("booking_date")
+            return Reservation.objects.all().order_by(
+                "booking_date", "time_slot"
+            )
+        return Reservation.objects.filter(
+            user=self.request.user
+        ).order_by("booking_date")
 
 
 # ---------------------------------
 # Staff Dashboard
 # ---------------------------------
+
 
 class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     """
@@ -74,7 +95,9 @@ class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return self.request.user.is_staff
 
     def handle_no_permission(self):
-        messages.error(self.request, "You do not have permission to access this page.")
+        messages.error(
+            self.request, "You do not have permission to access this page."
+        )
         return redirect("reservation_list")
 
     def get_queryset(self):
@@ -84,6 +107,7 @@ class StaffDashboardView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 # ---------------------------------
 # Create Reservation
 # ---------------------------------
+
 
 class ReservationCreateView(LoginRequiredMixin, CreateView):
     """
@@ -96,7 +120,11 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("reservation_list")
 
     def get_form_class(self):
-        return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
+        return (
+            ReservationFormForStaff
+            if self.request.user.is_staff
+            else ReservationFormForUser
+        )
 
     def form_valid(self, form):
         reservation = form.save(commit=False)
@@ -104,7 +132,10 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         if self.request.user.is_staff:
             # Ensure staff selects a user
             if not form.cleaned_data.get("user"):
-                messages.error(self.request, "Staff must select a user for the reservation.")
+                messages.error(
+                    self.request,
+                    "Staff must select a user for the reservation.",
+                )
                 return self.form_invalid(form)
             reservation.user = form.cleaned_data["user"]
         else:
@@ -114,17 +145,24 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         reservation.created_by = self.request.user
         reservation.save()
 
-        messages.success(self.request, "Reservation successfully created!")
+        messages.success(
+            self.request, "Reservation successfully created!"
+        )
         return redirect("reservations:reservations_list")
 
     def form_invalid(self, form):
-        messages.error(self.request, "There were errors in your submission. Please check your inputs.")
+        messages.error(
+            self.request,
+            "There were errors in your submission. "
+            "Please check your inputs.",
+        )
         return self.render_to_response(self.get_context_data(form=form))
 
 
 # ---------------------------------
 # Update Reservation
 # ---------------------------------
+
 
 class ReservationUpdateView(LoginRequiredMixin, UpdateView):
     """
@@ -136,7 +174,11 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "reservations/reservation_edit_form.html"
 
     def get_form_class(self):
-        return ReservationFormForStaff if self.request.user.is_staff else ReservationFormForUser
+        return (
+            ReservationFormForStaff
+            if self.request.user.is_staff
+            else ReservationFormForUser
+        )
 
     def form_valid(self, form):
         # Ensure the user field is always set correctly
@@ -144,10 +186,14 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
             form.instance.user = self.request.user
 
         if self.request.user.is_staff and not form.cleaned_data.get("user"):
-            messages.error(self.request, "Staff must select a user for the reservation.")
+            messages.error(
+                self.request, "Staff must select a user for the reservation."
+            )
             return self.form_invalid(form)
 
-        messages.success(self.request, "Your reservation has been successfully updated!")
+        messages.success(
+            self.request, "Your reservation has been successfully updated!"
+        )
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -157,6 +203,7 @@ class ReservationUpdateView(LoginRequiredMixin, UpdateView):
 # ---------------------------------
 # Delete Reservation
 # ---------------------------------
+
 
 class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     """
