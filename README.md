@@ -1,6 +1,6 @@
 # Sawadee Dining Boat
 
-<!-- EDIT: Welcome to **Sawadee Dining Boat** - your perfect escape for a memorable private boat trip. *Reserve now* and enjoy the most amazing views while dining.  -->
+Welcome to **Sawadee Dining Boat** - your perfect escape for a memorable private boat trip. Enjoy the most amazing views while dining.  -->
 
 
 This project was created to provide an easy-to-use platform for customers to book their trips, manage reservations, and ensure a seamless experience. By integrating a robust booking system with Django, it helps users book their desired time slots and view their booking details with ease. The goal is to create an enjoyable and user-friendly experience while managing all aspects of the reservation process.
@@ -8,11 +8,7 @@ This project was created to provide an easy-to-use platform for customers to boo
 Sawadee Dining Boat was built to serve as a foundation for a potential real-world application, focusing on efficient reservation handling and a smooth user interface.
 
 
-<!-- TO-DO: Add an image of the finished site here. I like to use [amiresponsive](https://ui.dev/amiresponsive) to get an image of my site on all device sizes, and amiresponsive allows you to click links on the page and scroll, so each device can show a different element of your site.  -->
-
-<!-- TO-DO: Add a link to the live site here, for Milestone 1 this will be the GitHub Pages Link from when you deployed the site.  -->
-
-<!-- TO-DO: If you want to add optional [shields.io](https://shields.io) badges to your README, I like to add them to this section. -->
+https://sawadee-dining-boat-f1458c05b467.herokuapp.com/
 
 ---
 
@@ -164,7 +160,7 @@ The imagery used throughout this project is carefully selected to reflect the es
 The goal is to **transport visitors** into a **luxurious yet traditional Thai dining journey**, making them feel as if they are already aboard the boat.  
 
 ### Example Imagery  
-![Thai Dining Boat](https://github.com/Alisha98A/sawadee-boat/blob/main/boatimagery.png?raw=true)  
+![Thai Dining Boat](documentation/boatimagery.png)  
 
 ## Project Planning
 
@@ -191,152 +187,194 @@ By visualizing the flow of the website, the wireframes help to establish a clear
 
 <details><summary>About Us</summary> <p align="left"><img src="./documentation/wireframes/About%20page.png" alt="wireframes for the about us section" width="620"/></p> </details>
 
-### Database Schema
+## Database Schema
 
-The Sawadee Dining Boat project uses a relational database powered by PostgreSQL, hosted on Heroku. The database structure is designed to handle user authentication, reservation management, menu administration, and staff permissions efficiently.
+The **Sawadee Dining Boat** project utilizes a **PostgreSQL** relational database hosted on **Heroku**. The database structure efficiently manages user authentication, reservations, menu administration, and staff permissions.
 
-### Entity-Relationship Diagram (ERD)
-An ERD (Entity Relationship Diagram) was used to plan the database schema and visualize the relationships between tables. This helps ensure a well-structured database where entities interact logically. The ERD follows a progressive data modeling approach with three abstraction levels: conceptual, logical, and physical.
+##  Entity-Relationship Diagram (ERD)
 
-- Entities and Their Relationships
+To design the database schema and visualize entity relationships, an **Entity Relationship Diagram (ERD)** was created. This approach ensures a structured and logical data model. The ERD follows a **progressive modeling approach** with three abstraction levels: **conceptual, logical, and physical**.
 
-User (Django’s built-in model)
-	•	id (PK) – Auto-generated primary key.
-	•	username – Unique username for authentication.
-	•	email – Required email field.
-	•	password – Hashed password.
-	•	is_staff – Boolean flag to determine if a user is a staff member.
-	•	is_active – Boolean flag to determine if the account is active.
+However, during development, additional models were introduced based on new requirements. The final models reflect the need for **both staff and user logins** with different access levels.
 
- Profile
-	•	id (PK)
-	•	user_id (FK, references User)
-	•	first_name – String (max 30).
-	•	last_name – String (max 30).
-	•	birth_date – Date (nullable).
-	•	address – Text (max 255, nullable).
-	•	phone_number – String (max 15, nullable).
+###  ERD Images:
+![Conceptual ERD](documentation/testing/erd_conceptional.png)  
+![Logical ERD](documentation/testing/erd_logical.png)  
+![Physical ERD](documentation/testing/erd_physical.png)  
 
-Relationships:
-	•	One-to-One: A User has one Profile.
+## Entities and Relationships
 
- Reservation
-	•	id (PK)
-	•	user_id (FK, references User) → The customer making the booking.
-	•	staff_member_id (FK, references User, nullable) → Staff member handling the reservation.
-	•	created_by_id (FK, references User, nullable) → The creator of the booking.
-	•	booking_date – Date.
-	•	time_slot – Time.
-	•	number_of_guests – Integer (4-20).
-	•	first_name – String (max 50).
-	•	last_name – String (max 50).
-	•	phone_number – String (max 15).
-	•	email_address – Validated email.
-	•	created_on – Datetime (auto-generated).
-	•	updated_on – Datetime (auto-updated).
+### ** User (Django’s Built-in Model)**
+- `id (PK)` – Auto-generated primary key.
+- `username` – Unique identifier for authentication.
+- `email` – Required field.
+- `password` – Hashed password.
+- `is_staff` – Boolean flag for staff members.
+- `is_active` – Boolean flag for account status.
 
-Constraints & Validation
-	•	Cannot book a past date.
-	•	Must book at least 2 days in advance.
-	•	Cannot exceed 20 guests.
-	•	Time slot must be between 10:00 and 22:00.
-	•	Bookings last 2 hours (no overlapping reservations).
+---
 
- Relationships:
-	•	Many-to-One: A User can have multiple Reservations.
-	•	Many-to-One: A Reservation may have an optional staff_member.
-	•	Many-to-One: A Reservation tracks who created it (created_by).
+### ** Profile**
+- `id (PK)`
+- `user_id (FK, references User)`
+- `first_name` – String (max 30).
+- `last_name` – String (max 30).
+- `birth_date` – Date (nullable).
+- `address` – Text (max 255, nullable).
+- `phone_number` – String (max 15, nullable).
 
- Menu
-	•	id (PK)
-	•	name – String (max 100, unique).
-	•	description – Text (nullable).
-	•	created_on – Datetime (auto-generated).
-	•	is_active – Boolean (default False).
+ **Relationship:**  
+One-to-One → **A User has one Profile.**
 
- MenuItem (Category)
-	•	id (PK)
-	•	menu_id (FK, references Menu).
-	•	category – String (max 100).
+---
 
-🔹 Relationships:
-	•	Many-to-One: A MenuItem belongs to one Menu.
-	•	One-to-Many: A MenuItem can have multiple Items.
+### **Reservation**
+- `id (PK)`
+- `user_id (FK, references User)` → Customer making the booking.
+- `staff_member_id (FK, references User, nullable)` → Staff handling the reservation.
+- `created_by_id (FK, references User, nullable)` → Creator of the booking.
+- `booking_date` – Date.
+- `time_slot` – Time.
+- `number_of_guests` – Integer (4-20).
+- `first_name` – String (max 50).
+- `last_name` – String (max 50).
+- `phone_number` – String (max 15).
+- `email_address` – Validated email.
+- `created_on` – Auto-generated datetime.
+- `updated_on` – Auto-updated datetime.
 
- Item (Dish)
-	•	id (PK)
-	•	menu_item_id (FK, references MenuItem).
-	•	name – String (max 100).
-	•	description – Text (nullable).
-	•	price – Decimal (max 9999.99).
-	•	image – CloudinaryField (default placeholder).
+#### **Constraints & Validation**
+Cannot book a past date.  
+Must book at least **2 days** in advance.  
+Guest count **must be between 4 and 20**.  
+Time slots **must be between 10:00 and 22:00**.  
+Bookings last **2 hours**, preventing **overlapping reservations**.
+
+ **Relationships:**  
+Many-to-One → **A User can have multiple Reservations.**  
+Many-to-One → **A Reservation may have an optional Staff Member.**  
+Many-to-One → **A Reservation tracks its creator (created_by).**
+
+---
+
+### ** Menu**
+- `id (PK)`
+- `name` – String (max 100, unique).
+- `description` – Text (nullable).
+- `created_on` – Auto-generated datetime.
+- `is_active` – Boolean (default False).
+
+---
+
+### ** MenuItem (Category)**
+- `id (PK)`
+- `menu_id (FK, references Menu)`
+- `category` – String (max 100).
+
+ **Relationships:**  
+Many-to-One → **A MenuItem belongs to one Menu.**  
+One-to-Many → **A MenuItem can have multiple Items.**
+
+---
+
+### ** Item (Dish)**
+- `id (PK)`
+- `menu_item_id (FK, references MenuItem)`
+- `name` – String (max 100).
+- `description` – Text (nullable).
+- `price` – Decimal (max 9999.99).
+- `image` – **CloudinaryField** (default placeholder).
+
+---
+
+##  Business Goals
+
+The database structure supports the following **key business objectives**:
+
+**Menu is visible to customers and manageable by staff.**  
+**Customers must register to make reservations.**  
+**Each reservation books the entire boat, not individual tables.**  
+**Bookings are limited to 2-hour slots.**  
+**Guest count must be between 4-20 people.**  
+**Staff can manage all reservations, while users can only manage their own.**  
+**Reservations cannot overlap to avoid double bookings.**  
+**Users can modify or cancel reservations before a set deadline.**  
+**Scalability is considered for future features, such as loyalty programs or event-specific bookings.**
+
+---
+
+## Progressive Data Model
+
+The **progressive data modeling** approach was used to design the database, ensuring smooth collaboration between **business stakeholders and developers**.
+
+### ** Conceptual Model**
+- Defines **main entities** and their **relationships**.
+- Used in the **early planning phase** to confirm business needs.
+- **Key entities:**
+  - **Users (Customers & Staff)**
+  - **Reservations (Handles Boat Bookings)**
+  - **Menu (Food Items Served)**
+  - **Time Slots (Available 2-Hour Sessions)**
+
+---
+
+### ** Logical Model**
+- Expands the conceptual model with **table structures, attributes, and relationships**.
+- Defines **primary relationships** between tables:
+  - **One-to-Many:** A **User can have multiple Reservations**.
+  - **One-to-One:** Each **Reservation has a unique Time Slot**.
+  - **Many-to-Many:** **Staff members can manage multiple reservations**.
+
+---
+
+### ** Physical Model**
+- Translates the **logical model into SQL tables**.
+- Assigns **specific data types** to columns.
+- Implements **indexes and foreign key constraints** for data integrity.
+
+---
+
+##  Agile Development Process
+
+This project follows **Agile** principles, using **Scrum** methodology to develop and refine features **iteratively**.
+
+### ** GitHub for Issue Tracking**
+- **User Stories** were created based on business & user needs.
+- **Milestones** tracked progress in **sprints**.
+- Features were **developed incrementally**, following the **MoSCoW prioritization**:
+
+ **Must-Have:**  
+- Core features: **Reservations, Authentication, Menu Management**.  
+
+ **Should-Have:**  
+- Additional enhancements like **User Profile Customization**.  
+
+ **Could-Have:**  
+- Optional improvements like **Email Notifications**.  
+
+ **Won’t-Have (for now):**  
+- Advanced features like **dynamic pricing based on demand**.
 
 
-The Sawadee Dining Boat system follows a structured database design that maintains relationships between users, reservations, and menus. Below is a conceptual overview of the Entity Relationship Diagram (ERD).
+This structured database schema ensures that the Sawadee Dining Boat system runs efficiently while providing a seamless experience for both customers and staff.
 
-### Business Goals
-The database structure is designed to meet the following business objectives:
-- The menu is visible on the website and can be managed by staff.
-- Customers must register to make reservations.
-- Each reservation books the entire boat, not individual tables.
-- Bookings are restricted to specific time slots (2-hour dining trips).
-- Each reservation must have between 4 to 20 guests.
-- Staff can manage all reservations, while users can only manage their own.
-- Reservations cannot overlap, ensuring only one booking per time slot.
-- Users can modify or cancel reservations before a set deadline.
-- Future scalability is considered for implementing additional features, such as customer loyalty programs or event-specific bookings.
-
-### Progressive Data Model
-A progressive data model was used to design the database, ensuring seamless collaboration between business stakeholders and the development team.
-
-#### Conceptual Model
-- The conceptual ERD was created to define the main entities and their relationships.
-- This model was used in the early planning phase to confirm the business needs of the project.
-- The key entities identified include:
-  - Users (customers and staff)
-  - Reservations (handles boat bookings)
-  - Menu (food items served on board)
-  - Time Slots (available 2-hour dining sessions)
-
-#### Logical Model
-- After the conceptual model was confirmed, the logical ERD was developed.
-- This stage defined table structures, attributes, and relationships in more detail.
-- Primary relationships between tables were mapped, such as:
-  - One-to-Many: A user can make multiple reservations.
-  - One-to-One: Each reservation has a unique time slot.
-  - Many-to-Many: Staff members can manage multiple reservations.
-
-#### Physical Model
-- The physical database schema was finalized, translating the logical model into SQL tables.
-- Specific data types were assigned to each column, ensuring optimized performance.
-- Indexes and foreign key constraints were implemented to maintain data integrity.
-
-### Agile Development Process
-The project followed agile principles, using Scrum as the methodology to develop and refine features iteratively.
-
-#### GitHub for Issue Tracking
-- User stories were created based on business and user needs.
-- Issues were assigned milestones to track progress in sprints.
-- Each feature was developed incrementally, following the MoSCoW prioritization method:
-  - Must-Have: Core functionalities like reservations, authentication, and menu management.
-  - Should-Have: Additional improvements like user profile customization.
-  - Could-Have: Optional enhancements such as email notifications.
-  - Won’t-Have (for now): Advanced features like dynamic pricing based on demand.
+---
 
 #### Kanban Board
 - A Kanban board in GitHub Projects was used to track tasks.
 - Each user story moved through different stages:
-  - To Do → In Progress → Testing → Done.
+  - To Do → In Progress → Done.
 - Completed features were merged into the main branch after testing.
+
+![Kanbaan board](documentation/testing/kanbaan.png)
+
 
 ### Scalability & Future Improvements
 The database is designed with scalability in mind, allowing future enhancements such as:
 - Loyalty programs for returning customers.
 - Event-specific bookings for special occasions.
 - Automated reminders for upcoming reservations.
-
-This structured database schema ensures that the Sawadee Dining Boat system runs efficiently while providing a seamless experience for both customers and staff.
-
+- Adding more boats
 
 
 ## Features
@@ -368,6 +406,9 @@ The `base.html` file serves as the **foundation for all pages** on the site. It 
 ---
 <details>
   <summary>Navigation Bar</summary>
+
+
+  ![Navigation Bar](documentation/testing/navbar.png)
  
 ### **2. Navigation Bar (`navbar.html`)**
 The **navbar is included dynamically** in the base template, ensuring it appears on all pages.
@@ -404,6 +445,9 @@ The **navbar is included dynamically** in the base template, ensuring it appears
 ---
 
 ### **3. Footer**
+
+![Footer](documentation/testing/footer.png)
+
 - **Consistent across all pages**.
 - Displays:
   - **Copyright information**.
@@ -425,6 +469,8 @@ The **navbar is included dynamically** in the base template, ensuring it appears
 The Home Page serves as the introduction to the Sawadee Dining Boat experience. It features a hero section with a background video, an introductory text section, and quick navigation to key parts of the site.
 
 ### Hero Section (Video Background)
+
+![Hero](documentation/testing/hero.png)
 
 The hero section creates an immersive first impression with:
 - A full-width background video showcasing water movements, enhancing the boat dining theme.
@@ -451,6 +497,7 @@ A three-column layout (`#info-columns`) provides quick navigation to important p
 - **Reservations:** A CTA to book a dining experience.
 
 #### Column Features:
+
 - Each column includes:
   - A title (`<h3>`)
   - A brief description (`<p>`)
@@ -474,6 +521,8 @@ A three-column layout (`#info-columns`) provides quick navigation to important p
   <summary>About Page </summary>
  
 ## About Page (`about.html`)
+
+![About](documentation/about.png)
 
 The About Page provides an overview of the Sawadee Dining Boat experience, its history, and what makes it unique. It features informative sections, high-quality imagery, and a call to action for reservations.
 
@@ -528,8 +577,11 @@ The About Page consists of the following sections:
 ---
 <details>
   <summary>Menu Page</summary>
- 
+
 ## Menu Page (`menu.html`)
+
+ ![Menu](documentation/menu.png)
+
 
 The Menu Page displays the current menu for Sawadee Dining Boat, showcasing various Thai dishes categorized into sections. It dynamically retrieves menu items from the database and presents them in an organized and visually appealing manner.
 
@@ -661,6 +713,8 @@ Each menu item is displayed in a **table format** with the following columns:
   <summary>Menu Form Page</summary>
  
 ## Menu Form Page (`menu_form.html`)
+
+ ![Staff](documentation/staffmenu.png)
 
 The **Menu Form Page** allows **staff members** to create or edit menus. This page provides a **clean and structured form** for entering or modifying menu details.
 
