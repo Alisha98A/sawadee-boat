@@ -83,6 +83,8 @@
                 {% endfor %}
             </div>
         </div>
+    {% empty %}
+        <div class="alert alert-info text-center">No menus available. Start by adding one!</div>
     {% endfor %}
 </div>
 {% endblock %}
