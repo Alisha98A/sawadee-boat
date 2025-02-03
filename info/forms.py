@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Menu, MenuItem, Item
 
+
 # -------------------------------------
 # File Upload Validation
 # -------------------------------------
@@ -12,25 +13,35 @@ def validate_image(file):
 
     # Check file size
     if file.size > max_size:
-        raise ValidationError(f"File size must be under 2MB. Your file is {file.size / (1024 * 1024):.2f}MB.")
+        raise ValidationError(
+            f"File size must be under 2MB. Your file is "
+            f"{file.size / (1024 * 1024):.2f}MB."
+        )
 
     # Check file type
     ext = file.name.split(".")[-1].lower()
     if ext not in valid_extensions:
-        raise ValidationError("Invalid file type. Only JPG, PNG, and GIF files are allowed.")
+        raise ValidationError(
+            "Invalid file type. Only JPG, PNG, and GIF files are allowed."
+        )
+
 
 # -------------------------------------
 # Forms for Menu Management
 # -------------------------------------
 class MenuForm(forms.ModelForm):
+    """Form for creating and updating a menu."""
     class Meta:
         model = Menu
         fields = ["name", "description", "is_active"]
 
+
 class MenuItemForm(forms.ModelForm):
+    """Form for managing menu categories."""
     class Meta:
         model = MenuItem
         fields = ["menu", "category"]
+
 
 class ItemForm(forms.ModelForm):
     """Form for adding/editing menu items with image validation."""
