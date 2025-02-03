@@ -44,7 +44,7 @@
                             </div>
                         </div>
 
-                        {% if menu_item.menu_items.all %}
+                        {% if menu_item.menu_items.exists %}
                             <table class="table table-striped mt-2">
                                 <thead>
                                     <tr>
@@ -61,7 +61,13 @@
                                             <td><strong>{{ item.name }}</strong></td>
                                             <td>{{ item.description }}</td>
                                             <td>${{ item.price }}</td>
-                                            <td><img src="{{ item.image.url }}" alt="{{ item.name }}" width="50" class="rounded"></td>
+                                            <td>
+                                                {% if item.image %}
+                                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" width="50" class="rounded">
+                                                {% else %}
+                                                    <span class="text-muted">No Image</span>
+                                                {% endif %}
+                                            </td>
                                             <td>
                                                 <a href="{% url 'edit_item' item.id %}" class="btn btn-outline-warning btn-sm">Edit</a>
                                                 <a href="{% url 'delete_item' item.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
