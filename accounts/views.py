@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
 from allauth.account.views import PasswordChangeView
 from .models import Profile
 from .forms import ProfileForm
