@@ -314,47 +314,129 @@ Since no errors were found, and all warnings are related to modern JavaScript sy
 
 ### CSS Validation 
 
-[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate my CSS file. External CSS for Bootstrap, provided by [CDN](https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css) was not tested. Warnings were present, these were related to my use of variables for colors and fonts in my CSS file.
+The CSS code for this project was validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).  
+No errors were found in the validation process.
 
 ![css validation](documentation/testing/css_valid.png)
+
   
 <hr> 
 
    
 ### Lighthouse Scores
 
-Lighthouse testing was carried out in Incognito mode to acheive the best result. Performance was lower than preferred due to the site being image heavy. Images used in the sites design were saved in webp and png format, and compressed using [tinypng](https://tinypng.com/) and [Convertio](https://www.convertio.co) to offer the best chance for a decent performance score. The CDNs used for Bootstrap were also noted in the Lighthouse report as causing issue with performance. This report will be reviewed for future development of Freefido to raise this score.
+Lighthouse testing was carried out in Incognito mode to acheive the best result. Performance was lower than preferred due to the site being image heavy. Images used in the sites design were saved in jpg format, and compressed using [tinypng](https://tinypng.com/) to offer the best chance for a decent performance score.
+
+
+#### Lighthouse Performance Report (Desktop) on homepage
+
+I tested my project using **Google Lighthouse** to evaluate key web performance metrics, accessibility, best practices, and SEO. The results for the **desktop version** were excellent, with high scores in all categories.
+
+####  Summary of Lighthouse Scores
+| Category           | Score |
+|-------------------|------|
+| **Performance**   | 97   |
+| **Accessibility** | 100  |
+| **Best Practices** | 96   |
+| **SEO**          | 91   |
+
+---
+
+####  Key Performance Metrics
+| Metric                         | Result |
+|--------------------------------|--------|
+| **First Contentful Paint (FCP)** | 0.9 s  |
+| **Largest Contentful Paint (LCP)** | 1.0 s  |
+| **Total Blocking Time (TBT)**   | 0 ms   |
+| **Cumulative Layout Shift (CLS)** | 0.025  |
+| **Speed Index (SI)**            | 0.9 s  |
+
+These scores indicate a **fast-loading, stable, and well-optimized website**.
+
+---
+
+####  Areas for Improvement & Optimization
+Lighthouse identified some **optimization opportunities** for further performance enhancements:
+
+- **Preconnect to required origins** *(Potential savings: 110ms)*
+- **Eliminate render-blocking resources** *(Potential savings: 400ms)*
+- **Serve images in next-gen formats** *(Potential savings: 117 KiB)*
+- **Minify CSS** *(Potential savings: 5 KiB)*
+- **Enable text compression** *(Potential savings: 14 KiB)*
+- **Use HTTP/2** *(9 requests not served via HTTP/2)*
+- **Efficient cache policy for static assets** *(10 resources found)*
+- **Properly size images** *(Potential savings: 4 KiB)*
+- **Reduce unused CSS** *(Potential savings: 18 KiB)*
+
+While these optimizations could further enhance performance, the site **already performs exceptionally well**.
+
+####  Conclusion
+The **Lighthouse results** confirm that my project is **fast, accessible, and SEO-friendly**. By following modern web performance best practices, I have ensured an **optimized and smooth user experience**. 
+
+---
+
+#### Lighthouse Performance Report (Mobile) on homepage
+
+I tested my project using **Google Lighthouse** to analyze its **performance, accessibility, best practices, and SEO** on mobile devices. While the desktop performance is excellent, the mobile version shows **areas for improvement**, particularly in **loading times**.
+
+### Summary of Lighthouse Mobile Performance
+
+| Metric                         | Result |
+|--------------------------------|--------|
+| **First Contentful Paint (FCP)** | 2.8 s  |
+| **Largest Contentful Paint (LCP)** | 4.1 s  |
+| **Total Blocking Time (TBT)**   | 0 ms   |
+| **Cumulative Layout Shift (CLS)** | 0.007  |
+| **Speed Index (SI)**            | 2.8 s  |
+
+These results suggest that **while interactivity is fast, the largest elements take longer to load** on mobile devices.
+
+---
+
+### Areas for Improvement & Optimization
+To further improve mobile performance, Lighthouse identified the following **optimization opportunities**:
+
+-  **Serve images in next-gen formats** *(Potential savings: 117 KiB)*
+-  **Preconnect to required origins** *(Potential savings: 330 ms)*
+-  **Properly size images** *(Potential savings: 135 KiB)*
+-  **Largest Contentful Paint element took** *4,070 ms*
+-  **Eliminate render-blocking resources** *(Potential savings: 1,760 ms)*
+-  **Use HTTP/2** *(9 requests not served via HTTP/2)*
+-  **Minify CSS** *(Potential savings: 5 KiB)*
+-  **Enable text compression** *(Potential savings: 14 KiB)*
+-  **Reduce unused CSS** *(Potential savings: 30 KiB)*
+-  **Serve static assets with an efficient cache policy** *(10 resources found)*
+-  **Avoid large layout shifts** *(1 layout shift detected)*
+-  **Avoid chaining critical requests** *(7 chains found)*
+-  **Avoid excessive network payloads** *(Total size: 22,874 KiB)*
+
+---
+
+#### Conclusion
+The **Lighthouse results for mobile** highlight **areas for optimization**, particularly **reducing render-blocking resources, optimizing images, and leveraging caching techniques**. By implementing these improvements, the **mobile performance can be significantly enhanced** for a smoother user experience. 
+
+#### Lighthouse Test Screenshots
 
 **Desktop**  
 
-![Lighthouse scores desktop](documentation/testing/desktop_lh.png)  
+![Lighthouse scores desktop](documentation/testing/homepage_lighthouse_desktop.png)  
 *Desktop Home Page*  
   
-![Lighthouse scores desktop](documentation/testing/dt_art_lh.png)  
-*Desktop Article Page*
+![Lighthouse scores desktop](documentation/testing/about_page_lighthouse_desktop.png)  
+*Desktop About Page*
   
 **Mobile**  
 
-![Lighthouse scores mobile](documentation/testing/mobile_lh.png) 
+![Lighthouse scores mobile](documentation/testing/homepage_lighthouse_mobile.png) 
 *Mobile Home Page*  
   
-![Lighthouse scores mobile](documentation/testing/mob_art_lh.png) 
-*Mobile Article Page*
+![Lighthouse scores mobile](documentation/testing/about_page_mobile_lighthouse.png) 
+*Mobile About Page*
   
+---
+
+
 <hr> 
-
-### Wave Accessibility Evaluation
-
-![WAVE Web Accessibility Evaluation Tools](documentation/testing/wave_report.png)  
-  
-Accessibility was included in every planning stage for FreeFido, through the use of the WAVE report tool I could ensure that any necessary changes were made to make the website as accessible as it could be. A minor contrast issue with a word rendered in orange for the feature theme and the absence of text in article image cards, due to their design, was noted in the report. These will be considered in the next version of FreeFido to better it's score.
-  
-<hr>  
-
-
-
-
-
 
 
 ## Automatic Tests
