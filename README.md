@@ -198,6 +198,82 @@ The Sawadee Dining Boat project uses a relational database powered by PostgreSQL
 ### Entity-Relationship Diagram (ERD)
 An ERD (Entity Relationship Diagram) was used to plan the database schema and visualize the relationships between tables. This helps ensure a well-structured database where entities interact logically. The ERD follows a progressive data modeling approach with three abstraction levels: conceptual, logical, and physical.
 
+- Entities and Their Relationships
+
+User (Django’s built-in model)
+	•	id (PK) – Auto-generated primary key.
+	•	username – Unique username for authentication.
+	•	email – Required email field.
+	•	password – Hashed password.
+	•	is_staff – Boolean flag to determine if a user is a staff member.
+	•	is_active – Boolean flag to determine if the account is active.
+
+ Profile
+	•	id (PK)
+	•	user_id (FK, references User)
+	•	first_name – String (max 30).
+	•	last_name – String (max 30).
+	•	birth_date – Date (nullable).
+	•	address – Text (max 255, nullable).
+	•	phone_number – String (max 15, nullable).
+
+Relationships:
+	•	One-to-One: A User has one Profile.
+
+ Reservation
+	•	id (PK)
+	•	user_id (FK, references User) → The customer making the booking.
+	•	staff_member_id (FK, references User, nullable) → Staff member handling the reservation.
+	•	created_by_id (FK, references User, nullable) → The creator of the booking.
+	•	booking_date – Date.
+	•	time_slot – Time.
+	•	number_of_guests – Integer (4-20).
+	•	first_name – String (max 50).
+	•	last_name – String (max 50).
+	•	phone_number – String (max 15).
+	•	email_address – Validated email.
+	•	created_on – Datetime (auto-generated).
+	•	updated_on – Datetime (auto-updated).
+
+Constraints & Validation
+	•	Cannot book a past date.
+	•	Must book at least 2 days in advance.
+	•	Cannot exceed 20 guests.
+	•	Time slot must be between 10:00 and 22:00.
+	•	Bookings last 2 hours (no overlapping reservations).
+
+ Relationships:
+	•	Many-to-One: A User can have multiple Reservations.
+	•	Many-to-One: A Reservation may have an optional staff_member.
+	•	Many-to-One: A Reservation tracks who created it (created_by).
+
+ Menu
+	•	id (PK)
+	•	name – String (max 100, unique).
+	•	description – Text (nullable).
+	•	created_on – Datetime (auto-generated).
+	•	is_active – Boolean (default False).
+
+ MenuItem (Category)
+	•	id (PK)
+	•	menu_id (FK, references Menu).
+	•	category – String (max 100).
+
+🔹 Relationships:
+	•	Many-to-One: A MenuItem belongs to one Menu.
+	•	One-to-Many: A MenuItem can have multiple Items.
+
+ Item (Dish)
+	•	id (PK)
+	•	menu_item_id (FK, references MenuItem).
+	•	name – String (max 100).
+	•	description – Text (nullable).
+	•	price – Decimal (max 9999.99).
+	•	image – CloudinaryField (default placeholder).
+
+
+The Sawadee Dining Boat system follows a structured database design that maintains relationships between users, reservations, and menus. Below is a conceptual overview of the Entity Relationship Diagram (ERD).
+
 ### Business Goals
 The database structure is designed to meet the following business objectives:
 - The menu is visible on the website and can be managed by staff.
