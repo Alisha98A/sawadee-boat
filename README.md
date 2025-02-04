@@ -1677,25 +1677,34 @@ To keep this README concise, all testing details, including functionality tests,
 
 ## Credits
 
-👩🏻‍💻 View an example of a completed Credits section [here](https://github.com/kera-cudmore/BookWorm#Credits)
-
-Credit to Kera Cudmore for using this template
+- This project was influenced by I think therefore I blog, a code-along project from Code Institute. By trying to understand the underlying principles I have tried to adapt them to my own project. However, this might involve using similar container elements, semantic tags etc.
+- I relied very much upon Code Institute's learning material, together with MDN and W3Schools.
+- Code Institute Slack Community has also been a big support.
+- A specific THANKS to [Matt Bodden](https://github.com/MattBCoding) who helped me through this journey. I would not be here without him!
+- Tutoring team on Code Institute has also been there for me with providing me materials and articles for understanding the project.
+- I've used [OpenAI](https://chat.openai.com/) for explanation over things I needed more clarification in.
 
 ### Code Used
 
-If you have used some code in your project that you didn't write, this is the place to make note of it. Credit the author of the code and if possible a link to where you found the code. You could also add in a brief description of what the code does, or what you are using it for here.
+I have used a lot of functions and ideas from ([Django Documentation]https://docs.djangoproject.com/en/5.1/) which helped me alot!
 
 ### Content
 
-Who wrote the content for the website? Was it yourself - or have you made the site for someone and they specified what the site was to say? This is the best place to put this information.
+ - All fonts imported from - Google Fonts
+ - The icons in the navbar were taken from [Font Awesome](https://fontawesome.com/)
 
 ###  Media
 
-If you have used any media on your site (images, audio, video etc) you can credit them here. I like to link back to the source where I found the media, and include where on the site the image is used.
+- https://d31tywj7yuuw1d.cloudfront.net/2024/10/manohra-gallery-feat-26.jpg
+- https://d31tywj7yuuw1d.cloudfront.net/2024/10/manohra-gallery-feat-22.jpg
+- https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/df/7d/75/caption.jpg?w=1200&h=-1&s=1
+- https://sunkissedkitchen.com/wp-content/uploads/2023/12/Shrimp-lettuce-wraps-4.jpg
+- https://images.kglobalservices.com/www.kelloggs.my/en_my/recipe/recipe_1059223/recip_img-1059241_my-r-crispy-calamari-bites-2203032214-1.jpg
   
 ###  Acknowledgments
 
-If someone helped you out during your project, you can acknowledge them here! For example someone may have taken the time to help you on slack with a problem. Pop a little thank you here with a note of what they helped you with (I like to try and link back to their GitHub or Linked In account too). This is also a great place to thank your mentor and tutor support if you used them.
+Matt Bodden, my mentor helped me with how to run automatic tests for python files.
+Jonathan Zakrisson (Previous CI student) helped me explain how views and URL's work
 
 Learned how to use form and field validation through clean method - https://docs.djangoproject.com/en/5.1/ref/forms/validation/
 Used for SawadeeReservations/models.py to validate date and time for the admin panel -->
