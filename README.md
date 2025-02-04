@@ -1,14 +1,15 @@
 # Sawadee Dining Boat
 
-Welcome to **Sawadee Dining Boat** - your perfect escape for a memorable private boat trip. Enjoy the most amazing views while dining.  -->
+Welcome to **Sawadee Dining Boat** - your perfect escape for a memorable private boat trip. Enjoy the most amazing views while dining.
 
+![Homepage](documentation/testing/homepage.png)
 
 This project was created to provide an easy-to-use platform for customers to book their trips, manage reservations, and ensure a seamless experience. By integrating a robust booking system with Django, it helps users book their desired time slots and view their booking details with ease. The goal is to create an enjoyable and user-friendly experience while managing all aspects of the reservation process.
 
 Sawadee Dining Boat was built to serve as a foundation for a potential real-world application, focusing on efficient reservation handling and a smooth user interface.
 
+[Link to deployed app!](https://sawadee-dining-boat-f1458c05b467.herokuapp.com/)
 
-https://sawadee-dining-boat-f1458c05b467.herokuapp.com/
 
 ---
 
